@@ -1,0 +1,185 @@
+{
+    "sigla": "OTAVI",
+    "nombre": "Asociación Kapaj Otavi",
+    "representante_legal": {
+        "contacto": "Juan Vilca Ramos",
+        "cargo": "Presidente",
+        "telefono": "2-2784687",
+        "celular": "76579852",
+        "correo": "juan.vilca.ramos@otavi.com"
+    },
+    "ubicacion_geografica": {
+        "departamento": "Potosí",
+        "provincia": "Chayanta",
+        "municipio": "Ravelo",
+        "principalidad": "Kapaj Otavi"
+    },
+    "estatus_juridico": {
+        "entidad": "Entidad Ejemplo",
+        "num_resolucion": "4586531",
+        "fecha_resolucion": "1997-07-16"
+    },
+    "documentos_identidad_persona_colectiva": [
+        {
+            "num": 1,
+            "documento": "Fotocopias actas"
+        }
+    ],
+    "documentos_uso_recurso_hidrico": [
+        {
+            "num": 1,
+            "documento": "Acta de la municipalidad"
+        }
+    ],
+    "info_demografica": {
+        "departamento": "Potosí",
+        "provincia": "Chayanta",
+        "municipio": "Ravelo",
+        "localidad": "Kapaj Otavi",
+        "poblacion_total_localidad": 80,
+        "poblacion_con_agua_potable": 80,
+        "poblacion_con_saneamiento": null,
+        "viviendas_con_agua_potable": 16,
+        "viviendas_con_saneamiento": null
+    },
+    "servicios": [
+        {
+            "tipo_servicio": "Agua Potable",
+            "cobertura": 100.00
+        }
+    ],
+    "instalaciones": [
+        {
+            "descripcion": "Fuente de Abastecimiento",
+            "edad": 48,
+            "estado": "BUENO",
+            "fuente_financiamiento": "USAID",
+            "porc_credito": null,
+            "porc_donacion": null,
+            "porc_aporte_propio": null,
+            "porc_aporte_otros": null
+        },
+        {
+            "descripcion": "Tanque de Almacenamiento",
+            "edad": 48,
+            "estado": "BUENO",
+            "fuente_financiamiento": "USAID",
+            "porc_credito": null,
+            "porc_donacion": null,
+            "porc_aporte_propio": null,
+            "porc_aporte_otros": null
+        },
+        {
+            "descripcion": "Red de Distribución",
+            "edad": 48,
+            "estado": "BUENO",
+            "fuente_financiamiento": "USAID",
+            "porc_credito": null,
+            "porc_donacion": null,
+            "porc_aporte_propio": null,
+            "porc_aporte_otros": null
+        },
+        {
+            "descripcion": "Aducción",
+            "edad": 48,
+            "estado": "BUENO",
+            "fuente_financiamiento": "USAID",
+            "porc_credito": null,
+            "porc_donacion": null,
+            "porc_aporte_propio": null,
+            "porc_aporte_otros": null
+        }
+    ],
+    "info_tecnica": {
+        "num_conexiones_agua_potable": 16,
+        "num_piletas_publicas": null,
+        "num_conexiones_alcantarillado": null,
+        "num_camaras_septicas_domiciliarias": 42,
+        "num_letrinas": 14,
+        "num_minitorios": null
+    },
+    "problemas_contaminacion_fuente_suministro": [
+        {
+            "num": 1,
+            "descripcion": "Ejemplo Descripción"
+        }
+    ],
+    "tipos_sistemas_gravedad": [
+        "Por gravedad"
+    ],
+    "tipos_tratamiento_agua": [],
+    "tuberias": [
+        {
+            "sector": "Aducción",
+            "longitud_total": 2938,
+            "porc_pvc": 0.00,
+            "porc_pg": 0.00
+        }
+    ],
+    "sistemas_alcantarillado": [
+        "Letrinas",
+        "Cámara Séptica"
+    ],
+    "descargas_aguas_residuales": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    125.6,
+                    10.1
+                ]
+            },
+            "properties": {
+                "cuerpo_receptor": "Ejemplo cuerpo receptor"
+            }
+        }
+    ],
+    "info_funcionarios": [
+        {
+            "tipo_funcionarios": "Personal permanente",
+            "num_funcionarios": 5,
+            "monto_bs": null
+        }
+    ],
+    "ingresos": [
+        {
+            "concepto": "Tarifa",
+            "monto_bs": 360.00,
+            "periodo_pago": 2007
+        }
+    ],
+    "problemas_identificados": [
+        {
+            "tipo_problema": "Administrativo",
+            "descripcion": "Falta de conocimiento de funciones y obligaciones",
+            "efectos": "Falta de organización",
+            "acciones_actuales": "Reuniones mensuales y de emergencia"
+        },
+        {
+            "tipo_problema": "Técnico",
+            "descripcion": "No reporta",
+            "efectos": "Falta de agua y discontinuidad de servicio",
+            "acciones_actuales": "Reparaciones inmediatas"
+        }
+    ],
+    "requerimientos_desarrollo": [
+        {
+            "tipo_requerimiento": "Administrativo",
+            "descripcion": "Capacitación de funciones y obligaciones de los directivos de la asociación"
+        },
+        {
+            "tipo_requerimiento": "Sobre Ingresos",
+            "descripcion": "Capacitación en el mejor manejo de ingresos y egresos económicos"
+        },
+        {
+            "tipo_requerimiento": "Técnico",
+            "descripcion": "Capacitación en operación a la directiva y población en general"
+        },
+        {
+            "tipo_requerimiento": "Institucional",
+            "descripcion": "Capacitación para un mejor manejo de la asociación"
+        }
+    ],
+    "fecha_llenado": "2019-09-10"
+}

@@ -10,7 +10,7 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
-        <meta name="description" content="Descripción general del Servicio de Sincronización de Datos del componente AAPS-DATA.">
+        <meta name="description" content="Descripción de los estándares y especificaciones de Datos del componente AAPS-DATA.">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>Servicio de Sincronización</title>
+        <title>Estándares y Especificaciones de Datos</title>
       
     
     
@@ -87,7 +87,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#aaps-data_servicio_de_sincronizacion_de_datos" tabindex="1" class="md-skip">
+      <a href="#aaps-data_estandares_y_especificaciones_de_datos" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -113,7 +113,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Servicio de Sincronización
+                Estándares y Especificaciones de Datos
               
             </span>
           
@@ -184,7 +184,7 @@
 
 <div class="md-hero md-hero--expand" data-md-component="hero">
   <div class="md-hero__inner md-grid">
-    AAPS-DATA - Servicio de Sincronización
+    AAPS-DATA - Especificaciones
   </div>
 </div>
         
@@ -458,11 +458,56 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../specifications/" title="Estándares y Especificaciones" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Estándares y Especificaciones
+      </label>
+    
+    <a href="./" title="Estándares y Especificaciones" class="md-nav__link md-nav__link--active">
       Estándares y Especificaciones
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#json-schema" class="md-nav__link">
+    JSON-Schema
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fechas" class="md-nav__link">
+    Fechas
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -482,109 +527,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Servicio de Sincronización
-      </label>
-    
-    <a href="./" title="Servicio de Sincronización" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../sync/" title="Servicio de Sincronización" class="md-nav__link">
       Servicio de Sincronización
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#general" class="md-nav__link">
-    General
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fuentes_originales_de_datos" class="md-nav__link">
-    Fuentes Originales de Datos
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#funciones" class="md-nav__link">
-    Funciones
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#propiedades_de_las_funciones" class="md-nav__link">
-    Propiedades de las Funciones
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#interfaz_de_monitoreo" class="md-nav__link">
-    Interfaz de Monitoreo
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#especificaciones_tecnicas" class="md-nav__link">
-    Especificaciones Técnicas
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tecnologias_utilizadas" class="md-nav__link">
-    Tecnologías Utilizadas
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -614,69 +561,16 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#general" class="md-nav__link">
-    General
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fuentes_originales_de_datos" class="md-nav__link">
-    Fuentes Originales de Datos
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#funciones" class="md-nav__link">
-    Funciones
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#propiedades_de_las_funciones" class="md-nav__link">
-    Propiedades de las Funciones
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#interfaz_de_monitoreo" class="md-nav__link">
-    Interfaz de Monitoreo
+  <a href="#json-schema" class="md-nav__link">
+    JSON-Schema
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#especificaciones_tecnicas" class="md-nav__link">
-    Especificaciones Técnicas
+  <a href="#fechas" class="md-nav__link">
+    Fechas
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tecnologias_utilizadas" class="md-nav__link">
-    Tecnologías Utilizadas
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -696,50 +590,40 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/sergio-chumacero/fastaaps/edit/master/docs/AAPS-DATA/sync.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/sergio-chumacero/fastaaps/edit/master/docs/AAPS-DATA/specifications.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="aaps-data_servicio_de_sincronizacion_de_datos">AAPS-DATA: Servicio de Sincronización de Datos<a class="headerlink" href="#aaps-data_servicio_de_sincronizacion_de_datos" title="Permanent link">&para;</a></h1>
-<h2 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h2>
-<p>El <strong>Servicio de Sincronización de Datos</strong> del componente AAPS-DATA, se encarga de sincronizar los datos del componente con los datos de diversas fuentes externas, principalmente con los datos del sistema SIIRAyS.</p>
-<p><img alt="sync" src="../../img/sync.png" /></p>
-<h3 id="fuentes_originales_de_datos">Fuentes Originales de Datos<a class="headerlink" href="#fuentes_originales_de_datos" title="Permanent link">&para;</a></h3>
-<p>Las fuentes originales de los datos de la AAPS son aquellas administradas por sus direcciones, a través de sus planillas excel, sistema SIIRAyS, los archivos georeferenciados o cualquier otro método considerado necesario para el manejo apropiado de sus datos. El sistema FASTAAPS simplemente almacena, distribuye y utiliza estos datos con el fin de facilitar las tareas de los funcionarios de la AAPS.</p>
-<h2 id="funciones">Funciones<a class="headerlink" href="#funciones" title="Permanent link">&para;</a></h2>
-<p>El servicio de sicronización se encarga de las siguientes funciones:</p>
-<ol>
-<li>
-<p><strong>Sincronización Periódica con el SIIRAyS</strong>: Para asegurar que los datos utilizados por las aplicaciones se encuentren actualizados y repliquen fielmente el estado del SIIRAyS, el servicio de sincronización tiene una función que accesa de manera periódica y automática a la base de datos del sistema SIIRAyS y releva los datos más actuales.</p>
-</li>
-<li>
-<p><strong>Sincronización a Pedido</strong>: En caso de que sea necesario relizar una actualización a pedido, el servicio de sincronización ofrece esta función a través de su interfaz de monitoreo.</p>
-</li>
-</ol>
-<h3 id="propiedades_de_las_funciones">Propiedades de las Funciones<a class="headerlink" href="#propiedades_de_las_funciones" title="Permanent link">&para;</a></h3>
-<p>Para asegurar la consistencia del sistema, requerimos que todas las funciones del servicio de sincronización cumpla dos características fundamentales: Atomicidad e Idempotencia. </p>
-<ol>
-<li><strong>Atomicidad</strong>: Una función atómica es aquella que es aplicada en su totalidad o no es aplicada en lo absoluto. 
- Es decir, al aplicar una función atomica todos sus subprocesos persistentes son aplicados en el orden correcto en el caso exitoso mientras que, en caso de fallar algún subproceso, ninguno de los subprocesos persistentes es aplicado.</li>
-</ol>
-<p>En lenguaje simple se puede entender a una función atómica, como una que no deja rastros "a medias". </p>
-<ol>
-<li><strong>Idempotencia</strong>: Con una función idempotente se obtiene el mismo resultado, independientemente de las veces que la función sea repetida. 
- Es decir, aplicar una función idempotente una vez es equivalente a aplicarla dos o más veces. </li>
-</ol>
-<p>En caso de extender el serivicio de sincronización añadiendo nuevas funciones, recomendamos fuertemente que las nuevas funciones cumplan con estas dos características.</p>
-<h2 id="interfaz_de_monitoreo">Interfaz de Monitoreo<a class="headerlink" href="#interfaz_de_monitoreo" title="Permanent link">&para;</a></h2>
-<p>Para transparentar el trabajo realizado por el servicio de sincronización y facilitar su mantenimiento, el servicio de sincronización cuenta con una interfaz de usuario web desde la cual un usuario de apoyo técnico puede monitorear las tareas realizadas y planeadas.</p>
-<p>En esta página se muestra también si alguna tarea de sincronización reportó errores, el tipo de error producido y detalles que permitan solucionarlo y prevenir futuras ocurrencias.</p>
-<p>A través de esta interfaz de usuario, es posible realizar una <strong>actualización a pedido</strong> de manera manual.</p>
+                <h1 id="aaps-data_estandares_y_especificaciones_de_datos">AAPS-DATA: Estándares y Especificaciones de Datos<a class="headerlink" href="#aaps-data_estandares_y_especificaciones_de_datos" title="Permanent link">&para;</a></h1>
+<p>El sistema FASTAAPS a través de su servicio de acceso web de datos permite a aplicaciones acceder a los datos del sistema.</p>
+<p>El formato de intercambio de datos utilizado es JSON, el formato más utilizado a nivel mundial para este tipo de servicios.</p>
 <div class="admonition info">
-<p class="admonition-title">Información Técnica</p>
-<p>La interfaz de monitoreo del servicio de sincronización fue implementada haciendo uso de la librería <a href="https://flower.readthedocs.io/">Flower</a>, la cual es una herramienta de monitoreo para aplicaciones <a href="http://www.celeryproject.org/">Celery</a>.</p>
-<p>Celery, a su vez, es una librería de tareas distribuidas, la cual utilizamos para realizar tareas periódicas de manera automática. Celery hace uso de un <em>agente de mensajería</em> (en ingés <em>message broker</em>) del tipo <a href="https://www.rabbitmq.com/">RabbitMQ</a>.</p>
-<p>Dentro del servidor de la aplicación, tanto la aplicación Celery, como el agente de mensajería RabbitMQ, se encuentran contenerizados.</p>
-<p>Todos las librerías RabbitMQ, Celery y Flower son del tipo <em>código abierto</em>.</p>
+<p class="admonition-title">Acerca de JSON</p>
+<p><a href="http://www.json.org/">JSON</a>, cuyas siglas en inglés significan "<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation" (en español "notación de objetos JavaScript") es un formato ligero de intercambio de datos ampliamente utilizado en la web. Es fácil de leer para humanos y facil de interpretar para máquinas. Es el formato más utilizado en servicios de acceso de datos REST-API.</p>
 </div>
-<h2 id="especificaciones_tecnicas">Especificaciones Técnicas<a class="headerlink" href="#especificaciones_tecnicas" title="Permanent link">&para;</a></h2>
-<h3 id="tecnologias_utilizadas">Tecnologías Utilizadas<a class="headerlink" href="#tecnologias_utilizadas" title="Permanent link">&para;</a></h3>
+<h2 id="json-schema">JSON-Schema<a class="headerlink" href="#json-schema" title="Permanent link">&para;</a></h2>
+<p>Es necesario describir y especificar el formato de los archivos JSON utilizados. Para este fin utilizamos el estándar <a href="https://json-schema.org/">JSON-Schema</a>.</p>
+<p>JSON-Schema permite describir el formato de datos JSON que sea facilmente legible por humanos y sirva de documentación. Además, puede ser utilizado para validar datos.</p>
+<p>La versión más reciente del estándar a la fecha es <a href="https://json-schema.org/specification.html">2019-19</a>. </p>
+<h2 id="fechas">Fechas<a class="headerlink" href="#fechas" title="Permanent link">&para;</a></h2>
+<p>Las fechas en los archivos JSON almacenados y distribuidos por el sistema FASTAAPS, son del tipo <strong>string</strong> (cadenas de texto) y acatan el estándar internacional para la representación de fecha y hora <a href="https://www.w3.org/TR/NOTE-datetime"><strong>ISO 8601</strong></a>.</p>
+<p>Algunos de los formatos del estándar utilizados son los siguientes:</p>
+<ul>
+<li><strong>Año</strong>: <code>AAAA</code> (ejemplo <code>1997</code>)</li>
+<li><strong>Año y Mes</strong>: <code>AAAA-MM</code> (ejemplo <code>1997-07</code>)</li>
+<li><strong>Fecha completa</strong>: <code>AAAA-MM-DD</code> (ejemplo <code>1997-07-16</code>)</li>
+<li><strong>Fecha completa más hora y minutos</strong>: <code>AAAA-MM-DDThh:mmTZD</code> (ejemplo <code>1997-07-16T19:20+01:00</code>)</li>
+<li><strong>Fecha completa más hora, minutos y segundos</strong>: <code>AAAA-MM-DDThh:mm:ssTZD</code> (ejemplo <code>1997-07-16T19:20:30+01:00</code>)</li>
+</ul>
+<p>Donde:</p>
+<ul>
+<li><code>AAAA</code> = Año de cuatro dígitos</li>
+<li><code>MM</code>   = Mes de dos dígitos (01=Enero, etc.)</li>
+<li><code>DD</code>   = Día del mes de dos dígitos (01 a 31)</li>
+<li><code>hh</code>   = Hora de dos dígitos (00 a 23) (am/pm NO permitido)</li>
+<li><code>mm</code>   = Minuto de dos dígitos (00 a 59)</li>
+<li><code>ss</code>   = Segundo de dos dígitos (00 a 59)</li>
+<li><code>TZD</code>  = Zona horaria (Z o +hh:mm o -hh:mm)</li>
+</ul>
                 
                   
                 
@@ -760,7 +644,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../dataset/" title="Conjuntos de Datos" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../summary/" title="Resúmen" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -769,11 +653,25 @@
                 <span class="md-footer-nav__direction">
                   Anterior
                 </span>
-                Conjuntos de Datos
+                Resúmen
               </span>
             </div>
           </a>
         
+        
+          <a href="../dataset/" title="Conjuntos de Datos" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Conjuntos de Datos
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>

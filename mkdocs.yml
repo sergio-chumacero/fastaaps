@@ -15,14 +15,15 @@ nav:
         - Especificaciones de Seguridad: 'AAPS-AUTH/specifications.md'
     - 'AAPS-DATA: Sincronización y Almacenamiento de Datos': 
         - Resúmen: 'AAPS-DATA/summary.md'
+        - Estándares y Especificaciones: 'AAPS-DATA/specifications.md'
         - Conjuntos de Datos: 'AAPS-DATA/dataset.md'
         - Servicio de Sincronización: 'AAPS-DATA/sync.md'
 
 theme:
   name: 'material'
   palette:
-    primary: 'indigo'
-    accent: 'indigo'
+    primary: 'teal'
+    accent: 'teal'
   font:
     text: 'Roboto'
     code: 'Roboto Mono'
@@ -41,8 +42,8 @@ extra:
     - type: 'twitter'
       link: 'https://twitter.com/SergioChumacer1'
 
-repo_name: 'sergio-chumacero/aapsapi'
-repo_url: 'https://github.com/sergio-chumacero/aapsapi'
+repo_name: 'sergio-chumacero/fastaaps'
+repo_url: 'https://github.com/sergio-chumacero/fastaaps'
 
 markdown_extensions:
   - admonition
