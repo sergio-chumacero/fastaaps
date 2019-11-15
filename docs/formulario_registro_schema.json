@@ -1,0 +1,690 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "sigla": {
+            "type": "string"
+        },
+        "nombre": {
+            "type": "string"
+        },
+        "representante_legal": {
+            "type": "object",
+            "properties": {
+                "contacto": {
+                    "type": "string"
+                },
+                "cargo": {
+                    "type": "string"
+                },
+                "telefono": {
+                    "type": "string"
+                },
+                "celular": {
+                    "type": "string"
+                },
+                "correo": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contacto",
+                "cargo",
+                "telefono",
+                "celular",
+                "correo"
+            ]
+        },
+        "ubicacion_geografica": {
+            "type": "object",
+            "properties": {
+                "departamento": {
+                    "type": "string"
+                },
+                "provincia": {
+                    "type": "string"
+                },
+                "municipio": {
+                    "type": "string"
+                },
+                "principalidad": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "departamento",
+                "provincia",
+                "municipio",
+                "principalidad"
+            ]
+        },
+        "estatus_juridico": {
+            "type": "object",
+            "properties": {
+                "entidad": {
+                    "type": "string"
+                },
+                "num_resolucion": {
+                    "type": "string"
+                },
+                "fecha_resolucion": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "entidad",
+                "num_resolucion",
+                "fecha_resolucion"
+            ]
+        },
+        "documentos_identidad_persona_colectiva": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "num": {
+                            "type": "integer"
+                        },
+                        "documento": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "num",
+                        "documento"
+                    ]
+                }
+            ]
+        },
+        "documentos_uso_recurso_hidrico": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "num": {
+                            "type": "integer"
+                        },
+                        "documento": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "num",
+                        "documento"
+                    ]
+                }
+            ]
+        },
+        "info_demografica": {
+            "type": "object",
+            "properties": {
+                "departamento": {
+                    "type": "string"
+                },
+                "provincia": {
+                    "type": "string"
+                },
+                "municipio": {
+                    "type": "string"
+                },
+                "localidad": {
+                    "type": "string"
+                },
+                "poblacion_total_localidad": {
+                    "type": "integer"
+                },
+                "poblacion_con_agua_potable": {
+                    "type": "integer"
+                },
+                "poblacion_con_saneamiento": {
+                    "type": "null"
+                },
+                "viviendas_con_agua_potable": {
+                    "type": "integer"
+                },
+                "viviendas_con_saneamiento": {
+                    "type": "null"
+                }
+            },
+            "required": [
+                "departamento",
+                "provincia",
+                "municipio",
+                "localidad",
+                "poblacion_total_localidad",
+                "poblacion_con_agua_potable",
+                "poblacion_con_saneamiento",
+                "viviendas_con_agua_potable",
+                "viviendas_con_saneamiento"
+            ]
+        },
+        "servicios": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "tipo_servicio": {
+                            "type": "string"
+                        },
+                        "cobertura": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "tipo_servicio",
+                        "cobertura"
+                    ]
+                }
+            ]
+        },
+        "instalaciones": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "descripcion": {
+                            "type": "string"
+                        },
+                        "edad": {
+                            "type": "integer"
+                        },
+                        "estado": {
+                            "type": "string"
+                        },
+                        "fuente_financiamiento": {
+                            "type": "string"
+                        },
+                        "porc_credito": {
+                            "type": "null"
+                        },
+                        "porc_donacion": {
+                            "type": "null"
+                        },
+                        "porc_aporte_propio": {
+                            "type": "null"
+                        },
+                        "porc_aporte_otros": {
+                            "type": "null"
+                        }
+                    },
+                    "required": [
+                        "descripcion",
+                        "edad",
+                        "estado",
+                        "fuente_financiamiento",
+                        "porc_credito",
+                        "porc_donacion",
+                        "porc_aporte_propio",
+                        "porc_aporte_otros"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "descripcion": {
+                            "type": "string"
+                        },
+                        "edad": {
+                            "type": "integer"
+                        },
+                        "estado": {
+                            "type": "string"
+                        },
+                        "fuente_financiamiento": {
+                            "type": "string"
+                        },
+                        "porc_credito": {
+                            "type": "null"
+                        },
+                        "porc_donacion": {
+                            "type": "null"
+                        },
+                        "porc_aporte_propio": {
+                            "type": "null"
+                        },
+                        "porc_aporte_otros": {
+                            "type": "null"
+                        }
+                    },
+                    "required": [
+                        "descripcion",
+                        "edad",
+                        "estado",
+                        "fuente_financiamiento",
+                        "porc_credito",
+                        "porc_donacion",
+                        "porc_aporte_propio",
+                        "porc_aporte_otros"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "descripcion": {
+                            "type": "string"
+                        },
+                        "edad": {
+                            "type": "integer"
+                        },
+                        "estado": {
+                            "type": "string"
+                        },
+                        "fuente_financiamiento": {
+                            "type": "string"
+                        },
+                        "porc_credito": {
+                            "type": "null"
+                        },
+                        "porc_donacion": {
+                            "type": "null"
+                        },
+                        "porc_aporte_propio": {
+                            "type": "null"
+                        },
+                        "porc_aporte_otros": {
+                            "type": "null"
+                        }
+                    },
+                    "required": [
+                        "descripcion",
+                        "edad",
+                        "estado",
+                        "fuente_financiamiento",
+                        "porc_credito",
+                        "porc_donacion",
+                        "porc_aporte_propio",
+                        "porc_aporte_otros"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "descripcion": {
+                            "type": "string"
+                        },
+                        "edad": {
+                            "type": "integer"
+                        },
+                        "estado": {
+                            "type": "string"
+                        },
+                        "fuente_financiamiento": {
+                            "type": "string"
+                        },
+                        "porc_credito": {
+                            "type": "null"
+                        },
+                        "porc_donacion": {
+                            "type": "null"
+                        },
+                        "porc_aporte_propio": {
+                            "type": "null"
+                        },
+                        "porc_aporte_otros": {
+                            "type": "null"
+                        }
+                    },
+                    "required": [
+                        "descripcion",
+                        "edad",
+                        "estado",
+                        "fuente_financiamiento",
+                        "porc_credito",
+                        "porc_donacion",
+                        "porc_aporte_propio",
+                        "porc_aporte_otros"
+                    ]
+                }
+            ]
+        },
+        "info_tecnica": {
+            "type": "object",
+            "properties": {
+                "num_conexiones_agua_potable": {
+                    "type": "integer"
+                },
+                "num_piletas_publicas": {
+                    "type": "null"
+                },
+                "num_conexiones_alcantarillado": {
+                    "type": "null"
+                },
+                "num_camaras_septicas_domiciliarias": {
+                    "type": "integer"
+                },
+                "num_letrinas": {
+                    "type": "integer"
+                },
+                "num_minitorios": {
+                    "type": "null"
+                }
+            },
+            "required": [
+                "num_conexiones_agua_potable",
+                "num_piletas_publicas",
+                "num_conexiones_alcantarillado",
+                "num_camaras_septicas_domiciliarias",
+                "num_letrinas",
+                "num_minitorios"
+            ]
+        },
+        "problemas_contaminacion_fuente_suministro": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "num": {
+                            "type": "integer"
+                        },
+                        "descripcion": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "num",
+                        "descripcion"
+                    ]
+                }
+            ]
+        },
+        "tipos_sistemas_gravedad": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "tipos_tratamiento_agua": {
+            "type": "array",
+            "items": {}
+        },
+        "tuberias": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "sector": {
+                            "type": "string"
+                        },
+                        "longitud_total": {
+                            "type": "integer"
+                        },
+                        "porc_pvc": {
+                            "type": "number"
+                        },
+                        "porc_pg": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "sector",
+                        "longitud_total",
+                        "porc_pvc",
+                        "porc_pg"
+                    ]
+                }
+            ]
+        },
+        "sistemas_alcantarillado": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "descargas_aguas_residuales": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        },
+                        "geometry": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                },
+                                "coordinates": {
+                                    "type": "array",
+                                    "items": [
+                                        {
+                                            "type": "number"
+                                        },
+                                        {
+                                            "type": "number"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "type",
+                                "coordinates"
+                            ]
+                        },
+                        "properties": {
+                            "type": "object",
+                            "properties": {
+                                "cuerpo_receptor": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "cuerpo_receptor"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "geometry",
+                        "properties"
+                    ]
+                }
+            ]
+        },
+        "info_funcionarios": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "tipo_funcionarios": {
+                            "type": "string"
+                        },
+                        "num_funcionarios": {
+                            "type": "integer"
+                        },
+                        "monto_bs": {
+                            "type": "null"
+                        }
+                    },
+                    "required": [
+                        "tipo_funcionarios",
+                        "num_funcionarios",
+                        "monto_bs"
+                    ]
+                }
+            ]
+        },
+        "ingresos": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "concepto": {
+                            "type": "string"
+                        },
+                        "monto_bs": {
+                            "type": "number"
+                        },
+                        "periodo_pago": {
+                            "type": "integer"
+                        }
+                    },
+                    "required": [
+                        "concepto",
+                        "monto_bs",
+                        "periodo_pago"
+                    ]
+                }
+            ]
+        },
+        "problemas_identificados": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "tipo_problema": {
+                            "type": "string"
+                        },
+                        "descripcion": {
+                            "type": "string"
+                        },
+                        "efectos": {
+                            "type": "string"
+                        },
+                        "acciones_actuales": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "tipo_problema",
+                        "descripcion",
+                        "efectos",
+                        "acciones_actuales"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "tipo_problema": {
+                            "type": "string"
+                        },
+                        "descripcion": {
+                            "type": "string"
+                        },
+                        "efectos": {
+                            "type": "string"
+                        },
+                        "acciones_actuales": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "tipo_problema",
+                        "descripcion",
+                        "efectos",
+                        "acciones_actuales"
+                    ]
+                }
+            ]
+        },
+        "requerimientos_desarrollo": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "tipo_requerimiento": {
+                            "type": "string"
+                        },
+                        "descripcion": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "tipo_requerimiento",
+                        "descripcion"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "tipo_requerimiento": {
+                            "type": "string"
+                        },
+                        "descripcion": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "tipo_requerimiento",
+                        "descripcion"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "tipo_requerimiento": {
+                            "type": "string"
+                        },
+                        "descripcion": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "tipo_requerimiento",
+                        "descripcion"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "tipo_requerimiento": {
+                            "type": "string"
+                        },
+                        "descripcion": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "tipo_requerimiento",
+                        "descripcion"
+                    ]
+                }
+            ]
+        },
+        "fecha_llenado": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "sigla",
+        "nombre",
+        "representante_legal",
+        "ubicacion_geografica",
+        "estatus_juridico",
+        "documentos_identidad_persona_colectiva",
+        "documentos_uso_recurso_hidrico",
+        "info_demografica",
+        "servicios",
+        "instalaciones",
+        "info_tecnica",
+        "problemas_contaminacion_fuente_suministro",
+        "tipos_sistemas_gravedad",
+        "tipos_tratamiento_agua",
+        "tuberias",
+        "sistemas_alcantarillado",
+        "descargas_aguas_residuales",
+        "info_funcionarios",
+        "ingresos",
+        "problemas_identificados",
+        "requerimientos_desarrollo",
+        "fecha_llenado"
+    ]
+}
