@@ -1,0 +1,59 @@
+site_name: Fast AAPS - Documentación
+
+nav:
+    - 'Inicio': 'README.md'
+    - 'FASTAAPS: Información General':
+      - Contenerización de Servicios: 'FASTAAPS/docker.md'
+    - 'AAPS-LAB: Aplicaciones Interactivas': 
+        - Resúmen: 'AAPS-LAB/summary.md'
+    - 'AAPS-API: Servicio de Datos': 
+        - Resúmen: 'AAPS-API/summary.md'
+        - Servicios de Datos - Conceptos y Tecnologías: 'AAPS-API/general.md'
+        - Especificación del Servicio de Datos: 'AAPS-API/specifications.md'
+    - 'AAPS-AUTH: Seguridad':
+        - Resúmen: 'AAPS-AUTH/summary.md'
+        - Especificaciones de Seguridad: 'AAPS-AUTH/specifications.md'
+    - 'AAPS-DATA: Sincronización y Almacenamiento de Datos': 
+        - Resúmen: 'AAPS-DATA/summary.md'
+        - Conjuntos de Datos: 'AAPS-DATA/dataset.md'
+        - Servicio de Sincronización: 'AAPS-DATA/sync.md'
+
+theme:
+  name: 'material'
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  logo:
+    icon: 'blur_circular'
+  language: 'es'
+  favicon: 'assets/images/blur_circular.svg'
+
+
+extra:
+  search:
+    language: 'es, en'
+  social:
+    - type: 'github'
+      link: 'https://github.com/sergio-chumacero'
+    - type: 'twitter'
+      link: 'https://twitter.com/SergioChumacer1'
+
+repo_name: 'sergio-chumacero/aapsapi'
+repo_url: 'https://github.com/sergio-chumacero/aapsapi'
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc: # Generates a table of contents and links to sections in pages.
+      permalink: true # Paragraph symbol besides titles will be used as anchor for links
+      separator: "_" # Symbol used to replace white spaces in links
+  - meta # Implements metadata functionalities: hero
+  - pymdownx.superfences
+  - pymdownx.details
+  - codehilite:
+      guess_lang: false
+  - footnotes
