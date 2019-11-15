@@ -308,6 +308,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#archivos_docker_de_los_servicios" class="md-nav__link">
+    Archivos Docker de los Servicios
+  </a>
+  
+</li>
+      
       
       
       
@@ -562,6 +569,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#archivos_docker_de_los_servicios" class="md-nav__link">
+    Archivos Docker de los Servicios
+  </a>
+  
+</li>
+      
       
       
       
@@ -586,10 +600,11 @@
 <h2 id="informacion_general_que_es_y_para_que_sirve_docker">Información General: ¿Qué es y para qué sirve Docker?<a class="headerlink" href="#informacion_general_que_es_y_para_que_sirve_docker" title="Permanent link">&para;</a></h2>
 <p>Docker es una plataforma que permite a los desarrolladores empaquetar y correr aplicaciones de manera estándar. </p>
 <p>Docker está basado en tecnologías de virtualización a nivel de sistema operativo que empaqueta software en sus propios entornos virtuales denominados <em>contenedores</em>. A diferencia de una <em>máquina virtual</em>, un contenedor es más eficiente y ligero porque no replica una máquina física abstracta, sino que simplemente replica un sistema operativo abstracto. De esta manera se puede correr muchos más contenedores en un mismo servidor que maquinas virtuales gozando de las ventajas de aislar cada aplicación en su entorno individual.</p>
+<p>Un contenedor Docker es un proceso aislado que corre en el entorno del usuario del sistema operativo y comparte el núcleo (kernel) del sistema con otros procesos. Múltiples contenedores pueden correr en la misma máquina, cada uno corriendo su aplicación en un proceso aislado.</p>
 <p>La ventaja de utilizar tecnologías de contenerización para los servicios en producción son:</p>
 <ol>
 <li>
-<p><strong>Bajo índice de acoplamiento (loose coupling)</strong>: Al aislar cada aplicación en su propio entorno virtual, estas son independientes las unas de las otras. Las dependencias de una no interfieren con las dependencias de las otras.</p>
+<p><strong>Bajo índice de acoplamiento (loose coupling)</strong>: Al aislar cada aplicación en su propio entorno virtual, estas son independientes las unas de las otras. Las dependencias de una no interfieren con las dependencias de las otras. Por ejemplo, múltiples servicios del sistema FASTAAPS requieren de una instalación de Python y al aislarlos en sus propios contenedores es posible que cada servicio tenga su propia instalación de Python, posiblemente con distintas versiones, librerías de código instaladas y variables de entorno. </p>
 </li>
 <li>
 <p><strong>Consistencia y Replicabilidad (replicablity)</strong>: Al definir explícitamente las dependencias de una aplicación, podemos garantizar que las aplicaciones funcionarán de igual manera en cualquier entorno, sea este de desarrollo o de producción.</p>
@@ -600,7 +615,8 @@
 </ol>
 <p>Una desventaja del uso de contenedores es la complejidad de interconexión y monitoreo de servicios. Por suerte, existen tecnologías maduras de manejo y orquestración de servicios contenerizados como <a href="https://kubernetes.io/">Kubernetes</a>.  </p>
 <h2 id="servicios_contenerizados_dentro_del_sistema_fastaaps">Servicios Contenerizados dentro del Sistema FASTAAPS<a class="headerlink" href="#servicios_contenerizados_dentro_del_sistema_fastaaps" title="Permanent link">&para;</a></h2>
-<p>Un contenedor es creado de una <em>imágen base</em> que describe todas sus dependencias y su proceso de instalación. A continuación listamos las imágenes creadar para los distintos servicios del sistema FASTAAPS:</p>
+<p>Un contenedor es creado de una <em>imágen base</em> que describe todas sus dependencias y su proceso de instalación. Estas imágenes nos dan la capacidad de crear servicios de manera reproducible y predecible, independientemente de las características particulares de la máquina.</p>
+<p>A continuación listamos las imágenes creadar para los distintos servicios del sistema FASTAAPS:</p>
 <table>
 <thead>
 <tr>
@@ -625,6 +641,10 @@
 </tr>
 </tbody>
 </table>
+<h2 id="archivos_docker_de_los_servicios">Archivos Docker de los Servicios<a class="headerlink" href="#archivos_docker_de_los_servicios" title="Permanent link">&para;</a></h2>
+<p>El <em>archivo de Docker</em> (en inglés <em>Dockerfile</em>) contiene todas las instrucciones necesarias para construir la imágen del contenedor y a su vez sirve de documentación técnica. Estos archivos describen la aplicación y sus dependencias. </p>
+<p>Docker ejecuta las instrucciones de un archivo Docker para contruir la imágen base.</p>
+<p>A continuación incluímos los archivos docker que construyen las imágenes base usadas por los servicios del sistema.</p>
                 
                   
                 
