@@ -295,15 +295,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#informacion_general_que_es_y_para_que_sirve_docker" class="md-nav__link">
-    Información General: ¿Qué es y para qué sirve Docker?
+  <a href="#1_informacion_general_que_es_y_para_que_sirve_docker" class="md-nav__link">
+    1. Información General: ¿Qué es y para qué sirve Docker?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#servicios_contenerizados_dentro_del_sistema_fastaaps" class="md-nav__link">
-    Servicios Contenerizados dentro del Sistema FASTAAPS
+  <a href="#2_imagenes_base_y_contenedores_del_sistema_fastaaps" class="md-nav__link">
+    2. Imágenes Base y Contenedores del Sistema FASTAAPS
   </a>
   
 </li>
@@ -568,15 +568,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#informacion_general_que_es_y_para_que_sirve_docker" class="md-nav__link">
-    Información General: ¿Qué es y para qué sirve Docker?
+  <a href="#1_informacion_general_que_es_y_para_que_sirve_docker" class="md-nav__link">
+    1. Información General: ¿Qué es y para qué sirve Docker?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#servicios_contenerizados_dentro_del_sistema_fastaaps" class="md-nav__link">
-    Servicios Contenerizados dentro del Sistema FASTAAPS
+  <a href="#2_imagenes_base_y_contenedores_del_sistema_fastaaps" class="md-nav__link">
+    2. Imágenes Base y Contenedores del Sistema FASTAAPS
   </a>
   
 </li>
@@ -609,9 +609,10 @@
                 
                 <h1 id="docker_tecnologias_de_contenerizacion">Docker: Tecnologías de Contenerización<a class="headerlink" href="#docker_tecnologias_de_contenerizacion" title="Permanent link">&para;</a></h1>
 <p><img alt="docker" src="../../img/docker.png" /></p>
-<h2 id="informacion_general_que_es_y_para_que_sirve_docker">Información General: ¿Qué es y para qué sirve Docker?<a class="headerlink" href="#informacion_general_que_es_y_para_que_sirve_docker" title="Permanent link">&para;</a></h2>
-<p>Docker es una plataforma que permite a los desarrolladores empaquetar y correr aplicaciones de manera estándar. </p>
+<h2 id="1_informacion_general_que_es_y_para_que_sirve_docker">1. Información General: ¿Qué es y para qué sirve Docker?<a class="headerlink" href="#1_informacion_general_que_es_y_para_que_sirve_docker" title="Permanent link">&para;</a></h2>
+<p>Docker es una plataforma que permite a los desarrolladores empaquetar y correr aplicaciones vía interfaces estandarizadas. </p>
 <p>Docker está basado en tecnologías de virtualización a nivel de sistema operativo que empaqueta software en sus propios entornos virtuales denominados <em>contenedores</em>. A diferencia de una <em>máquina virtual</em>, un contenedor es más eficiente y ligero porque no replica una máquina física abstracta, sino que simplemente replica un sistema operativo abstracto. De esta manera se puede correr muchos más contenedores en un mismo servidor que maquinas virtuales gozando de las ventajas de aislar cada aplicación en su entorno individual.</p>
+<p>El uso de contenedores Docker para la puesta en producción reduce el trabajo de instalación y el uso de scripts de instalación.</p>
 <p>Un contenedor Docker es un proceso aislado que corre en el entorno del usuario del sistema operativo y comparte el núcleo (kernel) del sistema con otros procesos. Múltiples contenedores pueden correr en la misma máquina, cada uno corriendo su aplicación en un proceso aislado.</p>
 <p>La ventaja de utilizar tecnologías de contenerización para los servicios en producción son:</p>
 <ol>
@@ -619,15 +620,15 @@
 <p><strong>Bajo índice de acoplamiento (loose coupling)</strong>: Al aislar cada aplicación en su propio entorno virtual, estas son independientes las unas de las otras. Las dependencias de una no interfieren con las dependencias de las otras. Por ejemplo, múltiples servicios del sistema FASTAAPS requieren de una instalación de Python y al aislarlos en sus propios contenedores es posible que cada servicio tenga su propia instalación de Python, posiblemente con distintas versiones, librerías de código instaladas y variables de entorno. </p>
 </li>
 <li>
-<p><strong>Consistencia y Replicabilidad (replicablity)</strong>: Al definir explícitamente las dependencias de una aplicación, podemos garantizar que las aplicaciones funcionarán de igual manera en cualquier entorno, sea este de desarrollo o de producción.</p>
+<p><strong>Consistencia y Replicabilidad (replicablity)</strong>: Al definir explícitamente las dependencias de una aplicación, podemos garantizar que las aplicaciones funcionarán de igual manera en cualquier entorno, sea este de desarrollo, de prueba o de producción.</p>
 </li>
 <li>
-<p><strong>Facilidad de escalabilidad (scalability)</strong>: Al tener la posibilidad de crear y replicar aplicaciones contenerizadas facilmente, es posible incrementar o reducir el número de copias de un servicio en distintos de acuerdo a su uso.  </p>
+<p><strong>Facilidad de escalabilidad (scalability)</strong>: Al tener la posibilidad de crear y replicar aplicaciones contenerizadas facilmente, es posible incrementar o reducir el número de copias de un servicio y sus recursos de cómputo de acuerdo a los requerimientos de uso.  </p>
 </li>
 </ol>
-<p>Una desventaja del uso de contenedores es la complejidad de interconexión y monitoreo de servicios. Por suerte, existen tecnologías maduras de manejo y orquestración de servicios contenerizados como <a href="https://kubernetes.io/">Kubernetes</a>.  </p>
-<h2 id="servicios_contenerizados_dentro_del_sistema_fastaaps">Servicios Contenerizados dentro del Sistema FASTAAPS<a class="headerlink" href="#servicios_contenerizados_dentro_del_sistema_fastaaps" title="Permanent link">&para;</a></h2>
-<p>Un contenedor es creado de una <em>imágen base</em> que describe todas sus dependencias y su proceso de instalación. Estas imágenes nos dan la capacidad de crear servicios de manera reproducible y predecible, independientemente de las características particulares de la máquina.</p>
+<p>Una desventaja del uso de contenedores es la complejidad de interconexión y monitoreo de servicios. Por suerte, existen tecnologías maduras de manejo y orquestración de servicios contenerizados como <a href="https://kubernetes.io/">Kubernetes</a>.</p>
+<h2 id="2_imagenes_base_y_contenedores_del_sistema_fastaaps">2. Imágenes Base y Contenedores del Sistema FASTAAPS<a class="headerlink" href="#2_imagenes_base_y_contenedores_del_sistema_fastaaps" title="Permanent link">&para;</a></h2>
+<p>Un contenedor es un proceso aislado creado a partir de una <em>imágen base</em> que describe todas sus dependencias y su proceso de instalación. Estas imágenes nos dan la capacidad de crear servicios de manera reproducible y predecible, independientemente de las características particulares de la máquina. Las imágenes base de los contenedores además sirven de documentación técnica.</p>
 <p>A continuación listamos las imágenes creadar para los distintos servicios del sistema FASTAAPS:</p>
 <table>
 <thead>
@@ -646,10 +647,10 @@
 <td>Corre y Administra tareas de sincronización de datos.</td>
 </tr>
 <tr>
-<td>Agente de Mensajería</td>
+<td>Agente de Mensajería (Message Broker)</td>
 <td>AAPS-DATA</td>
 <td>RabbitMQ</td>
-<td>Maneja una fila de mensajes (en inglés message queue). Usado por el servicio de sincronización.</td>
+<td>Maneja una fila de mensajes (message queue). Usado por el servicio de sincronización.</td>
 </tr>
 </tbody>
 </table>

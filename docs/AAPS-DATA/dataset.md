@@ -30,15 +30,3 @@ Los conjuntos de datos relacionados a las EPSAs registradas son los siguientes:
 Este conjunto de datos corresponde a los datos proporcionados por las EPSAs a través de los formularios de solucitud de registro. Es administrado por la jefatura de Constitución de Licencias y Registros (L&R) de la AAPS y es almacenado en la base de datos del sistema SIIRAyS, ingresado y escaneado a través de su aplicación web.
 
 Todos los datos del formulario de registro son incluídos en este conjunto de datos con excepción de los datos georeferenciados de áreas de cobertura, fuentes de abastecimiento y tanques de almacenamiento que constituyen conjuntos de datos separados propios.  
-
-El [Servicio de Sincronización](/AAPS-DATA/sync), tanto de manera automática periódica como de manera manual a través de la aplicación de control de tareas, se encarga de:
-
-1. Acceder a estos datos, a través de un driver para la base de datos Postgres.
-
-2. Transformar los datos al formato del sistema.
-
-3. Ingresar los datos al sistema FASTAAPS a través del servicio de acceso.
-
-Una vez ingresados al sistema estos datos pueden ser utilizados por las aplicaciones.
-
-![arquitectura_data](../img/sync_data_flow.svg)
