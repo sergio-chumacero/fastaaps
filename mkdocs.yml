@@ -3,6 +3,7 @@ site_name: Fast AAPS - Documentación
 nav:
     - 'Inicio': 'README.md'
     - 'FASTAAPS: Información General':
+      - Mejoras del Sistema: 'FASTAAPS/upgrades.md'
       - Contenerización de Servicios: 'FASTAAPS/docker.md'
     - 'AAPS-LAB: Aplicaciones Interactivas': 
         - Resúmen: 'AAPS-LAB/summary.md'
