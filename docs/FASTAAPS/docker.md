@@ -28,19 +28,47 @@ La ventaja de utilizar tecnologías de contenerización para los servicios en pr
 
 Una desventaja del uso de contenedores es la complejidad de interconexión y monitoreo de servicios. Por suerte, existen tecnologías maduras de manejo y orquestración de servicios contenerizados como [Kubernetes](https://kubernetes.io/).
 
-## 2. Imágenes Base y Contenedores del Sistema FASTAAPS
+## 2. Imágenes Base, Servicios y Contenedores Docker del Sistema FASTAAPS
 
 Un contenedor es un proceso aislado creado a partir de una *imágen base* que describe todas sus dependencias y su proceso de instalación. Estas imágenes nos dan la capacidad de crear servicios de manera reproducible y predecible, independientemente de las características particulares de la máquina. Las imágenes base de los contenedores además sirven de documentación técnica.
 
-A continuación listamos las imágenes creadar para los distintos servicios del sistema FASTAAPS:
+A continuación listamos las imágenes base usadas para los distintos servicios del sistema FASTAAPS. Algunas imágenes descargadas del repositorio oficial de imágenes Docker, mientras otras son construidas en base a modificaciones de estas imágenes base.
 
+Código de Imágen | Componente | Servicio  | Imágen Base  | Tecnología Utilizada  
+---------- | -------- | ----------------- | ------------ | -------------------- 
+celery | AAPS-DATA | Servicio de Sincronización | [python:3.8.0](https://hub.docker.com/_/python/) |  Celery/Flower 
+[rabbitmq:3.8.1-management](https://hub.docker.com/_/rabbitmq) | AAPS-DATA | Servicio de Sincronización | - | [RabbitMQ](https://www.rabbitmq.com/)  
+[edoburu/pgbouncer](https://hub.docker.com/r/edoburu/pgbouncer/dockerfile/) | AAPS-DATA | Servicio de Sincronización | - | [PgBouncer](http://www.pgbouncer.org/)
 
-Servicio  | Componente  | Tecnología Utilizada | Descripción 
------------- | ------------- | ------------         |  ---------
-Servicio de Sincronización de datos  | AAPS-DATA |  Celery | Corre y Administra tareas de sincronización de datos.   
-Agente de Mensajería (Message Broker) | AAPS-DATA  | RabbitMQ | Maneja una fila de mensajes (message queue). Usado por el servicio de sincronización. 
+Sobre estas imágenes base se implementan distintos servicios Docker. Cada servicio corre en un proceso aislado.
 
+Nombre del Servicio  | Imágen Base | Descripción  | Tecnología Utilizada  
+------------ | ------------- | ------------ | ----------- 
+rabbitmq  | [rabbitmq:3.8.1-management](https://hub.docker.com/_/rabbitmq) | Agente de mensajería (message broker) |  [RabbitMQ](https://www.rabbitmq.com/)   
+celery  | celery | Proceso trabajador de Celery | [Celery](http://www.celeryproject.org/)
+flower | celery | Herramienta de monitorero de Celery | [Flower](https://flower.readthedocs.io/)
+beat | celery | Herramienta de tareas periódicas | [Celery](http://www.celeryproject.org/)
+pgbouncer | [edoburu/pgbouncer](https://hub.docker.com/r/edoburu/pgbouncer/dockerfile/) | Gestor de Conexiones para PostgreSQL | [PgBouncer](http://www.pgbouncer.org/)
 
+Los contenedores Docker se comunican entre ellos y con sistemas externos exponiendo los siguientes puertos específicos en el servidor.
+
+Puerto | Protocolo | Servicio Docker | Descripción
+----- | ----- | ----- | -------
+5672 | AMQP | rabbitmq | Puerto de Mensajería
+15672 | HTTP | rabbitmq | Panel de Control de RabbitMQ
+5555 | HTTP | celery_flower | Panel de Control de Celery
+6432 | postgresql | pgbouncer | Gestor de Conexiones hacia PostgreSQL
+
+## 3. Variables de Configuración
+
+Las variables de configuración de una aplicación de software son aquellos datos que son independientes del funcionamiento de la aplicación, como las URLs de las bases de datos o las llaves de acceso. Estos datos deben ser accesibles para los administradores y por lo general son del tipo dinámico. Además, por seguridad, estos datos no pueden ser incluídos en los repositorios públicos de código. 
+
+De acuerdo a los [12 factores de aplicaciones como servicio](https://12factor.net/), es deseable separar los datos de configuración del código fuente. La manera recomendada de administrar las variables de configuración es a través de *variables de ambiente* (environment variables). Esto garantiza la portabilidad y escalabilidad de la aplicación. Las variables de ambiente tienen la ventaja de poder ser intercambiadas fácilmente entre distintos ambientes de trabajo, son independientes del lenguaje de programación y se integran muy bien con Docker.
+
+!!! info "Los 12 factores de aplicaciones como servicio"
+    Los [12 factores de aplicaciones como servicio](https://12factor.net/) son reglas generales para el desarrollo de software basado en una arquitectura de servicios que garantiza la portabilidad y la escalabilidad de los servicios.
+
+    El sistema FastAAPS se adhiere a varios de estos factores de calidad de código. Para más información, véase la sección [calidad de código](FASTAAPS/quality). 
 
 ## Archivos Docker de los Servicios
 

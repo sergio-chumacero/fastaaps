@@ -51,50 +51,111 @@ En lenguaje simple se puede entender a una función atómica, como una que no de
  Es decir, aplicar una función idempotente una vez es equivalente a aplicarla dos o más veces. 
  
 
-En caso de extender el serivicio de sincronización añadiendo nuevas funciones, recomendamos fuertemente que las nuevas funciones cumplan con estas dos características.
+En caso de extender el serivicio de sincronización añadiendo nuevas tareas, recomendamos que las nuevas funciones cumplan con estas dos características.
 
 
-## 4. Tecnologías
+## 4. Tecnologías Utilizadas
 
-A continuación describimos las tecnologías utilizadas para el servicio de sincronización.
+A continuación describimos las tecnologías utilizadas para el servicio de sincronización. Todas las librerías de código utilizado por las siguientes herramientas son del tipo "open source" o "código abierto".
 
-### 4.1 Celery & RabbitMQ: Sistema de Tareas Asincrónicas
+### 4.1 Celery: Sistema de Tareas Asincrónicas
 
-Celery es una herramienta que permite correr tareas específicas de manera asincrónica, es decir en otro proceso o inclusive en otro servidor dedicado. Normalmente es usado para correr tareas pesadas y de mantenimiento. 
-
-El servicio de sincronización de datos utiliza Celery para correr y manejar las tareas de sincronización con la base de datos del SIIRAyS.
+Celery es un conjunto de herramientas (framework) utilizado para correr tareas específicas de manera asincrónica, es decir, en otro proceso o inclusive en otro servidor dedicado. Normalmente es usado para correr tareas pesadas y de mantenimiento, que resultarían inconvenientes de ser incluídas en una aplicación web. 
 
 ![celery](../img/celery.png)
 
-Celery utiliza procesos del tipo *trabajador* (worker) que están pendientes de tareas que tengan que ser ejecutadas. Para transmitir mensajes a los procesos trabajadores es necesario usar un servicio de mensajería (message broker). Existen distintos serivicios de mensajería como por ejemplo [Redis](https://redis.io/) o una base de datos convencional, pero el sistema FASTAAPS utiliza el servicio de mensajería [RabbitMQ](https://www.rabbitmq.com/), el cual es el más completo en cuanto a funcionalidades de Celery. 
+El modelo de trabajo de celery gira entorno a una **fila de tareas**, en dónde las aplicaciones ingresan las tareas que deben ser realizadas. Esta fila de tareas es observada por **procesos trabajadores** que reciben las tareas y las procesan por su cuenta. 
 
+Las tareas de sincronización con la base de datos del SIIRAyS califican a ser implementadas usando el modelo de trabajo de Celery porque las siguientes características:
+
+* Las tareas de sincronización son pesadas. Pueden tardar varios segundos en ser procesadas.
+* Las tareas de sincronización pueden ser ejecutadas de manera asincrónica.
+* Los objetos involucrados en estas tareas son ajenos al resto de componentes del sistema.
+
+![celery_diagram](../img/celery_diagram.svg)
+
+Para el servicio de sincronización periódico utilizamos una herramienta automatizada para añadir tareas a la fila en intervalos regulares. Esta herramienta es implementada en un proceso aparte y la describimos en mayor detalle más adelante. 
+
+Celery utiliza procesos del tipo *trabajador* (worker) que corren de manera paralela y están pendientes de las tareas que tengan que ser ejecutadas. Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de [cálidad de código](/FASTAAPS/quality), los procesos trabajadores de Celery son contenerizados con Docker. 
+
+Celery no implementa la fila de tareas, en cambio, depende de los servicios de un **agente de mensajería** (message broker) externo para transmitir mensajes a los procesos trabajadores. El uso de un agente de mensajería externo tiene la ventaja de usar una tecnología especializada. Más adelante explicamos el agente de mensajería en mayor detalle.
+
+  
+
+### 4.2 RabbitMQ: Agente de Mensajería (Fila de Tareas)
+
+El sistema de Celery depende de un agente de mensajería (message broker) externo para implementar la fila de tareas.  
+
+Existen distintos serivicios de mensajería como por ejemplo [Redis](https://redis.io/) o una base de datos convencional, pero el sistema FASTAAPS utiliza el servicio de mensajería [RabbitMQ](https://www.rabbitmq.com/), el cual es el más completo en cuanto a funcionalidades de Celery.
 
 ![rabbitmq](../img/rabbitmq.png)
 
+Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de [cálidad de código](/FASTAAPS/quality), el agente de mensajería es contenerizado con Docker. De acuerdo con estos principios de diseño el agente de mensajería es accesible desde los contenedores que lo requieran (trabajadores Celery) en un puerto específico.
+
+Para monitorear el trabajo realizado por el agente de mensajería y facilitar su mantenimiento, incluímos un panel de control web desde el cual un usuario de apoyo técnico puede monitorear la fila de tareas en tiempo real. Este servicio es parte del contenedor de RabbitMQ.
+
+### 4.3 Celery-Beat: Herramienta de Tareas Periódicas
+
+Teniendo procesos trabajadores de Celery a la espera de nuevas tareas a realizar en la fila, sólo nos hace falta una herramienta encargada de poner tareas en la fila en intervalos regulares. Precisamente esta es la función de **Celery-Beat**, una herramienta de Celery que inicia un nuevo proceso con el fin de añadir tareas a la fila de manera periódica.
+
+Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de [cálidad de código](/FASTAAPS/quality), la herramienta de tareas periódicas es contenerizada con Docker.
+
+### 4.4 Flower: Interfaz de Monitoreo
+
+Para monitorear el trabajo realizado por el servicio de sincronización y facilitar su mantenimiento, el servicio de sincronización cuenta con una interfaz de usuario web desde la cual un usuario de apoyo técnico puede monitorear las tareas realizadas en tiempo real.
+
+La interfaz de monitoreo fue implementada haciendo uso de la librería [Flower](https://flower.readthedocs.io/).
+
+Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de [cálidad de código](/FASTAAPS/quality), la herramienta de monitoreo de tareas es contenerizado con Docker y el panel de control es expuesto en un puerto específico.
+
+El acceso al panel de control es considerado del tipo administrativo/técnico y se encuentra protegido por un sistema de autenticación básico (nombre de usuario & contraseña). 
 
 
-### 4.2 Flower: Interfaz de Monitoreo
+### 4.5 PgBouncer: Gestor de Conexiones a la Base de Datos PostgreSQL
 
-Para transparentar el trabajo realizado por el servicio de sincronización y facilitar su mantenimiento, el servicio de sincronización cuenta con una interfaz de usuario web desde la cual un usuario de apoyo técnico puede monitorear las tareas realizadas y planeadas.
+Establecer una conexión con un servidor PostgreSQL es notoriamente costoso:
 
-En esta página se muestra también si alguna tarea de sincronización reportó errores, el tipo de error producido y detalles que permitan solucionarlo y prevenir futuras ocurrencias.
+* **Memoria**: Cada conexión de PostgreSQL inicia un nuevo proceso que requiere una asignación de aproximadamente 10MB de memoria.
+* **Procesamiento Computacional**: Iniciar nuevas conexiones además implica un gasto adicional en tiempo de cómputo.
 
-A través de esta interfaz de usuario, es posible realizar una **actualización a pedido** de manera manual.
+Debido a estos costos, no sería eficiente establecer una conexión nueva con la base de datos cada vez que comienze una tarea de sincronización. En especial si estas conexiones son de vida corta y son destruidas una vez completada la tarea.
 
-!!!info "Información Técnica"
-    La interfaz de monitoreo del servicio de sincronización fue implementada haciendo uso de la librería [Flower](https://flower.readthedocs.io/), la cual es una herramienta de monitoreo para aplicaciones [Celery](http://www.celeryproject.org/).
+La solución a este problema es crear y mantener un grupo conexiones de larga duración (connection pool) que sean reutilizadas por los procesos trabajadores. Precisamente esta es la función de un **gestor de conexiones (connection pooler)** como [PgBouncer](http://www.pgbouncer.org/).
 
-    Celery, a su vez, es una librería de tareas distribuidas, la cual utilizamos para realizar tareas periódicas de manera automática. Celery hace uso de un *agente de mensajería* (en ingés *message broker*) del tipo [RabbitMQ](https://www.rabbitmq.com/).
+![pgbouncer](../img/pgbouncer.svg)
 
-    Dentro del servidor de la aplicación, tanto la aplicación Celery, como el agente de mensajería RabbitMQ, se encuentran contenerizados.
+El flujo de trabajo es el siguiente:
 
-    Todos las librerías RabbitMQ, Celery y Flower son del tipo *código abierto*.
+1. El gestor de conexiones establece y mantiene conexiones directas hacia la base de datos del SIIRAyS y proporciona estas conexiones como servicio. 
+2. Las tareas de Celery se conectan con el gestor como si este fuera la base de datos y realizan sus consultas.
+3. El gestor utiliza una de las conexiones que mantiene para realizar el pedido a la base de datos real y retorna el resultado de la consulta a la tarea.
+4. La conexión es retornada al grupo de conexiones para que esta pueda ser utilizada nuevamente.
+
+Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de [cálidad de código](/FASTAAPS/quality), el servicio de gestión de conexiones es contenerizado con Docker.
 
 ### 4.3 PsycoPG2: Driver de PostgreSQL
 
 ### 4.4 Requests: Cliente HTTP 
 
-## Especificaciones Técnicas
+## 5. Detalles de Implementación
+
+El servicio de sincronización está implementado a través de los siguientes servicios Docker:
+
+Nombre del Servicio  | Descripción  | Tecnología Utilizada  
+------------ | ------------- | ------------ 
+rabbitmq  | Agente de mensajería (message broker) |  [RabbitMQ](https://www.rabbitmq.com/)   
+celery  | Proceso trabajador de Celery | [Celery Worker](http://www.celeryproject.org/)
+flower | Herramienta de monitorero de Celery | [Flower](https://flower.readthedocs.io/)
+beat |  Herramienta de tareas periódicas de Celery | [Celery Beat](http://www.celeryproject.org/)
+pgbouncer | Gestor de conexiones (connection pooler) | [PgBouncer](http://www.pgbouncer.org/)
+
+Cada servicio corre en un proceso aislado, pero exponen los siguientes puertos dentro del servidor:
+
+Puerto | Protocolo | Servicio Docker | Descripción
+----- | ----- | ----- | -------
+5672 | AMQP | rabbitmq | Puerto de Mensajería
+15678 | HTTP | rabbitmq | Panel de Control de RabbitMQ
+5555 | HTTP | celery_flower | Panel de Control de Celery
 
 ### Tecnologías Utilizadas
 

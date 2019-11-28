@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/blur_circular.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.0">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
       
         <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -53,7 +53,7 @@
       
     
     
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
@@ -266,6 +266,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../upgrades/" title="Mejoras del Sistema" class="md-nav__link">
+      Mejoras del Sistema
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -277,11 +289,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Contenerización de Servicios
+        (Docker) Contenerización de Servicios
       </label>
     
-    <a href="./" title="Contenerización de Servicios" class="md-nav__link md-nav__link--active">
-      Contenerización de Servicios
+    <a href="./" title="(Docker) Contenerización de Servicios" class="md-nav__link md-nav__link--active">
+      (Docker) Contenerización de Servicios
     </a>
     
       
@@ -302,8 +314,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2_imagenes_base_y_contenedores_del_sistema_fastaaps" class="md-nav__link">
-    2. Imágenes Base y Contenedores del Sistema FASTAAPS
+  <a href="#2_imagenes_base_servicios_y_contenedores_docker_del_sistema_fastaaps" class="md-nav__link">
+    2. Imágenes Base, Servicios y Contenedores Docker del Sistema FASTAAPS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_variables_de_configuracion" class="md-nav__link">
+    3. Variables de Configuración
   </a>
   
 </li>
@@ -323,6 +342,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../quality/" title="Estándares de Calidad de Código" class="md-nav__link">
+      Estándares de Calidad de Código
+    </a>
   </li>
 
         
@@ -542,6 +573,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/db/" title="Base de Datos Especializada" class="md-nav__link">
+      Base de Datos Especializada
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -575,8 +618,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2_imagenes_base_y_contenedores_del_sistema_fastaaps" class="md-nav__link">
-    2. Imágenes Base y Contenedores del Sistema FASTAAPS
+  <a href="#2_imagenes_base_servicios_y_contenedores_docker_del_sistema_fastaaps" class="md-nav__link">
+    2. Imágenes Base, Servicios y Contenedores Docker del Sistema FASTAAPS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_variables_de_configuracion" class="md-nav__link">
+    3. Variables de Configuración
   </a>
   
 </li>
@@ -627,33 +677,131 @@
 </li>
 </ol>
 <p>Una desventaja del uso de contenedores es la complejidad de interconexión y monitoreo de servicios. Por suerte, existen tecnologías maduras de manejo y orquestración de servicios contenerizados como <a href="https://kubernetes.io/">Kubernetes</a>.</p>
-<h2 id="2_imagenes_base_y_contenedores_del_sistema_fastaaps">2. Imágenes Base y Contenedores del Sistema FASTAAPS<a class="headerlink" href="#2_imagenes_base_y_contenedores_del_sistema_fastaaps" title="Permanent link">&para;</a></h2>
+<h2 id="2_imagenes_base_servicios_y_contenedores_docker_del_sistema_fastaaps">2. Imágenes Base, Servicios y Contenedores Docker del Sistema FASTAAPS<a class="headerlink" href="#2_imagenes_base_servicios_y_contenedores_docker_del_sistema_fastaaps" title="Permanent link">&para;</a></h2>
 <p>Un contenedor es un proceso aislado creado a partir de una <em>imágen base</em> que describe todas sus dependencias y su proceso de instalación. Estas imágenes nos dan la capacidad de crear servicios de manera reproducible y predecible, independientemente de las características particulares de la máquina. Las imágenes base de los contenedores además sirven de documentación técnica.</p>
-<p>A continuación listamos las imágenes creadar para los distintos servicios del sistema FASTAAPS:</p>
+<p>A continuación listamos las imágenes base usadas para los distintos servicios del sistema FASTAAPS. Algunas imágenes descargadas del repositorio oficial de imágenes Docker, mientras otras son construidas en base a modificaciones de estas imágenes base.</p>
 <table>
 <thead>
 <tr>
-<th>Servicio</th>
+<th>Código de Imágen</th>
 <th>Componente</th>
+<th>Servicio</th>
+<th>Imágen Base</th>
 <th>Tecnología Utilizada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>celery</td>
+<td>AAPS-DATA</td>
+<td>Servicio de Sincronización</td>
+<td><a href="https://hub.docker.com/_/python/">python:3.8.0</a></td>
+<td>Celery/Flower</td>
+</tr>
+<tr>
+<td><a href="https://hub.docker.com/_/rabbitmq">rabbitmq:3.8.1-management</a></td>
+<td>AAPS-DATA</td>
+<td>Servicio de Sincronización</td>
+<td>-</td>
+<td><a href="https://www.rabbitmq.com/">RabbitMQ</a></td>
+</tr>
+<tr>
+<td><a href="https://hub.docker.com/r/edoburu/pgbouncer/dockerfile/">edoburu/pgbouncer</a></td>
+<td>AAPS-DATA</td>
+<td>Servicio de Sincronización</td>
+<td>-</td>
+<td><a href="http://www.pgbouncer.org/">PgBouncer</a></td>
+</tr>
+</tbody>
+</table>
+<p>Sobre estas imágenes base se implementan distintos servicios Docker. Cada servicio corre en un proceso aislado.</p>
+<table>
+<thead>
+<tr>
+<th>Nombre del Servicio</th>
+<th>Imágen Base</th>
+<th>Descripción</th>
+<th>Tecnología Utilizada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rabbitmq</td>
+<td><a href="https://hub.docker.com/_/rabbitmq">rabbitmq:3.8.1-management</a></td>
+<td>Agente de mensajería (message broker)</td>
+<td><a href="https://www.rabbitmq.com/">RabbitMQ</a></td>
+</tr>
+<tr>
+<td>celery</td>
+<td>celery</td>
+<td>Proceso trabajador de Celery</td>
+<td><a href="http://www.celeryproject.org/">Celery</a></td>
+</tr>
+<tr>
+<td>flower</td>
+<td>celery</td>
+<td>Herramienta de monitorero de Celery</td>
+<td><a href="https://flower.readthedocs.io/">Flower</a></td>
+</tr>
+<tr>
+<td>beat</td>
+<td>celery</td>
+<td>Herramienta de tareas periódicas</td>
+<td><a href="http://www.celeryproject.org/">Celery</a></td>
+</tr>
+<tr>
+<td>pgbouncer</td>
+<td><a href="https://hub.docker.com/r/edoburu/pgbouncer/dockerfile/">edoburu/pgbouncer</a></td>
+<td>Gestor de Conexiones para PostgreSQL</td>
+<td><a href="http://www.pgbouncer.org/">PgBouncer</a></td>
+</tr>
+</tbody>
+</table>
+<p>Los contenedores Docker se comunican entre ellos y con sistemas externos exponiendo los siguientes puertos específicos en el servidor.</p>
+<table>
+<thead>
+<tr>
+<th>Puerto</th>
+<th>Protocolo</th>
+<th>Servicio Docker</th>
 <th>Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Servicio de Sincronización de datos</td>
-<td>AAPS-DATA</td>
-<td>Celery</td>
-<td>Corre y Administra tareas de sincronización de datos.</td>
+<td>5672</td>
+<td>AMQP</td>
+<td>rabbitmq</td>
+<td>Puerto de Mensajería</td>
 </tr>
 <tr>
-<td>Agente de Mensajería (Message Broker)</td>
-<td>AAPS-DATA</td>
-<td>RabbitMQ</td>
-<td>Maneja una fila de mensajes (message queue). Usado por el servicio de sincronización.</td>
+<td>15672</td>
+<td>HTTP</td>
+<td>rabbitmq</td>
+<td>Panel de Control de RabbitMQ</td>
+</tr>
+<tr>
+<td>5555</td>
+<td>HTTP</td>
+<td>celery_flower</td>
+<td>Panel de Control de Celery</td>
+</tr>
+<tr>
+<td>6432</td>
+<td>postgresql</td>
+<td>pgbouncer</td>
+<td>Gestor de Conexiones hacia PostgreSQL</td>
 </tr>
 </tbody>
 </table>
+<h2 id="3_variables_de_configuracion">3. Variables de Configuración<a class="headerlink" href="#3_variables_de_configuracion" title="Permanent link">&para;</a></h2>
+<p>Las variables de configuración de una aplicación de software son aquellos datos que son independientes del funcionamiento de la aplicación, como las URLs de las bases de datos o las llaves de acceso. Estos datos deben ser accesibles para los administradores y por lo general son del tipo dinámico. Además, por seguridad, estos datos no pueden ser incluídos en los repositorios públicos de código. </p>
+<p>De acuerdo a los <a href="https://12factor.net/">12 factores de aplicaciones como servicio</a>, es deseable separar los datos de configuración del código fuente. La manera recomendada de administrar las variables de configuración es a través de <em>variables de ambiente</em> (environment variables). Esto garantiza la portabilidad y escalabilidad de la aplicación. Las variables de ambiente tienen la ventaja de poder ser intercambiadas fácilmente entre distintos ambientes de trabajo, son independientes del lenguaje de programación y se integran muy bien con Docker.</p>
+<div class="admonition info">
+<p class="admonition-title">Los 12 factores de aplicaciones como servicio</p>
+<p>Los <a href="https://12factor.net/">12 factores de aplicaciones como servicio</a> son reglas generales para el desarrollo de software basado en una arquitectura de servicios que garantiza la portabilidad y la escalabilidad de los servicios.</p>
+<p>El sistema FastAAPS se adhiere a varios de estos factores de calidad de código. Para más información, véase la sección <a href="FASTAAPS/quality">calidad de código</a>. </p>
+</div>
 <h2 id="archivos_docker_de_los_servicios">Archivos Docker de los Servicios<a class="headerlink" href="#archivos_docker_de_los_servicios" title="Permanent link">&para;</a></h2>
 <p>El <em>archivo de Docker</em> (en inglés <em>Dockerfile</em>) contiene todas las instrucciones necesarias para construir la imágen del contenedor y a su vez sirve de documentación técnica. Estos archivos describen la aplicación y sus dependencias. </p>
 <p>Docker ejecuta las instrucciones de un archivo Docker para contruir la imágen base.</p>
@@ -678,7 +826,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../.." title="Inicio" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../upgrades/" title="Mejoras del Sistema" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -687,19 +835,19 @@
                 <span class="md-footer-nav__direction">
                   Anterior
                 </span>
-                Inicio
+                Mejoras del Sistema
               </span>
             </div>
           </a>
         
         
-          <a href="../../AAPS-LAB/summary/" title="Resúmen" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../quality/" title="Estándares de Calidad de Código" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Siguiente
                 </span>
-                Resúmen
+                Estándares de Calidad de Código
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -736,7 +884,7 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
+      <script src="../../assets/javascripts/application.a8b5e56f.js"></script>
       
         
         

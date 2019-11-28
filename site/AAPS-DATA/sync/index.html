@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/blur_circular.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.0">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
       
         <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -53,7 +53,7 @@
       
     
     
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
@@ -266,8 +266,32 @@
 
 
   <li class="md-nav__item">
-    <a href="../../FASTAAPS/docker/" title="Contenerización de Servicios" class="md-nav__link">
-      Contenerización de Servicios
+    <a href="../../FASTAAPS/upgrades/" title="Mejoras del Sistema" class="md-nav__link">
+      Mejoras del Sistema
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../FASTAAPS/docker/" title="(Docker) Contenerización de Servicios" class="md-nav__link">
+      (Docker) Contenerización de Servicios
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../FASTAAPS/quality/" title="Estándares de Calidad de Código" class="md-nav__link">
+      Estándares de Calidad de Código
     </a>
   </li>
 
@@ -545,23 +569,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4_tecnologias" class="md-nav__link">
-    4. Tecnologías
+  <a href="#4_tecnologias_utilizadas" class="md-nav__link">
+    4. Tecnologías Utilizadas
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41_celery_rabbitmq_sistema_de_tareas_asincronicas" class="md-nav__link">
-    4.1 Celery &amp; RabbitMQ: Sistema de Tareas Asincrónicas
+  <a href="#41_celery_sistema_de_tareas_asincronicas" class="md-nav__link">
+    4.1 Celery: Sistema de Tareas Asincrónicas
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#42_flower_interfaz_de_monitoreo" class="md-nav__link">
-    4.2 Flower: Interfaz de Monitoreo
+  <a href="#42_rabbitmq_agente_de_mensajeria_fila_de_tareas" class="md-nav__link">
+    4.2 RabbitMQ: Agente de Mensajería (Fila de Tareas)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43_celery-beat_herramienta_de_tareas_periodicas" class="md-nav__link">
+    4.3 Celery-Beat: Herramienta de Tareas Periódicas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44_flower_interfaz_de_monitoreo" class="md-nav__link">
+    4.4 Flower: Interfaz de Monitoreo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45_pgbouncer_gestor_de_conexiones_a_la_base_de_datos_postgresql" class="md-nav__link">
+    4.5 PgBouncer: Gestor de Conexiones a la Base de Datos PostgreSQL
   </a>
   
 </li>
@@ -586,8 +631,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#especificaciones_tecnicas" class="md-nav__link">
-    Especificaciones Técnicas
+  <a href="#5_detalles_de_implementacion" class="md-nav__link">
+    5. Detalles de Implementación
   </a>
   
     <nav class="md-nav">
@@ -613,6 +658,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../db/" title="Base de Datos Especializada" class="md-nav__link">
+      Base de Datos Especializada
+    </a>
   </li>
 
         
@@ -676,23 +733,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4_tecnologias" class="md-nav__link">
-    4. Tecnologías
+  <a href="#4_tecnologias_utilizadas" class="md-nav__link">
+    4. Tecnologías Utilizadas
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41_celery_rabbitmq_sistema_de_tareas_asincronicas" class="md-nav__link">
-    4.1 Celery &amp; RabbitMQ: Sistema de Tareas Asincrónicas
+  <a href="#41_celery_sistema_de_tareas_asincronicas" class="md-nav__link">
+    4.1 Celery: Sistema de Tareas Asincrónicas
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#42_flower_interfaz_de_monitoreo" class="md-nav__link">
-    4.2 Flower: Interfaz de Monitoreo
+  <a href="#42_rabbitmq_agente_de_mensajeria_fila_de_tareas" class="md-nav__link">
+    4.2 RabbitMQ: Agente de Mensajería (Fila de Tareas)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43_celery-beat_herramienta_de_tareas_periodicas" class="md-nav__link">
+    4.3 Celery-Beat: Herramienta de Tareas Periódicas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44_flower_interfaz_de_monitoreo" class="md-nav__link">
+    4.4 Flower: Interfaz de Monitoreo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45_pgbouncer_gestor_de_conexiones_a_la_base_de_datos_postgresql" class="md-nav__link">
+    4.5 PgBouncer: Gestor de Conexiones a la Base de Datos PostgreSQL
   </a>
   
 </li>
@@ -717,8 +795,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#especificaciones_tecnicas" class="md-nav__link">
-    Especificaciones Técnicas
+  <a href="#5_detalles_de_implementacion" class="md-nav__link">
+    5. Detalles de Implementación
   </a>
   
     <nav class="md-nav">
@@ -796,29 +874,125 @@
 <li><strong>Idempotencia</strong>: Con una función idempotente se obtiene el mismo resultado, independientemente de las veces que la función sea repetida. 
  Es decir, aplicar una función idempotente una vez es equivalente a aplicarla dos o más veces. </li>
 </ol>
-<p>En caso de extender el serivicio de sincronización añadiendo nuevas funciones, recomendamos fuertemente que las nuevas funciones cumplan con estas dos características.</p>
-<h2 id="4_tecnologias">4. Tecnologías<a class="headerlink" href="#4_tecnologias" title="Permanent link">&para;</a></h2>
-<p>A continuación describimos las tecnologías utilizadas para el servicio de sincronización.</p>
-<h3 id="41_celery_rabbitmq_sistema_de_tareas_asincronicas">4.1 Celery &amp; RabbitMQ: Sistema de Tareas Asincrónicas<a class="headerlink" href="#41_celery_rabbitmq_sistema_de_tareas_asincronicas" title="Permanent link">&para;</a></h3>
-<p>Celery es una herramienta que permite correr tareas específicas de manera asincrónica, es decir en otro proceso o inclusive en otro servidor dedicado. Normalmente es usado para correr tareas pesadas y de mantenimiento. </p>
-<p>El servicio de sincronización de datos utiliza Celery para correr y manejar las tareas de sincronización con la base de datos del SIIRAyS.</p>
+<p>En caso de extender el serivicio de sincronización añadiendo nuevas tareas, recomendamos que las nuevas funciones cumplan con estas dos características.</p>
+<h2 id="4_tecnologias_utilizadas">4. Tecnologías Utilizadas<a class="headerlink" href="#4_tecnologias_utilizadas" title="Permanent link">&para;</a></h2>
+<p>A continuación describimos las tecnologías utilizadas para el servicio de sincronización. Todas las librerías de código utilizado por las siguientes herramientas son del tipo "open source" o "código abierto".</p>
+<h3 id="41_celery_sistema_de_tareas_asincronicas">4.1 Celery: Sistema de Tareas Asincrónicas<a class="headerlink" href="#41_celery_sistema_de_tareas_asincronicas" title="Permanent link">&para;</a></h3>
+<p>Celery es un conjunto de herramientas (framework) utilizado para correr tareas específicas de manera asincrónica, es decir, en otro proceso o inclusive en otro servidor dedicado. Normalmente es usado para correr tareas pesadas y de mantenimiento, que resultarían inconvenientes de ser incluídas en una aplicación web. </p>
 <p><img alt="celery" src="../../img/celery.png" /></p>
-<p>Celery utiliza procesos del tipo <em>trabajador</em> (worker) que están pendientes de tareas que tengan que ser ejecutadas. Para transmitir mensajes a los procesos trabajadores es necesario usar un servicio de mensajería (message broker). Existen distintos serivicios de mensajería como por ejemplo <a href="https://redis.io/">Redis</a> o una base de datos convencional, pero el sistema FASTAAPS utiliza el servicio de mensajería <a href="https://www.rabbitmq.com/">RabbitMQ</a>, el cual es el más completo en cuanto a funcionalidades de Celery. </p>
+<p>El modelo de trabajo de celery gira entorno a una <strong>fila de tareas</strong>, en dónde las aplicaciones ingresan las tareas que deben ser realizadas. Esta fila de tareas es observada por <strong>procesos trabajadores</strong> que reciben las tareas y las procesan por su cuenta. </p>
+<p>Las tareas de sincronización con la base de datos del SIIRAyS califican a ser implementadas usando el modelo de trabajo de Celery porque las siguientes características:</p>
+<ul>
+<li>Las tareas de sincronización son pesadas. Pueden tardar varios segundos en ser procesadas.</li>
+<li>Las tareas de sincronización pueden ser ejecutadas de manera asincrónica.</li>
+<li>Los objetos involucrados en estas tareas son ajenos al resto de componentes del sistema.</li>
+</ul>
+<p><img alt="celery_diagram" src="../../img/celery_diagram.svg" /></p>
+<p>Para el servicio de sincronización periódico utilizamos una herramienta automatizada para añadir tareas a la fila en intervalos regulares. Esta herramienta es implementada en un proceso aparte y la describimos en mayor detalle más adelante. </p>
+<p>Celery utiliza procesos del tipo <em>trabajador</em> (worker) que corren de manera paralela y están pendientes de las tareas que tengan que ser ejecutadas. Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de <a href="/FASTAAPS/quality">cálidad de código</a>, los procesos trabajadores de Celery son contenerizados con Docker. </p>
+<p>Celery no implementa la fila de tareas, en cambio, depende de los servicios de un <strong>agente de mensajería</strong> (message broker) externo para transmitir mensajes a los procesos trabajadores. El uso de un agente de mensajería externo tiene la ventaja de usar una tecnología especializada. Más adelante explicamos el agente de mensajería en mayor detalle.</p>
+<h3 id="42_rabbitmq_agente_de_mensajeria_fila_de_tareas">4.2 RabbitMQ: Agente de Mensajería (Fila de Tareas)<a class="headerlink" href="#42_rabbitmq_agente_de_mensajeria_fila_de_tareas" title="Permanent link">&para;</a></h3>
+<p>El sistema de Celery depende de un agente de mensajería (message broker) externo para implementar la fila de tareas.  </p>
+<p>Existen distintos serivicios de mensajería como por ejemplo <a href="https://redis.io/">Redis</a> o una base de datos convencional, pero el sistema FASTAAPS utiliza el servicio de mensajería <a href="https://www.rabbitmq.com/">RabbitMQ</a>, el cual es el más completo en cuanto a funcionalidades de Celery.</p>
 <p><img alt="rabbitmq" src="../../img/rabbitmq.png" /></p>
-<h3 id="42_flower_interfaz_de_monitoreo">4.2 Flower: Interfaz de Monitoreo<a class="headerlink" href="#42_flower_interfaz_de_monitoreo" title="Permanent link">&para;</a></h3>
-<p>Para transparentar el trabajo realizado por el servicio de sincronización y facilitar su mantenimiento, el servicio de sincronización cuenta con una interfaz de usuario web desde la cual un usuario de apoyo técnico puede monitorear las tareas realizadas y planeadas.</p>
-<p>En esta página se muestra también si alguna tarea de sincronización reportó errores, el tipo de error producido y detalles que permitan solucionarlo y prevenir futuras ocurrencias.</p>
-<p>A través de esta interfaz de usuario, es posible realizar una <strong>actualización a pedido</strong> de manera manual.</p>
-<div class="admonition info">
-<p class="admonition-title">Información Técnica</p>
-<p>La interfaz de monitoreo del servicio de sincronización fue implementada haciendo uso de la librería <a href="https://flower.readthedocs.io/">Flower</a>, la cual es una herramienta de monitoreo para aplicaciones <a href="http://www.celeryproject.org/">Celery</a>.</p>
-<p>Celery, a su vez, es una librería de tareas distribuidas, la cual utilizamos para realizar tareas periódicas de manera automática. Celery hace uso de un <em>agente de mensajería</em> (en ingés <em>message broker</em>) del tipo <a href="https://www.rabbitmq.com/">RabbitMQ</a>.</p>
-<p>Dentro del servidor de la aplicación, tanto la aplicación Celery, como el agente de mensajería RabbitMQ, se encuentran contenerizados.</p>
-<p>Todos las librerías RabbitMQ, Celery y Flower son del tipo <em>código abierto</em>.</p>
-</div>
+<p>Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de <a href="/FASTAAPS/quality">cálidad de código</a>, el agente de mensajería es contenerizado con Docker. De acuerdo con estos principios de diseño el agente de mensajería es accesible desde los contenedores que lo requieran (trabajadores Celery) en un puerto específico.</p>
+<p>Para monitorear el trabajo realizado por el agente de mensajería y facilitar su mantenimiento, incluímos un panel de control web desde el cual un usuario de apoyo técnico puede monitorear la fila de tareas en tiempo real. Este servicio es parte del contenedor de RabbitMQ.</p>
+<h3 id="43_celery-beat_herramienta_de_tareas_periodicas">4.3 Celery-Beat: Herramienta de Tareas Periódicas<a class="headerlink" href="#43_celery-beat_herramienta_de_tareas_periodicas" title="Permanent link">&para;</a></h3>
+<p>Teniendo procesos trabajadores de Celery a la espera de nuevas tareas a realizar en la fila, sólo nos hace falta una herramienta encargada de poner tareas en la fila en intervalos regulares. Precisamente esta es la función de <strong>Celery-Beat</strong>, una herramienta de Celery que inicia un nuevo proceso con el fin de añadir tareas a la fila de manera periódica.</p>
+<p>Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de <a href="/FASTAAPS/quality">cálidad de código</a>, la herramienta de tareas periódicas es contenerizada con Docker.</p>
+<h3 id="44_flower_interfaz_de_monitoreo">4.4 Flower: Interfaz de Monitoreo<a class="headerlink" href="#44_flower_interfaz_de_monitoreo" title="Permanent link">&para;</a></h3>
+<p>Para monitorear el trabajo realizado por el servicio de sincronización y facilitar su mantenimiento, el servicio de sincronización cuenta con una interfaz de usuario web desde la cual un usuario de apoyo técnico puede monitorear las tareas realizadas en tiempo real.</p>
+<p>La interfaz de monitoreo fue implementada haciendo uso de la librería <a href="https://flower.readthedocs.io/">Flower</a>.</p>
+<p>Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de <a href="/FASTAAPS/quality">cálidad de código</a>, la herramienta de monitoreo de tareas es contenerizado con Docker y el panel de control es expuesto en un puerto específico.</p>
+<p>El acceso al panel de control es considerado del tipo administrativo/técnico y se encuentra protegido por un sistema de autenticación básico (nombre de usuario &amp; contraseña). </p>
+<h3 id="45_pgbouncer_gestor_de_conexiones_a_la_base_de_datos_postgresql">4.5 PgBouncer: Gestor de Conexiones a la Base de Datos PostgreSQL<a class="headerlink" href="#45_pgbouncer_gestor_de_conexiones_a_la_base_de_datos_postgresql" title="Permanent link">&para;</a></h3>
+<p>Establecer una conexión con un servidor PostgreSQL es notoriamente costoso:</p>
+<ul>
+<li><strong>Memoria</strong>: Cada conexión de PostgreSQL inicia un nuevo proceso que requiere una asignación de aproximadamente 10MB de memoria.</li>
+<li><strong>Procesamiento Computacional</strong>: Iniciar nuevas conexiones además implica un gasto adicional en tiempo de cómputo.</li>
+</ul>
+<p>Debido a estos costos, no sería eficiente establecer una conexión nueva con la base de datos cada vez que comienze una tarea de sincronización. En especial si estas conexiones son de vida corta y son destruidas una vez completada la tarea.</p>
+<p>La solución a este problema es crear y mantener un grupo conexiones de larga duración (connection pool) que sean reutilizadas por los procesos trabajadores. Precisamente esta es la función de un <strong>gestor de conexiones (connection pooler)</strong> como <a href="http://www.pgbouncer.org/">PgBouncer</a>.</p>
+<p><img alt="pgbouncer" src="../../img/pgbouncer.svg" /></p>
+<p>El flujo de trabajo es el siguiente:</p>
+<ol>
+<li>El gestor de conexiones establece y mantiene conexiones directas hacia la base de datos del SIIRAyS y proporciona estas conexiones como servicio. </li>
+<li>Las tareas de Celery se conectan con el gestor como si este fuera la base de datos y realizan sus consultas.</li>
+<li>El gestor utiliza una de las conexiones que mantiene para realizar el pedido a la base de datos real y retorna el resultado de la consulta a la tarea.</li>
+<li>La conexión es retornada al grupo de conexiones para que esta pueda ser utilizada nuevamente.</li>
+</ol>
+<p>Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de <a href="/FASTAAPS/quality">cálidad de código</a>, el servicio de gestión de conexiones es contenerizado con Docker.</p>
 <h3 id="43_psycopg2_driver_de_postgresql">4.3 PsycoPG2: Driver de PostgreSQL<a class="headerlink" href="#43_psycopg2_driver_de_postgresql" title="Permanent link">&para;</a></h3>
 <h3 id="44_requests_cliente_http">4.4 Requests: Cliente HTTP<a class="headerlink" href="#44_requests_cliente_http" title="Permanent link">&para;</a></h3>
-<h2 id="especificaciones_tecnicas">Especificaciones Técnicas<a class="headerlink" href="#especificaciones_tecnicas" title="Permanent link">&para;</a></h2>
+<h2 id="5_detalles_de_implementacion">5. Detalles de Implementación<a class="headerlink" href="#5_detalles_de_implementacion" title="Permanent link">&para;</a></h2>
+<p>El servicio de sincronización está implementado a través de los siguientes servicios Docker:</p>
+<table>
+<thead>
+<tr>
+<th>Nombre del Servicio</th>
+<th>Descripción</th>
+<th>Tecnología Utilizada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rabbitmq</td>
+<td>Agente de mensajería (message broker)</td>
+<td><a href="https://www.rabbitmq.com/">RabbitMQ</a></td>
+</tr>
+<tr>
+<td>celery</td>
+<td>Proceso trabajador de Celery</td>
+<td><a href="http://www.celeryproject.org/">Celery Worker</a></td>
+</tr>
+<tr>
+<td>flower</td>
+<td>Herramienta de monitorero de Celery</td>
+<td><a href="https://flower.readthedocs.io/">Flower</a></td>
+</tr>
+<tr>
+<td>beat</td>
+<td>Herramienta de tareas periódicas de Celery</td>
+<td><a href="http://www.celeryproject.org/">Celery Beat</a></td>
+</tr>
+<tr>
+<td>pgbouncer</td>
+<td>Gestor de conexiones (connection pooler)</td>
+<td><a href="http://www.pgbouncer.org/">PgBouncer</a></td>
+</tr>
+</tbody>
+</table>
+<p>Cada servicio corre en un proceso aislado, pero exponen los siguientes puertos dentro del servidor:</p>
+<table>
+<thead>
+<tr>
+<th>Puerto</th>
+<th>Protocolo</th>
+<th>Servicio Docker</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5672</td>
+<td>AMQP</td>
+<td>rabbitmq</td>
+<td>Puerto de Mensajería</td>
+</tr>
+<tr>
+<td>15678</td>
+<td>HTTP</td>
+<td>rabbitmq</td>
+<td>Panel de Control de RabbitMQ</td>
+</tr>
+<tr>
+<td>5555</td>
+<td>HTTP</td>
+<td>celery_flower</td>
+<td>Panel de Control de Celery</td>
+</tr>
+</tbody>
+</table>
 <h3 id="tecnologias_utilizadas">Tecnologías Utilizadas<a class="headerlink" href="#tecnologias_utilizadas" title="Permanent link">&para;</a></h3>
                 
                   
@@ -855,6 +1029,20 @@
           </a>
         
         
+          <a href="../db/" title="Base de Datos Especializada" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Base de Datos Especializada
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
       </nav>
     </div>
   
@@ -884,7 +1072,7 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
+      <script src="../../assets/javascripts/application.a8b5e56f.js"></script>
       
         
         
