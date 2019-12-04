@@ -1,0 +1,166 @@
+###########################################################################
+# Título:      SYNC & REST-API Docker Compose
+# Ubicación:   FASTAAPS/docker-compose.yml
+# Descripción: 
+#   Archivo de orquestación de contenedores del servicio de sincronización
+#   y del servicio de acceso REST-API. 
+###########################################################################
+
+# Versión de Docker-Compose
+version: '3.4'
+
+# Lista de Servicios
+services:
+  # Proceso Trabajador de Celery
+  celery:
+    build:
+      context: ./AAPS-DATA/SYNC
+      dockerfile: Dockerfile
+    image: &img celery 
+    command: [celery, worker, --app=app.main, --pool=solo, --concurrency=8, --loglevel=INFO] 
+    env_file: &env      
+      - config.env
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./AAPS-DATA/SYNC/app:/app
+    networks:
+      - pgnetwork
+      - rabbitnetwork
+      - mongonetwork
+    hostname: celery
+    restart: "no"
+
+  # Base de Datos (PostgreSQL)
+  postgres:
+    image: postgres
+    env_file: *env
+    ports:
+      - 5432:5432
+    # volumes:
+    #   - ./AAPS-DATA/SYNC/postgres:/tmp
+    networks:
+      - pgnetwork
+    hostname: postgres
+    restart: unless-stopped
+
+  # Panel de Control de PostgreSQL (PgAdmin4)
+  pgadmin:
+    image: dpage/pgadmin4
+    env_file: *env
+    ports:
+      - 5050:80
+    depends_on:
+      - postgres
+    volumes:
+      - ./AAPS-DATA/SYNC/pgadmin:/root/.pgadmin
+    networks:
+      - pgnetwork
+    hostname: pgadmin
+    restart: unless-stopped
+
+  # Gestor de conexiones de PostgreSQL (pgbouncer)
+  pgbouncer:
+    image: edoburu/pgbouncer
+    env_file: *env
+    ports:
+      - 6432:6432
+    depends_on:
+      - postgres
+    volumes:
+      - ./AAPS-DATA/SYNC/etc/pgbouncer:/etc/pgbouncer
+      - ./AAPS-DATA/SYNC/log/postgresql:/var/log/postgresql
+    networks:
+      - pgnetwork
+    hostname: pgbouncer
+    restart: unless-stopped
+
+  # Agente de mensajería RabbitMQ (message broker)
+  # Panel de control RabbitMQ
+  rabbitmq:
+    image: rabbitmq:3.8.1-management
+    restart: 'no'
+    networks:
+      - rabbitnetwork
+    hostname: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  # Servicio de tareas periódicas (scheduler)
+  beat:
+    build: .
+    image: *img
+    command: [celery, beat, --app=app.main, --loglevel=INFO, --pidfile=]
+    env_file: *env
+    depends_on:
+      - celery
+    restart: 'no'
+    volumes:
+      - ./AAPS-DATA/SYNC/app:/app
+
+  # Aplicación de monitoreo
+  flower:
+    build: .
+    image: *img
+    env_file: *env
+    command: [celery, flower, --app=app.main]
+    depends_on:
+      - celery
+    restart: 'no'
+    ports:
+      - 5555:5555
+    volumes:
+      - ./AAPS-DATA/SYNC/app:/app
+
+  # MongoDb: Base de Datos Orientada a Documentos
+  mongo:
+    image: mongo:4.0.13
+    restart: always
+    env_file: *env
+    ports:
+      - 27017:27017
+    networks:
+      - mongonetwork
+    hostname: mongo
+
+  # Mongo-Express: Herramienta de Monitoreo de MongoDB
+  mongo-express:
+    image: mongo-express
+    restart: always
+    env_file: *env
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
+    networks:
+      - mongonetwork
+    hostname: mongo-express
+
+  # FastAPI: Serivicio de Acceso REST-API
+  fastapi:
+    build:
+      context: ./AAPS-API/RESTAPI
+      dockerfile: Dockerfile
+    image: fastapi
+    restart: always
+    env_file: *env
+    ports:
+      - 80:80
+    volumes:
+      - ./AAPS-API/RESTAPI/app:/app
+    networks:
+      - mongonetwork
+    hostname: fastapi
+    depends_on:
+      - mongo
+  
+# Redes
+networks:
+  # Red para PostgreSQL
+  pgnetwork:
+    driver: bridge
+  rabbitnetwork:
+    driver: bridge
+  mongonetwork:
+    driver: bridge

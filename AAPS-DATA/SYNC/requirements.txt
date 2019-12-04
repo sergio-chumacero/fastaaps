@@ -1,0 +1,19 @@
+###################################################################
+# Título:      Requerimientos Python de Imágen 'celery'
+# Ubicación:   FASTAAPS/AAPS-DATA/SYNC/requirements.txt
+# Descripción: 
+#   Dependencias de Python de la imágen base 'celery' de Docker.
+###################################################################
+
+# Celery: Agente de Mensajería
+celery
+flower
+
+# PsycoPG2: Driver PostgreSQL
+psycopg2
+
+# Pandas: Manejo de Datos
+pandas
+
+# Requests: Cliente Web
+requests
