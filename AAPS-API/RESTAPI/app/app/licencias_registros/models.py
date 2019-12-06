@@ -190,6 +190,181 @@ class ErUbicacion(BaseModel):
         validate_assignment = True            # Cambios de atributos serán validados
         allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
           
+# Epsa Registro - Documentos de Acreditación
+class ErDocumentoAcreditacion(BaseModel):
+    """
+    Modelo para el campo 'documentos_acreditacion' del modelo 'EpsaRegistro'. 
+    """
+    tipo : str = Field(
+        ..., # Campo requerido
+        description = "Tipo del documento de acreditación. Campo requerido. Corresponde a la columna 'tipo_documento_acreditacion' de la tabla 'tipo_acreditacion' en el SIIRAyS.",
+    ) # Observaciones: Tres opciones '-', 'Derecho al recurso hidrico' y 'Persona colectiva'. No existen datos en blanco.
+    descripcion : str = Field(
+        ..., # Campo requerido
+        description = "Descripción del documento de acreditación. Campo requerido. Corresponde a la columna 'descripcion_acreditacion' de la tabla 'tipo_acreditacion' en el SIIRAyS.",
+    ) # Observaciones: 13 opciones. No existen datos en blanco.
+
+    # Configuración del Modelo
+    class Config:
+        title = "EPSA Registro - Documento de Acreditación" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
+# Epsa Registro - Información Demográfica de Cobertura
+class ErDemografiaCobertura(BaseModel):
+    """
+    Modelo para el campo 'demografia_cobertura' del modelo 'EpsaRegistro'. 
+    """
+    localidad : str = Field(
+        ..., # Campo requerido
+        description = "Nombre de la Localidad. Campo requerido.  Corresponde a la columna 'localidad' de la tabla 'localidad' en el SIIRAyS.",
+    ) # Observaciones: Todas las columnas de la tabla 'demografia_cobertura' tienen un valor en 'id_localidad'. El nombre va en mayúsculas.
+    poblacion_total : int = Field(
+        default = None, # Campo opcional
+        description = "Población. Corresponde a la columna 'poblacion_total' de la tabla 'demografia_cobertura' en el SIIRAyS.",
+    )
+    poblacion_atendida_ap : int = Field(
+        default = None, # Campo opcional
+        description = "Población atendida con servicio de agua potable. Corresponde a la columna 'poblacion_atendida_ap' de la tabla 'demografia_cobertura' en el SIIRAyS.",
+    )
+    numero_viviendas_ap : int = Field(
+        default = None, # Campo opcional
+        description = "Número de viviendas con servicio de agua potable. Corresponde a la columna 'numero_viviendas_ap' de la tabla 'demografia_cobertura' en el SIIRAyS.",
+    )
+    porcentaje_cobertura_ap : float = Field(
+        default = None, # Campo opcional
+        description = "Porcentaje de cobertura de agua potable. Corresponde a la columna 'porcentaje_cobertura_ap' de la tabla 'demografia_cobertura' en el SIIRAyS.",
+    )
+    poblacion_atendida_as : int = Field(
+        default = None, # Campo opcional
+        description = "Población atendida con servicio de alcantarillado sanitario. Corresponde a la columna 'poblacion_atendida_as' de la tabla 'demografia_cobertura' en el SIIRAyS.",
+    )
+    numbero_viviendas_as : int = Field(
+        default = None, # Campo opcional
+        description = "Número de viviendas con servicio de alcantarillado sanitario. Corresponde a la columna 'numero_viviendas_as' de la tabla 'demografia_cobertura' en el SIIRAyS.",
+    ) # Observaciones: Nombre del campo en SIIRAyS con error: NUMBERO. Se mantiene por defecto.
+    porcentaje_cobertura_ap : float = Field(
+        default = None, # Campo opcional
+        description = "Porcentaje de cobertura de alcantarillado sanitario. Corresponde a la columna 'porcentaje_cobertura_as' de la tabla 'demografia_cobertura' en el SIIRAyS.",
+    )
+    porcentaje_cobertura_ptar : float = Field(
+        default = None, # Campo opcional
+        description = "Porcentaje de cobertura de plantas de tratamiento de aguas residuales. Corresponde a la columna 'porcentaje_cobertura_ptar' de la tabla 'demografia_cobertura' en el SIIRAyS.",
+    )
+
+    # Configuración del Modelo
+    class Config:
+        title = "EPSA Registro - Información Demográfica de Cobertura" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
+# Epsa Registro - Instalación
+class ErInstalacion(BaseModel):
+    """
+    Modelo para el campo 'instalaciones' del modelo 'EpsaRegistro'. 
+    """
+    tipo : str = Field(
+        default = None, # Campo opcional
+        description = "Nombre de la instalación. Corresponde a la columna 'tipo_fuente' de la tabla 'tipo_fuente' en el SIIRAyS.",
+    ) # Observaciones: Existen instalaciones sin valor en el campo 'tipo'.  
+    estado : str = Field(
+        default = None, # Campo opcional
+        description = "Estado de la instalación. Corresponde a la columna 'estado_fuente' de la tabla 'estado_fuente' en el SIIRAyS.",
+    ) # Observaciones: Existen instalaciones sin valor en el campo 'estado'.
+    edad : int = Field(
+        default = None, # Campo opcional
+        description = "Edad de la instalación. Corresponde a la columna 'edad_fuente' de la tabla 'instalacion' en el SIIRAyS.",
+    ) # Observaciones: Existen instalaciones sin valor en el campo 'edad'.
+    
+    # Configuración del Modelo
+    class Config:
+        title = "EPSA Registro - Instalación" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
+# Epsa Registro - Información Técnica
+class ErInformacionTecnica(BaseModel):
+    """
+    Modelo para el campo 'informacion_tecnica' del modelo 'EpsaRegistro'. 
+    """
+    numero_conexiones_ap : int = Field(
+        default = None, # Campo opcional
+        description = "Nombre de la instalación. Corresponde a la columna 'tipo_fuente' de la tabla 'tipo_fuente' en el SIIRAyS.",
+    )
+    numero_piletas_publicas : int = Field(
+        default = None, # Campo opcional
+        description = "Estado de la instalación. Corresponde a la columna 'estado_fuente' de la tabla 'estado_fuente' en el SIIRAyS.",
+    )
+    numero_conexions_as : int = Field(
+        default = None, # Campo opcional
+        description = "Edad de la instalación. Corresponde a la columna 'edad_fuente' de la tabla 'instalacion' en el SIIRAyS.",
+    ) # Observaciones: Error de nombre (CONEXIONS).
+    numero_camaras_septicas_domiciliarias : int = Field(
+        default = None, # Campo opcional
+        description = "Edad de la instalación. Corresponde a la columna 'edad_fuente' de la tabla 'instalacion' en el SIIRAyS.",
+    )
+    numero_letrinas : int = Field(
+        default = None, # Campo opcional
+        description = "Edad de la instalación. Corresponde a la columna 'edad_fuente' de la tabla 'instalacion' en el SIIRAyS.",
+    )
+    numero_banios_publicos : int = Field(
+        default = None, # Campo opcional
+        description = "Edad de la instalación. Corresponde a la columna 'edad_fuente' de la tabla 'instalacion' en el SIIRAyS.",
+    )
+    pozo_ciego : int = Field(
+        default = None, # Campo opcional
+        description = "Edad de la instalación. Corresponde a la columna 'edad_fuente' de la tabla 'instalacion' en el SIIRAyS.",
+    )
+    numero_conexiones_ap_medidor : int = Field(
+        default = None, # Campo opcional
+        description = "Edad de la instalación. Corresponde a la columna 'edad_fuente' de la tabla 'instalacion' en el SIIRAyS.",
+    )
+    dotacion_per_capita : int = Field(
+        default = None, # Campo opcional
+        description = "Edad de la instalación. Corresponde a la columna 'edad_fuente' de la tabla 'instalacion' en el SIIRAyS.",
+    )
+    continuidad_servicio_ap : int = Field(
+        default = None, # Campo opcional
+        description = "Edad de la instalación. Corresponde a la columna 'edad_fuente' de la tabla 'instalacion' en el SIIRAyS.",
+    )
+    continuidad_servicio_epoca_seca : int = Field(
+        default = None, # Campo opcional
+        description = "Edad de la instalación. Corresponde a la columna 'edad_fuente' de la tabla 'instalacion' en el SIIRAyS.",
+    )
+    porcentaje_perdida_red : int = Field(
+        default = None, # Campo opcional
+        description = "Edad de la instalación. Corresponde a la columna 'edad_fuente' de la tabla 'instalacion' en el SIIRAyS.",
+    ) # Observaciones: Columna de porcentajes sólo acepta valores enteros (int) y EPSA con id 4004 tiene un valor de 34023.
+
+    # Configuración del Modelo
+    class Config:
+        title = "EPSA Registro - Información Técnica" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
 
 # EPSA Registro
 class EpsaRegistro(BaseModel):
@@ -205,6 +380,22 @@ class EpsaRegistro(BaseModel):
         default = None,
         description = "Información de la ubicación geográfica EPSA. Estos datos corresponden a las tablas 'ubicacion' y 'localidad' en el SIIRAyS.",
     ) # Observaciones: Posiblemente múltiples objetos por EPSA.
+    documentos_acreditacion : List[ErDocumentoAcreditacion] = Field(
+        default = None,
+        description = "Información de los documentos de acreditación de la EPSA. Estos datos corresponden a las tablas 'documento_acreditacion' y 'tipo_acreditacion'."
+    ) # Observaciones: Es posible (y común) tener múltiples documentos de acreditación por EPSA.
+    demografia_cobertura : List[ErDemografiaCobertura] = Field(
+        default = None, # Campo opcional
+        description = "Información demográfica de cobertura de la EPSA. Estos datos corresponden a las tablas 'demografia_cobertura' y 'localidad' en el SIIRAyS."
+    ) # Observaciones: Es posible que una EPSA tenga múltiples datos de información demográfica de cobertura.
+    instalaciones : List[ErInstalacion] = Field(
+        default = None, # Campo opcional
+        description = "Información de instalaciones. Estos datos corresponden a las tablas 'instalacion', 'tipo_fuente', 'rar' y 'estado_fuente' del SIIRAyS."
+    ) # Observaciones: Cualquier permutación de los campos de una instalación pueden estar en blanco.
+    informacion_tecnica : ErInformacionTecnica = Field(
+        default = None, # Campo opcional
+        description = "Información técnica de la EPSA. Estos datos corresponden a las tabla 'informacion_tecnica' del SIIRAyS."
+    ) # Observaciones: Algunas EPSA tienen datos de información técnica duplicados. En este caso se toma sólamente uno. 
 
     class Config:
         title = "EPSA Registro"
@@ -272,5 +463,59 @@ epsa_registro_example = {
             "tipo": "Derecho uso al recurso hidrico",
             "descripcion": "Fotocopia de actas"
         }
-    ]
+    ],
+    "demografia_cobertura": [
+        {
+            "localidad": "AGUAQUIZA",
+            "poblacion_total": 135,
+            "poblacion_atendida_ap": 135.0,
+            "numero_viviendas_ap": 27.0,
+            "porcentaje_cobertura_ap": 100.0,
+            "poblacion_atendida_as": None,
+            "numbero_viviendas_as": None,
+            "porcentaje_cobertura_as": None,
+            "porcentaje_cobertura_ptar": None
+        }
+    ],
+    "instalaciones": [
+        {
+            "tipo": "Fuentes de abastecimiento",
+            "estado": "REGULAR",
+            "edad": 240.0
+        },
+        {
+            "tipo": "Fuentes de abastecimiento",
+            "estado": "BUENO",
+            "edad": 48.0
+        },
+        {
+            "tipo": "Tanque de Almacenamiento",
+            "estado": "MALO",
+            "edad": 240.0
+        },
+        {
+            "tipo": "Red de distribución",
+            "estado": "REGULAR",
+            "edad": 240.0
+        },
+        {
+            "tipo": "Aduccion",
+            "estado": "REGULAR",
+            "edad": 240.0
+        }
+    ],
+    "informacion_tecnica": {
+        "numero_conexiones_ap": 27.0,
+        "numero_piletas_publicas": 2.0,
+        "numero_conexions_as": None,
+        "numero_camaras_septicas_domiciliarias": None,
+        "numero_letrinas": 5.0,
+        "numero_banios_publicos": None,
+        "pozo_ciego": None,
+        "numero_conexiones_ap_medidor": 0.0,
+        "dotacion_per_capita": 0.0,
+        "continuidad_servicio_ap": 0,
+        "continuidad_servicio_epoca_seca": 0.0,
+        "porcentaje_perdida_red": 0
+    }
 }

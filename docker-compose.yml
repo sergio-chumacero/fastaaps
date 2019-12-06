@@ -69,7 +69,6 @@ services:
       - postgres
     volumes:
       - ./AAPS-DATA/SYNC/etc/pgbouncer:/etc/pgbouncer
-      - ./AAPS-DATA/SYNC/log/postgresql:/var/log/postgresql
     networks:
       - pgnetwork
     hostname: pgbouncer
