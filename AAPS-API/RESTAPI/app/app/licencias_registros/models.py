@@ -123,7 +123,6 @@ class ErRepresentante(BaseModel):
         validate_assignment = True            # Cambios de atributos serán validados
         allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
 
-
 # EPSA Registro - Ubicación
 class ErUbicacion(BaseModel):
     """
@@ -189,7 +188,61 @@ class ErUbicacion(BaseModel):
         use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
         validate_assignment = True            # Cambios de atributos serán validados
         allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
-          
+
+# Epsa Registro - Estatus Jurídico
+class ErEstatusJuridico(BaseModel):
+    """
+    Modelo para el campo 'estatus_juridico' del modelo 'EpsaRegistro'. 
+    """
+    numero_resolucion : str = Field(
+        ..., # Campo requerido
+        description = "Número de la resolución. Campo requerido. Corresponde a la columna 'numero_resolucion' de la tabla 'estatus_juridico' en el SIIRAyS.",
+    )
+    fecha_resolucion : date =  Field(
+        ..., # Campo requerido
+        description = "Fecha de la resolución. Campo requerido. Corresponde a la columna 'fecha_resolucion' de la tabla 'estatus_juridico' en el SIIRAyS.",
+    )
+    nombre_entidad : str = Field(
+        ..., # Campo requerido
+        description = "Número de la entidad. Campo requerido. Corresponde a la columna 'nombre_entidad' de la tabla 'entidad' en el SIIRAyS.",
+    )
+    sigla_entidad : str = Field(
+        default = None, # Campo opcional
+        description = "Sigla de la entidad. Corresponde a la columna 'sigla_entidad' de la tabla 'entidad' en el SIIRAyS.",
+    )
+    direccion : str = Field(
+        default = None, # Campo opcional
+        description = "Dirección de la entidad. Corresponde a la columna 'direccion' de la tabla 'entidad' en el SIIRAyS.",
+    )
+    telefonos : str = Field(
+        default = None, # Campo opcional
+        description = "Teléfonos de la entidad. Corresponde a la columna 'telefonos' de la tabla 'entidad' en el SIIRAyS.",
+    )
+    fax : str = Field(
+        default = None, # Campo opcional
+        description = "Fax de la entidad. Corresponde a la columna 'fax' de la tabla 'entidad' en el SIIRAyS.",
+    )
+    web : str = Field(
+        default = None, # Campo opcional
+        description = "Página web de la entidad. Corresponde a la columna 'web' de la tabla 'entidad' en el SIIRAyS.",
+    )
+    correo_electronico : str = Field(
+        default = None, # Campo opcional
+        description = "Correo electrónico de la entidad. Corresponde a la columna 'correo_electronico' de la tabla 'entidad' en el SIIRAyS.",
+    )
+
+    # Configuración del Modelo
+    class Config:
+        title = "EPSA Registro - Estatus Jurídico" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
 # Epsa Registro - Documentos de Acreditación
 class ErDocumentoAcreditacion(BaseModel):
     """
@@ -270,6 +323,48 @@ class ErDemografiaCobertura(BaseModel):
         validate_assignment = True            # Cambios de atributos serán validados
         allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
 
+# Instalacion - Fuente de Financiamiento
+class InsFuenteFinanciamiento(BaseModel):
+    """
+    Modelo para el campo 'fuente_financiamiento' del modelo 'ErInstalacion'.
+    """
+    nombre : str = Field(
+        ..., # Campo requerido
+        description = "Nombre de la fuente de financiamiento. Campo requerido. Corresponde a la columna 'fuente_financiamiento' de la tabla 'fuente_financiamiento' en el SIIRAyS."
+    )
+    descripcion : str = Field(
+        ..., # Campo requerido
+        description = "Descripción de la fuente de financiamiento. Campo requerido. Corresponde a la columna 'descripcion_fuente_financiamiento' de la tabla 'fuente_financiamiento' en el SIIRAyS."
+    )
+    porcentaje_credito : float = Field(
+        ..., # Campo requerido
+        description = "Porcentaje del financiamiento a crédito. Campo requerido. Corresponde a la columna 'porcentaje_credito' de la tabla 'instalacion_fuente_financiamiento' en el SIIRAyS."
+    )
+    porcentaje_donacion : float = Field(
+        ..., # Campo requerido
+        description = "Porcentaje del financiamiento a donación. Campo requerido. Corresponde a la columna 'porcentaje_donacion' de la tabla 'instalacion_fuente_financiamiento' en el SIIRAyS."
+    )
+    porcentaje_aporte_propio : float = Field(
+        ..., # Campo requerido
+        description = "Porcentaje del financiamiento en aporte propio. Campo requerido. Corresponde a la columna 'porcentaje_aporte_propio' de la tabla 'instalacion_fuente_financiamiento' en el SIIRAyS."
+    )
+    porcentaje_otros : float = Field(
+        ..., # Campo requerido
+        description = "Porcentaje del financiamiento procediente de otras fuentes. Campo requerido. Corresponde a la columna 'porcentaje_otros' de la tabla 'instalacion_fuente_financiamiento' en el SIIRAyS."
+    )
+
+    # Configuración del Modelo
+    class Config:
+        title = "Instlación - Fuente de Financiamiento" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
 # Epsa Registro - Instalación
 class ErInstalacion(BaseModel):
     """
@@ -287,6 +382,10 @@ class ErInstalacion(BaseModel):
         default = None, # Campo opcional
         description = "Edad de la instalación. Corresponde a la columna 'edad_fuente' de la tabla 'instalacion' en el SIIRAyS.",
     ) # Observaciones: Existen instalaciones sin valor en el campo 'edad'.
+    fuente_financiamiento : InsFuenteFinanciamiento = Field(
+        default = None, # Campo opcional
+        description = "Fuente de financiamiento de la instalación. Estos datos son recuperados de las tablas 'instalacion_fuente_financiamiento' y 'fuente_financiamiento' en el SIIRAyS.",
+    )
     
     # Configuración del Modelo
     class Config:
@@ -366,6 +465,274 @@ class ErInformacionTecnica(BaseModel):
         validate_assignment = True            # Cambios de atributos serán validados
         allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
 
+# Epsa Registro - Problemas de Contaminación
+class ErProblemaContaminacion(BaseModel):
+    """
+    Modelo para el campo 'problemas_contaminacion' del modelo 'EpsaRegistro'. 
+    """
+    descripcion : str = Field(
+        ..., # Campo requerido
+        description = "Descripción del problema de contaminación reportado. Campo requerido. Corresponde a la columna 'descripcion' de la tabla 'problemas_contaminacion' en el SIIRAyS."
+    ) # Observaciones: Único campo con datos relevantes de la tabla de problemas de contaminación.
+
+    # Configuración del Modelo
+    class Config:
+        title = "Epsa Registro - Problemas de Contaminación" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
+# Epsa Registro - Planta de Tratamiento de Aguas Residuales
+class ErTratamientoAr(BaseModel):
+    """
+    Modelo para el campo 'tratamiento_ar' del modelo 'EpsaRegistro'. 
+    """
+    cantidad : float = Field(
+        ..., # Campo requerido
+        description = "Cantidad. Campo requerido. Corresponde a la columna 'cantidad' de la tabla 'tratamiento_agua_residual' en el SIIRAyS."
+    ) # Observaciones: Tipo en Postgres Numeric(8,2).
+    instalada : float = Field(
+        ..., # Campo requerido
+        description = "Instalada. Campo requerido. Corresponde a la columna 'instalada' de la tabla 'tratamiento_agua_residual' en el SIIRAyS."
+    ) # Observaciones: Tipo en Postgres Numeric(8,2).
+    operada : float = Field(
+        ..., # Campo requerido
+        description = "Operada. Campo requerido. Corresponde a la columna 'operada' de la tabla 'tratamiento_agua_residual' en el SIIRAyS."
+    ) # Observaciones: Tipo en Postgres Numeric(8,2).
+    anio_inicio : int = Field(
+        ..., # Campo requerido
+        description = "Año de inicio de operaciones. Campo requerido. Corresponde a la columna 'anio_inicio' de la tabla 'tratamiento_agua_residual' en el SIIRAyS."
+    ) # Observaciones: Tipo en Postgres Integer. En muchos casos el valor es '0'.
+    coordenada_x : float = Field(
+        default = None, # Campo opcional
+        description = "Coordenada X de la planta de tratamiento. Campo opcional. Corresponde a la columna 'coordenada_x' de la tabla 'tratamiento_agua_residual' en el SIIRAyS."
+    ) # Observaciones: Tipo en Postgres Double Precision.
+    coordenada_y : float = Field(
+        default = None, # Campo opcional
+        description = "Coordenada Y de la planta de tratamiento. Campo opcional. Corresponde a la columna 'coordenada_y' de la tabla 'tratamiento_agua_residual' en el SIIRAyS."
+    ) # Observaciones: Tipo en Postgres Double Precision.
+    coordenada_z : float = Field(
+        default = None, # Campo opcional
+        description = "Coordenada Z de la planta de tratamiento. Campo opcional. Corresponde a la columna 'coordenada_z' de la tabla 'tratamiento_agua_residual' en el SIIRAyS."
+    ) # Observaciones: Tipo en Postgres Double Precision.
+    zona_utm : str = Field(
+        default = None, # Campo opcional
+        descripcion = "Zona UTM. Campo opcional. Corresponde a la columna 'zona_utm' de la tabla 'tratamiento_agua_residual' en el SIIRAyS."
+    ) # Observaciones: Muy pocas filas de plantas de tratamiento cuentan con este dato.
+    tipo : str = Field(
+        ..., # Campo requerido
+        description = "Tipo de la planta de tratamiento. Campo requerido. Corresponde a la columna 'descripcion_tratamiento' de la tabla 'tipo_tratamiento_ar' en el SIIRAyS."
+    )
+    
+    # Configuración del Modelo
+    class Config:
+        title = "Epsa Registro - Planta de Tratamiento de Aguas Residuales" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
+# Epsa Registro - Tuberías
+class ErTuberia(BaseModel):
+    """
+    Modelo para el campo 'tuberias' del modelo 'EpsaRegistro'. 
+    """
+    longitud_total : int = Field(
+        default = None, # Campo opcional
+        description = "Longitud total de la red de tuberías. Corresponde a la columna 'longitud_total' de la tabla 'tecnica_tuberia' en el SIIRAyS."
+    ) 
+    localidad : str = Field(
+        ..., # Campo requerido
+        description = "Nombre de la localidad correspondiente a la red de tubería. Campo requerido. Corresponde a la columna 'localidad' de la tabla 'localidad' en el SIIRAyS."
+    ) 
+    sector : str = Field(
+        ..., # Campo requerido
+        description = "Tipo del sector correspondiente a al red de tubería. Campo requerido. Corresponde a la columna 'sector' de la tabla 'sector' en el SIIRAyS."
+    )
+    material : str = Field(
+        ..., # Campo requerido
+        description = "Material de la red de tubería. Campo requerido. Corresponde a la columna 'material_tuberia' de la tabla 'material_tuberia' en el SIIRAyS."
+    )
+
+    # Configuración del Modelo
+    class Config:
+        title = "Epsa Registro - Tuberías" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
+# Epsa Registro - Descarga de Aguas Residuales
+class ErDescargaAr(BaseModel):
+    """
+    Modelo para el campo 'descarga_ar' del modelo 'EpsaRegistro'. 
+    """
+    cuerpo_receptor : str = Field(
+        default = None, # Campo opcional
+        description = "Nombre del cuerpo receptor. Corresponde a la columna 'cuerpo_receptor' de la tabla 'descarga_ar' en el SIIRAyS."
+    )
+    coordenada_x : float = Field(
+        default = None, # Campo opcional
+        description = "Coordenada X del cuerpo receptor. Corresponde a la columna 'coordenada_x' de la tabla 'descarga_ar' en el SIIRAyS."
+    ) # Observaciones: Presente en pocas filas.
+    coordenada_y : float = Field(
+        default = None, # Campo opcional
+        description = "Coordenada Y del cuerpo receptor. Corresponde a la columna 'coordenada_y' de la tabla 'descarga_ar' en el SIIRAyS."
+    ) # Observaciones: Presente en pocas filas.
+    zona_utm : str = Field(
+        default = None, # Campo opcional
+        description = "Zona UTM del cuerpo receptor. Corresponde a la columna 'zona_utm' de la tabla 'descarga_ar' en el SIIRAyS."
+    ) # Observaciones: Presente en muy pocas filas.
+    tipo_cuerpo_receptor : str = Field(
+        ..., # Campo requerido
+        description = "Descripción del problema de contaminación reportado. Campo requerido. Corresponde a la columna 'descripcion' de la tabla 'problemas_contaminacion' en el SIIRAyS."
+    ) 
+
+    # Configuración del Modelo
+    class Config:
+        title = "Epsa Registro - Descarga de Aguas Residuales" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
+# Epsa Registro - Funicionario
+class ErFuncionario(BaseModel):
+    """
+    Modelo para el campo 'funcionarios' del modelo 'EpsaRegistro'. 
+    """
+    numero_funcionarios : int = Field(
+        default = None, # Campo requerido
+        description = "Número de funcionarios. Corresponde a la columna 'numero_funcionarios' de la tabla 'funcionarios' en el SIIRAyS."
+    ) # Observaciones: Algunas filas (como excepción) no cuentan con datos para este campo.
+    tipo_funcionario : str = Field(
+        ..., # Campo requerido
+        description = "Tipo de los funcionarios. Campo requerido. Corresponde a la columna 'tipo_funcionario' de la tabla 'tipo_funcionario' en el SIIRAyS."
+    )
+
+    # Configuración del Modelo
+    class Config:
+        title = "Epsa Registro - Funicionario" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
+# Epsa Registro - Ingreso
+class ErIngreso(BaseModel):
+    """
+    Modelo para el campo 'ingresos' del modelo 'EpsaRegistro'. 
+    """
+    monto : int = Field(
+        default = None, # Campo opcional
+        description = "Monto de los ingresos. Corresponde a la columna 'monto' de la tabla 'ingresos' en el SIIRAyS."
+    )
+    observacion : str = Field(
+        default = None, # Campo opcional
+        description = "Observaciones sobre los ingresos. Corresponde a la columna 'observacion' de la tabla 'ingresos' en el SIIRAyS."
+    )
+    concepto : str = Field(
+        ..., # Campo requerido
+        description = "Concepto de los ingresos. Corresponde a la columna 'concepto' de la tabla 'tipo_ingreso' en el SIIRAyS."
+    )
+    periodo_pago : str = Field(
+        ..., # Campo requerido
+        description = "Periodo de pago. Corresponde a la columna 'periodo_pago' de la tabla 'periodo_pago' en el SIIRAyS."
+    )
+
+    # Configuración del Modelo
+    class Config:
+        title = "Epsa Registro - Ingreso" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
+# Epsa Registro - Identificación de Problema
+class ErIdentificacionProblema(BaseModel):
+    """
+    Modelo para el campo 'identificacion_problemas' del modelo 'EpsaRegistro'. 
+    """
+    descripcion : str = Field(
+        ..., # Campo requerido
+        description = "Descripción del problema. Campo requerido. Corresponde a la columna 'descripcion' de la tabla 'identificacion_problemas' en el SIIRAyS."
+    )
+    efecto : str = Field(
+        ..., # Campo requerido
+        description = "Efecto del problema. Campo requerido. Corresponde a la columna 'efecto' de la tabla 'identificacion_problemas' en el SIIRAyS."
+    )
+    acciones_actuales : str = Field(
+        ..., # Campo requerido
+        description = "Acciones actuales frente al problema. Campo requerido. Corresponde a la columna 'acciones_actuales' de la tabla 'identificacion_problemas' en el SIIRAyS."
+    )
+    tipo_problema : str = Field(
+        ..., # Campo requerido
+        description = "Tipo del problema.  Campo requerido. Corresponde a la columna 'tipo_problema' de la tabla 'tipo_sistema_problema' en el SIIRAyS."
+    )
+
+    # Configuración del Modelo
+    class Config:
+        title = "Epsa Registro - Identificación de Problema" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
+# Epsa Registro - Requerimiento de Desarrollo
+class ErRequerimientoDesarrollo(BaseModel):
+    """
+    Modelo para el campo 'requerimiento_desarrollo' del modelo 'EpsaRegistro'. 
+    """
+    descripcion : str = Field(
+        ..., # Campo requerido
+        description = "Descripción del requerimiento de desarrollo. Campo requerido. Corresponde a la columna 'descripcion' de la tabla 'requerimiento_desarrollo' en el SIIRAyS."
+    )
+    tipo : str = Field(
+        ..., # Campo requerido
+        description = "Tipo del requerimiento de desarrollo.  Campo requerido. Corresponde a la columna 'tipo_requerimiento' de la tabla 'tipo_requerimiento' en el SIIRAyS."
+    )
+
+    # Configuración del Modelo
+    class Config:
+        title = "Epsa Registro - Requerimiento de Desarrollo" # Título para JSON-Schema
+
+        anystr_strip_whitespace = True        # Espacios en blanco al comienzo y final serán removidos
+        validate_all = True                   # Valores por defecto serán validados
+        extra = "ignore"                      # Campos adicionales serán ignorados
+        allow_mutation = True                 # Modelo es mutable (sus propiedades pueden ser cambiadas)
+        use_enum_values = True                # Campos con enumeraciones usarán valores en vez de objetos Enum
+        validate_assignment = True            # Cambios de atributos serán validados
+        allow_population_by_field_name = True # Campos con alias pueden ser especificados por el nombre del campo
+
 # EPSA Registro
 class EpsaRegistro(BaseModel):
     informacion_general : ErInformacionGeneral = Field(
@@ -380,6 +747,10 @@ class EpsaRegistro(BaseModel):
         default = None,
         description = "Información de la ubicación geográfica EPSA. Estos datos corresponden a las tablas 'ubicacion' y 'localidad' en el SIIRAyS.",
     ) # Observaciones: Posiblemente múltiples objetos por EPSA.
+    estatus_juridico : ErEstatusJuridico = Field(
+        default = None, # Campo opcional
+        description = "Información acerca del estatus jurídico de la EPSA. Estos datos corresponden a las tablas 'estatus_juridico' y 'entidad' en el SIIRAyS.",
+    ) # Observaciones: Pocas EPSA cuentan con datos de estatus jurídico.
     documentos_acreditacion : List[ErDocumentoAcreditacion] = Field(
         default = None,
         description = "Información de los documentos de acreditación de la EPSA. Estos datos corresponden a las tablas 'documento_acreditacion' y 'tipo_acreditacion'."
@@ -395,7 +766,47 @@ class EpsaRegistro(BaseModel):
     informacion_tecnica : ErInformacionTecnica = Field(
         default = None, # Campo opcional
         description = "Información técnica de la EPSA. Estos datos corresponden a las tabla 'informacion_tecnica' del SIIRAyS."
-    ) # Observaciones: Algunas EPSA tienen datos de información técnica duplicados. En este caso se toma sólamente uno. 
+    ) # Observaciones: Algunas EPSA tienen datos de información técnica duplicados. En este caso se toma sólamente uno.
+    problemas_contaminacion : List[ErProblemaContaminacion] = Field(
+        default = None, # Campo opcional
+        description = "Información de problemas de contaminación. Estos datos corresponden a la tabla 'problemas_contaminacion' del SIIRAyS."
+    ) # Observaciones: Ninguna EPSA reporta más de un problema de contaminación.
+    sistemas_ap : List[str] = Field(
+        default = None, # Campo opcional
+        description = "Lista de los sistemas de agua potable utilizados por la EPSA. Estos datos corresponden a las tabla 'sistema_ap' y 'tipo_sistema_ap' del SIIRAyS."
+    ) # Observaciones: Los datos corresponden a la columna 'descripcion_tipo_sistema_ap' de la tabla 'tipo_sistema_ap' del SIIRAyS.
+    tratamiento_ar : List[ErTratamientoAr] = Field(
+        default = None, # Campo opcional
+        description = "Lista de las plantas de tratamiento de agua residual de la EPSA. Estos datos corresponden a las tablas 'tratamiento_agua_residual' y 'tipo_tratamiento_ar' del SIIRAyS."
+    )
+    tuberias : List[ErTuberia] = Field(
+        default = None, # Campo opcional
+        description = "Lista de las redes de tubería registradas de la EPSA. Estos datos corresponden a las tablas 'tecnica_tuberia', 'localidad', 'sector' y 'material_tuberia' del SIIRAyS."
+    ) # Observaciones: La mayoría de las EPSAs cuentan con al menos dos datos de tuberías cada una.
+    tecnicas_as : List[str] = Field(
+        default = None, # Campo opcional
+        desciption = "Lista de las técnicas de aguas servidas utilizadas por la EPSA. Estos datos corresponden a las tablas 'tecnica_as' y 'opcion_tecnica' en el SIIRAyS."
+    ) # Observaciones: El único campo significativo de estas tablas es el de 'opcion_tecnica' en la tabla 'opcion_tecnica' en el SIIRAyS. Estos datos son agrupados por EPSA y almacenados como lista en este campo.
+    descarga_ar : List[ErDescargaAr] = Field(
+        default = None, # Campo opcional
+        description = "Información acerca de descargas de agua residual realizadas por la EPSA. Estos datos corresponden a las tablas 'descarga_ar' y 'cuerpo_receptor' en el SIIRAyS."
+    )
+    funcionarios : List[ErFuncionario] = Field(
+        default = None, # Campo opcional
+        description = "Información de los funcionarios de la EPSA. Estos datos corresponden a las tablas 'funcionarios' y 'tipo_funcionario' en el SIIRAyS."
+    ) # Observaciones: Una EPSA puede tener varios datos de funcionarios. Uno para cada tipo de funcionarios.
+    ingresos : List[ErIngreso] = Field(
+        default = None, # Campo opcional
+        description = "Información acerca de los ingresos de la EPSA. Estos datos corresponden a las tablas 'ingresos' y 'tipo_ingreso' en el SIIRAyS."
+    )
+    identificacion_problemas : List[ErIdentificacionProblema] = Field(
+        default = None, # Campo opcional
+        description = "Información acerca de problemas ambientales identificados por la EPSA. Estos datos corresponden a las tablas 'identificacion_problemas' y 'tipo_sistema_problema' en el SIIRAyS."
+    )
+    requerimiento_desarrollo : List[ErRequerimientoDesarrollo] = Field(
+        default = None, # Campo opcional
+        description = "Información acerca de los requerimientos de desarrollo de la EPSA. Estos datos corresponden a las tablas 'requerimiento_desarrollo' y 'tipo_requerimiento' en el SIIRAyS."
+    )
 
     class Config:
         title = "EPSA Registro"

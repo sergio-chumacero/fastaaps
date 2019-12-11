@@ -13,153 +13,196 @@ version: '3.4'
 services:
   # Proceso Trabajador de Celery
   celery:
+    container_name: celery
+    hostname: celery
+    image: &img celery
     build:
       context: ./AAPS-DATA/SYNC
-      dockerfile: Dockerfile
-    image: &img celery 
-    command: [celery, worker, --app=app.main, --pool=solo, --concurrency=8, --loglevel=INFO] 
+      dockerfile: Dockerfile 
     env_file: &env      
       - config.env
+    command: celery worker --app=app.main --pool=solo --concurrency=8 --loglevel=INFO 
+    restart: unless-stopped
     depends_on:
-      - rabbitmq
-    volumes:
-      - ./AAPS-DATA/SYNC/app:/app
+    #   - rabbitmq
+      - redis
+      - pgbouncer
+      - fastapi
     networks:
+      - apinetwork
+      #   - rabbitnetwork
+      - redisnetwork
       - pgnetwork
-      - rabbitnetwork
       - mongonetwork
-    hostname: celery
-    restart: "no"
+    volumes: &vol
+      - ./AAPS-DATA/SYNC/app:/app
 
   # Base de Datos (PostgreSQL)
   postgres:
+    container_name: postgres
+    hostname: postgres
     image: postgres
     env_file: *env
-    ports:
-      - 5432:5432
-    # volumes:
-    #   - ./AAPS-DATA/SYNC/postgres:/tmp
+    restart: unless-stopped
     networks:
       - pgnetwork
-    hostname: postgres
-    restart: unless-stopped
+    ports:
+      - 5432:5432
 
   # Panel de Control de PostgreSQL (PgAdmin4)
   pgadmin:
+    container_name: pgadmin
+    hostname: pgadmin
     image: dpage/pgadmin4
     env_file: *env
-    ports:
-      - 5050:80
+    restart: unless-stopped
     depends_on:
       - postgres
-    volumes:
-      - ./AAPS-DATA/SYNC/pgadmin:/root/.pgadmin
     networks:
       - pgnetwork
-    hostname: pgadmin
+    ports:
+      - 5050:80
+    volumes:
+      - ./AAPS-DATA/SYNC/pgadmin:/root/.pgadmin
     restart: unless-stopped
 
   # Gestor de conexiones de PostgreSQL (pgbouncer)
   pgbouncer:
+    container_name: pgbouncer
+    hostname: pgbouncer
     image: edoburu/pgbouncer
     env_file: *env
-    ports:
-      - 6432:6432
+    restart: unless-stopped
     depends_on:
       - postgres
-    volumes:
-      - ./AAPS-DATA/SYNC/etc/pgbouncer:/etc/pgbouncer
     networks:
       - pgnetwork
-    hostname: pgbouncer
-    restart: unless-stopped
-
-  # Agente de mensajería RabbitMQ (message broker)
-  # Panel de control RabbitMQ
-  rabbitmq:
-    image: rabbitmq:3.8.1-management
-    restart: 'no'
-    networks:
-      - rabbitnetwork
-    hostname: rabbitmq
     ports:
-      - 5672:5672
-      - 15672:15672
+      - 6432:6432
+
+  # Agente de mensajería RabbitMQ (message broker) + Panel de control
+#   rabbitmq:
+#     container_name: rabbitmq
+#     hostname: rabbitmq
+#     image: rabbitmq:3.8.1-management
+#     restart: 'no'
+#     networks:
+#       - rabbitnetwork
+#     ports:
+#       - 5672:5672
+#       - 15672:15672
+
+  redis:
+    container_name: redis
+    hostname: redis
+    image: redis:5.0.7
+    env_file: *env
+    command: redis-server --requirepass guest
+    restart: unless-stopped
+    networks:
+      - redisnetwork
+    ports:
+      - 6379:6379
+    
 
   # Servicio de tareas periódicas (scheduler)
   beat:
-    build: .
+    container_name: beat
+    hostname: beat
     image: *img
-    command: [celery, beat, --app=app.main, --loglevel=INFO, --pidfile=]
+    build:
+      context: ./AAPS-DATA/SYNC
+      dockerfile: Dockerfile
     env_file: *env
+    command: celery beat --app=app.main --loglevel INFO --pidfile=
+    restart: unless-stopped
     depends_on:
-      - celery
+      - redis
+    networks:
+      - redisnetwork
     restart: 'no'
-    volumes:
-      - ./AAPS-DATA/SYNC/app:/app
+    volumes: *vol
+    #   - ./AAPS-DATA/SYNC/app:/app
 
   # Aplicación de monitoreo
   flower:
-    build: .
+    container_name: flower
+    hostname: flower
     image: *img
+    build:
+      context: ./AAPS-DATA/SYNC
+      dockerfile: Dockerfile
     env_file: *env
-    command: [celery, flower, --app=app.main]
+    command: celery flower --app app.main
+    restart: unless-stopped
     depends_on:
+      - redis
       - celery
-    restart: 'no'
+      - beat
+    networks:
+      - redisnetwork
     ports:
       - 5555:5555
-    volumes:
-      - ./AAPS-DATA/SYNC/app:/app
+    volumes: *vol
+    #   - ./AAPS-DATA/SYNC/app:/app
 
   # MongoDb: Base de Datos Orientada a Documentos
   mongo:
+    container_name: mongo
+    hostname: mongo
     image: mongo:4.0.13
-    restart: always
     env_file: *env
-    ports:
-      - 27017:27017
+    restart: unless-stopped
     networks:
       - mongonetwork
-    hostname: mongo
+    ports:
+      - 27017:27017
+    # volumes:
+    #   - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 
   # Mongo-Express: Herramienta de Monitoreo de MongoDB
   mongo-express:
+    container_name: mongo-express
+    hostname: mongo-express
     image: mongo-express
-    restart: always
     env_file: *env
-    ports:
-      - 8081:8081
+    restart: unless-stopped
     depends_on:
       - mongo
     networks:
       - mongonetwork
-    hostname: mongo-express
+    ports:
+      - 8081:8081
 
   # FastAPI: Serivicio de Acceso REST-API
   fastapi:
+    container_name: fastapi
+    hostname: fastapi
+    image: fastapi
     build:
       context: ./AAPS-API/RESTAPI
       dockerfile: Dockerfile
-    image: fastapi
-    restart: always
     env_file: *env
+    restart: unless-stopped
+    depends_on:
+      - mongo
+      - pgbouncer
+    networks:
+      - mongonetwork
+      - apinetwork
     ports:
       - 80:80
     volumes:
       - ./AAPS-API/RESTAPI/app:/app
-    networks:
-      - mongonetwork
-    hostname: fastapi
-    depends_on:
-      - mongo
   
-# Redes
 networks:
-  # Red para PostgreSQL
   pgnetwork:
     driver: bridge
-  rabbitnetwork:
+#   rabbitnetwork:
+#     driver: bridge
+  redisnetwork:
     driver: bridge
   mongonetwork:
+    driver: bridge
+  apinetwork:
     driver: bridge

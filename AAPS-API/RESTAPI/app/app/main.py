@@ -37,5 +37,3 @@ app.include_router(lr_router, prefix="/registro", tags=["Licencias y Registros"]
 # Añadir métodos de inicio y cierre de conexiones a la base de datos
 app.add_event_handler("startup", start_db_client)
 app.add_event_handler("shutdown", stop_db_client)
-
-

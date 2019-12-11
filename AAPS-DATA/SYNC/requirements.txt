@@ -6,14 +6,20 @@
 ###################################################################
 
 # Celery: Agente de Mensajería
-celery
-flower
+celery==4.3.0
+flower==0.9.3
 
 # PsycoPG2: Driver PostgreSQL
-psycopg2
+psycopg2==2.8.4
 
 # Pandas: Manejo de Datos
-pandas
+pandas==0.25.3
 
 # Requests: Cliente Web
-requests
+requests==2.22.0
+
+# PyMongo: Driver para MongoDB
+pymongo==3.9.0
+
+# Driver para Redis
+redis==3.3.11

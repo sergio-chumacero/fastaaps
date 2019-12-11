@@ -9,7 +9,6 @@
 ###################################################################
 
 # Dependencias
-
 from .main import app
 
 # Utilidades Generales
@@ -48,7 +47,6 @@ def init_db_connection():
     """
     db_connection = None
     cursor = None
-
     try:
         db_connection = pg.connect(
             host = PGDB_HOST,
@@ -57,20 +55,16 @@ def init_db_connection():
             password = PGDB_PASS,
             database = PGDB_NAME,
         )
-
         logger.info("Propiedades de la conexión:\n")
         logger.info(json.dumps(
             db_connection.get_dsn_parameters(),
             indent = 2,
             ensure_ascii = False,
         ))
-
         cursor = db_connection.cursor()
         cursor.execute("SELECT version();")
         record = cursor.fetchone()
-
         logger.info(f"Versión PostgreSQL: {record}\n")
-    
     except (Exception, pg.Error) as error:
         logger.error(f"Error al establecer de la conexión. {error}\n")
     finally:
@@ -243,7 +237,7 @@ def retrieve_estatus_juridico(connection, epsa_data, result_obj):
         # Transformar a formato JSON y añadir a datos de EPSA base
         ubicacion_df = pd.DataFrame(cursor.fetchall(), columns=estatus_juridico_cols + entidad_cols)
         for name,group in ubicacion_df.groupby("id_epsa"):
-            epsa_data[str(name)]["estatus_juridico"] = group.loc[:,group.columns != "id_epsa"].to_dict(orient="records")
+            epsa_data[str(name)]["estatus_juridico"] = group.loc[:,group.columns != "id_epsa"].to_dict(orient="records")[0]
         result_obj["estatus_juridico"] = "ok"
     except (Exception, pg.Error) as error:
         logger.error(f"Error al recuperar datos de las tablas 'estatus_juridico' y 'entidad'. {error}\n")
@@ -330,7 +324,7 @@ def retrieve_demografia_cobertura(connection, epsa_data, result_obj):
         # Transformar a formato JSON y añadir a datos de EPSA base
         demografia_cobertura_df = pd.DataFrame(cursor.fetchall(), columns=demografia_cobertura_df_cols)
         for name, group in demografia_cobertura_df.groupby("id_epsa"):
-            epsa_data[str(name)]["demografia_cobertura"] = group.loc[:,group.columns != "id_epsa"].to_dict(orient="records")[0]
+            epsa_data[str(name)]["demografia_cobertura"] = group.where((pd.notnull(group)),None).loc[:,group.columns != "id_epsa"].to_dict(orient="records")
 
         result_obj["demografia_cobertura"] = "ok"
     except (Exception, pg.Error) as error:
@@ -374,7 +368,7 @@ def retrieve_instalacion(connection, epsa_data, result_obj):
         # Transformar a formato JSON y añadir a datos de EPSA base
         instalacion_df = pd.DataFrame(cursor.fetchall(), columns=instalacion_df_cols)
         for name, group in instalacion_df.groupby("id_epsa"):
-            epsa_data[str(name)]["instalaciones"] = group.loc[:,group.columns != "id_epsa"].to_dict(orient="records")
+            epsa_data[str(name)]["instalaciones"] = group.where((pd.notnull(group)),None).loc[:,group.columns != "id_epsa"].to_dict(orient="records")
         
         result_obj["instalacion"] = "ok"
     except (Exception, pg.Error) as error:
@@ -418,11 +412,11 @@ def retrieve_fuente_financiamiento(connection, epsa_data, result_obj):
         # Transformar a formato JSON y añadir a datos de EPSA base
         instalacion_df = pd.DataFrame(cursor.fetchall(), columns=fuente_financiamiento_df_cols)
         for name, group in instalacion_df.groupby("id_epsa"):
-            fuentes_financiamiento = group.loc[:,group.columns != "id_epsa"].to_dict(orient="records")
-            for fuente_financiamiento in fuentes_financiamiento:
-                for instalacion in epsa_data[str(name)]["instalaciones"]:
-                    if fuente_financiamiento["id_instalacion"] == instalacion["id_instalacion"]:
-                        instalacion["fuente_financiamiento"] = fuente_financiamiento
+            fuente_financiamiento = group.loc[:,group.columns != "id_epsa"].to_dict(orient="records")[0]
+            
+            for instalacion in epsa_data[str(name)]["instalaciones"]:
+                if fuente_financiamiento["id_instalacion"] == instalacion["id_instalacion"]:
+                    instalacion["fuente_financiamiento"] = fuente_financiamiento
 
         result_obj["fuente_financiamiento"] = "ok"
     except (Exception, pg.Error) as error:
@@ -454,7 +448,7 @@ def retrieve_informacion_tecnica(connection, epsa_data, result_obj):
         # Transformar a formato JSON y añadir a datos de EPSA base
         informacion_tecnica_df = pd.DataFrame(cursor.fetchall(), columns=informacion_tecnica_cols)
         for name, group in informacion_tecnica_df.groupby("id_epsa"):
-            epsa_data[str(name)]["informacion_tecnica"] = group.loc[:,group.columns != "id_epsa"].to_dict(orient="records")
+            epsa_data[str(name)]["informacion_tecnica"] = group.where((pd.notnull(group)),None).loc[:,group.columns != "id_epsa"].to_dict(orient="records")[0]
         
         result_obj["informacion_tecnica"] = "ok"
     except (Exception, pg.Error) as error:
@@ -542,7 +536,7 @@ def retrieve_tratamiento_agua_residual(connection, epsa_data, result_obj):
     # Nombres de las tablas en el SIIRAyS
     tratamiento_agua_residual_tables = ["tratamiento_agua_residual","tipo_tratamiento_ar"]
     # Nombres de columnas SIIRAyS
-    tratamiento_agua_residual_cols = ["id_epsa","cantidad","instalada","operada","anio_inicio","coordenada_x","coordenada_y"]
+    tratamiento_agua_residual_cols = ["id_epsa","cantidad","instalada","operada","anio_inicio","coordenada_x","coordenada_y","coordenada_z","zona_utm"]
     tipo_tratamiento_ar_cols = ["descripcion_tratamiento"]
     
     # Tablas y Columnas para la consulta SQL
@@ -553,7 +547,7 @@ def retrieve_tratamiento_agua_residual(connection, epsa_data, result_obj):
     )
     # Nombres de los atributos en FASTAAPS
     tratamiento_agua_residual_df_cols = [
-        "id_epsa","cantidad","instalada","operada","anio_inicio","coord_x","coord_y","tipo",
+        "id_epsa","cantidad","instalada","operada","anio_inicio","coordenada_x","coordenada_y","coordenada_z","zona_utm","tipo",
     ]
     try:
         # Ejecutar consulta SQL: Recuperar datos
@@ -613,7 +607,7 @@ def retrieve_tecnica_tuberia(connection, epsa_data, result_obj):
         # Transformar a formato JSON y añadir a datos de EPSA base
         tecnica_tuberia_df = pd.DataFrame(cursor.fetchall(), columns=tecnica_tuberia_df_cols)
         for name, group in tecnica_tuberia_df.groupby("id_epsa"):
-            epsa_data[str(name)]["tuberias"] = group.loc[:,group.columns != "id_epsa"].to_dict(orient="records")
+            epsa_data[str(name)]["tuberias"] = group.where((pd.notnull(group)),None).loc[:,group.columns != "id_epsa"].to_dict(orient="records")
         
         result_obj["tecnica_tuberia"] = "ok"
     except (Exception, pg.Error) as error:
@@ -671,7 +665,7 @@ def retrieve_descarga_ar(connection, epsa_data, result_obj):
     # Nombres de las tablas en el SIIRAyS
     descarga_ar_tables = ["descarga_ar","cuerpo_receptor"]
     # Nombres de columnas SIIRAyS
-    descarga_ar_cols = ["id_epsa","nombre_cuerpo_receptor","coordenada_x","coordenada_y"]
+    descarga_ar_cols = ["id_epsa","nombre_cuerpo_receptor","coordenada_x","coordenada_y","zona_utm"]
     cuerpo_receptor_cols = ["cuerpo_receptor"]
     
     # Tablas y Columnas para la consulta SQL
@@ -681,7 +675,7 @@ def retrieve_descarga_ar(connection, epsa_data, result_obj):
         [f"cuerpo_receptor.{col}" for col in cuerpo_receptor_cols]
     )
     # Nombres de los atributos en FASTAAPS
-    descarga_ar_df_cols = ["id_epsa","cuerpo_receptor","coord_x","coord_y","tipo_cuerpo_receptor"]
+    descarga_ar_df_cols = ["id_epsa","cuerpo_receptor","coordenada_x","coordenada_y","zona_utm","tipo_cuerpo_receptor"]
     try:
         # Ejecutar consulta SQL: Recuperar datos
         cursor = connection.cursor()
@@ -693,7 +687,7 @@ def retrieve_descarga_ar(connection, epsa_data, result_obj):
         # Transformar a formato JSON y añadir a datos de EPSA base
         descarga_ar_df = pd.DataFrame(cursor.fetchall(), columns=descarga_ar_df_cols)
         for name, group in descarga_ar_df.groupby("id_epsa"):
-            epsa_data[str(name)]["descarga_ar"] = group.loc[:,group.columns != "id_epsa"].to_dict(orient="records")
+            epsa_data[str(name)]["descarga_ar"] = group.where((pd.notnull(group)),None).loc[:,group.columns != "id_epsa"].to_dict(orient="records")
         
         result_obj["descarga_ar"] = "ok"
     except (Exception, pg.Error) as error:
@@ -733,7 +727,7 @@ def retrieve_funcionarios(connection, epsa_data, result_obj):
         # Transformar a formato JSON y añadir a datos de EPSA base
         funcionarios_df = pd.DataFrame(cursor.fetchall(), columns=funcionarios_df_cols)
         for name, group in funcionarios_df.groupby("id_epsa"):
-            epsa_data[str(name)]["funcionarios"] = group.loc[:,group.columns != "id_epsa"].to_dict(orient="records")
+            epsa_data[str(name)]["funcionarios"] = group.where((pd.notnull(group)),None).loc[:,group.columns != "id_epsa"].to_dict(orient="records")
         
         result_obj["funcionarios"] = "ok"
     except (Exception, pg.Error) as error:
@@ -777,7 +771,7 @@ def retrieve_ingresos(connection, epsa_data, result_obj):
         # Transformar a formato JSON y añadir a datos de EPSA base
         ingresos_df = pd.DataFrame(cursor.fetchall(), columns=ingresos_df_cols)
         for name, group in ingresos_df.groupby("id_epsa"):
-            epsa_data[str(name)]["ingresos"] = group.loc[:,group.columns != "id_epsa"].to_dict(orient="records")
+            epsa_data[str(name)]["ingresos"] = group.where((pd.notnull(group)),None).loc[:,group.columns != "id_epsa"].to_dict(orient="records")
         
         result_obj["ingresos"] = "ok"
     except (Exception, pg.Error) as error:
@@ -900,7 +894,11 @@ def export_data(epsa_data, result_obj):
             f"http://{REST_HOST}:{REST_PORT}/registro/restore",
             data=post_data,
         )
-        result_obj["exportacion"] = "ok"
+        if response.status_code == 422:
+            result_obj["exportacion"] = response.json()
+            logger.error(response.json())
+        if response.status_code == 201:
+            result_obj["exportacion"] = "ok"
     except Exception as error:
         logger.error(f"Error al exportar los datos. {error}\n")
         result_obj["exportacion"] = "error"
@@ -956,21 +954,7 @@ def sync_db(self, col_name):
     end = time.time()
     elapsed_time = "{0:.2f}".format(end - start)
     logger.info(f"Tarea de sincronización concluída. Resultado: {result}. Tiempo transcurrido: {elapsed_time} segundos.\n")
-
-    assert(type(epsa_data) == list)
-    assert(type(result) == dict)
     
     result["numero_epsas"] = len(epsa_data)
-
-    for epsa in epsa_data:
-        if "informacion_general" in epsa.keys() and "representante" in epsa.keys():
-            epsa_example = json.dumps(
-                epsa, 
-                indent = 2,
-                ensure_ascii = False,
-                default = str
-            )
-            logger.info(f"Ejemplo de epsa:\n{epsa_example}")
-            break
 
     return result

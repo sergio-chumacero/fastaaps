@@ -82,3 +82,52 @@ async def create_epsas(
             },
         )
     return new
+
+# Recuperar EPSA por ID SIIRAyS
+@lr_router.get(
+    path = "/{id_siirays}",
+    summary = "Recuperar datos de registro de EPSA por ID del SIIRAyS.",
+    response_model = EpsaRegistro,
+    response_model_skip_defaults = True,
+    response_description = "Respuesta Exitosa - EPSA recuperada",
+    status_code = HTTP_200_OK,
+)
+async def retrieve_epsa(
+    id_siirays: int = Path(
+        default = ...,
+        title = "ID de la EPSA en el SIIRAyS.",
+    ),
+    db_client: AsyncIOMotorClient = Depends(get_db_client),
+    db_name: str = Depends(get_db_name),
+):
+    """
+    Recuperoa los datos de registro de una EPSA identificada de manera única en base a su ID en el SIIRAyS.
+    ---
+    Acepta como argumento de URL un ID de EPSA válido de la EPSA cuyos datos de registro que serán recuperados.
+    ---
+    Si el ID proporcionado es válido y la EPSA se encuentra almacenada en la base de datos, los datos de registro de la EPSA serán retornados 
+    en el contenido de la respuesta al pedido en formato JSON en base al modelo 'EPSA REGISTRO'.
+
+    Si el ID proporcionado no es válido o la EPSA no se encuentra almacenada en la base datos, se retorna un error con más detalles.
+    """
+    # try:
+    collection = db_client[db_name][epsa_registro_collection_name]
+    response = await collection.find_one({"informacion_general.id_siirays": id_siirays})
+    if response:
+        return EpsaRegistro(**response)
+    else:
+        raise HTTPException(
+            status_code = HTTP_404_NOT_FOUND,
+            detail = {
+                "error": f"EPSA con id {id_siirays} no encontrada."
+            }
+        )
+    # except BulkWriteError as e:
+    #     raise HTTPException(
+    #         status_code = HTTP_400_BAD_REQUEST,
+    #         detail = {
+    #             "errores": [we["errmsg"] for we in e.details["writeErrors"]],
+    #             "info": f"Número de EPSAs ingresadas exitósamente: {e.details.get('nInserted','No Determinado')}", 
+    #         },
+    #     )
+    # return new
