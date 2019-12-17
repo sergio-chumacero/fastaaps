@@ -6,6 +6,7 @@ nav:
       - Mejoras del Sistema: 'FASTAAPS/upgrades.md'
       - (Docker) Contenerización de Servicios: 'FASTAAPS/docker.md'
       - Estándares de Calidad de Código: 'FASTAAPS/quality.md'
+      - Instalación del Sistema en Servidores: 'FASTAAPS/deployment.md'
     - 'AAPS-LAB: Aplicaciones Interactivas': 
         - Resúmen: 'AAPS-LAB/summary.md'
     - 'AAPS-API: Servicio de Datos': 
@@ -25,8 +26,8 @@ nav:
 theme:
   name: 'material'
   palette:
-    primary: 'teal'
-    accent: 'teal'
+    primary: 'cyan'
+    accent: 'cyan'
   font:
     text: 'Roboto'
     code: 'Roboto Mono'
@@ -52,12 +53,10 @@ markdown_extensions:
   - admonition
   - codehilite:
       guess_lang: false
-  - toc: # Generates a table of contents and links to sections in pages.
-      permalink: true # Paragraph symbol besides titles will be used as anchor for links
-      separator: "_" # Symbol used to replace white spaces in links
-  - meta # Implements metadata functionalities: hero
+  - toc:
+      permalink: true
+      separator: "_"
+  - meta
   - pymdownx.superfences
   - pymdownx.details
-  - codehilite:
-      guess_lang: false
   - footnotes
