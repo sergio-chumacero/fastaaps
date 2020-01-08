@@ -1,0 +1,1113 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Descripción general del Servicio de Sincronización de Datos del componente AAPS-DATA.">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es, en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/blur_circular.svg">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Servicio de Sincronización</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#00bcd4">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="cyan" data-md-color-accent="cyan">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#aaps-data_servicio_de_sincronizacion_de_datos" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Fast AAPS - Documentación" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">blur_circular</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Fast AAPS - Documentación
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Servicio de Sincronización
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/sergio-chumacero/fastaaps/" title="Ir al repositorio" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    sergio-chumacero/fastaaps
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+          
+
+
+  
+
+<div class="md-hero md-hero--expand" data-md-component="hero">
+  <div class="md-hero__inner md-grid">
+    AAPS-DATA - Servicio de Sincronización
+  </div>
+</div>
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Fast AAPS - Documentación" class="md-nav__button md-logo">
+      
+        <i class="md-icon">blur_circular</i>
+      
+    </a>
+    Fast AAPS - Documentación
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/sergio-chumacero/fastaaps/" title="Ir al repositorio" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    sergio-chumacero/fastaaps
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      FASTAAPS: Información General
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        FASTAAPS: Información General
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../FASTAAPS/upgrades/" title="Mejoras del Sistema" class="md-nav__link">
+      Mejoras del Sistema
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../FASTAAPS/docker/" title="(Docker) Contenerización de Servicios" class="md-nav__link">
+      (Docker) Contenerización de Servicios
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../FASTAAPS/quality/" title="Estándares de Calidad de Código" class="md-nav__link">
+      Estándares de Calidad de Código
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../FASTAAPS/deployment/" title="Instalación del Sistema en Servidores" class="md-nav__link">
+      Instalación del Sistema en Servidores
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      AAPS-LAB: Aplicaciones Interactivas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        AAPS-LAB: Aplicaciones Interactivas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-LAB/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      AAPS-API: Servicio de Datos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        AAPS-API: Servicio de Datos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-API/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-API/general/" title="Servicios de Datos - Conceptos y Tecnologías" class="md-nav__link">
+      Servicios de Datos - Conceptos y Tecnologías
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-API/specifications/" title="Especificación del Servicio de Datos" class="md-nav__link">
+      Especificación del Servicio de Datos
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      AAPS-AUTH: Seguridad
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        AAPS-AUTH: Seguridad
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-AUTH/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-AUTH/specifications/" title="Especificaciones de Seguridad" class="md-nav__link">
+      Especificaciones de Seguridad
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+    
+    <label class="md-nav__link" for="nav-6">
+      AAPS-DATA: Sincronización y Almacenamiento de Datos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        AAPS-DATA: Sincronización y Almacenamiento de Datos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../specifications/" title="Estándares y Especificaciones" class="md-nav__link">
+      Estándares y Especificaciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dataset/" title="Conjuntos de Datos" class="md-nav__link">
+      Conjuntos de Datos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Servicio de Sincronización
+      </label>
+    
+    <a href="./" title="Servicio de Sincronización" class="md-nav__link md-nav__link--active">
+      Servicio de Sincronización
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1_general" class="md-nav__link">
+    1. General
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_fuentes_originales_de_datos" class="md-nav__link">
+    2. Fuentes Originales de Datos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_funciones" class="md-nav__link">
+    3. Funciones
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31_propiedades_de_las_funciones" class="md-nav__link">
+    3.1 Propiedades de las Funciones
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4_tecnologias_utilizadas" class="md-nav__link">
+    4. Tecnologías Utilizadas
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41_celery_sistema_de_tareas_asincronicas" class="md-nav__link">
+    4.1 Celery: Sistema de Tareas Asincrónicas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42_rabbitmq_agente_de_mensajeria_fila_de_tareas" class="md-nav__link">
+    4.2 RabbitMQ: Agente de Mensajería (Fila de Tareas)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43_celery-beat_herramienta_de_tareas_periodicas" class="md-nav__link">
+    4.3 Celery-Beat: Herramienta de Tareas Periódicas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44_flower_interfaz_de_monitoreo" class="md-nav__link">
+    4.4 Flower: Interfaz de Monitoreo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45_pgbouncer_gestor_de_conexiones_a_la_base_de_datos_postgresql" class="md-nav__link">
+    4.5 PgBouncer: Gestor de Conexiones a la Base de Datos PostgreSQL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43_psycopg2_driver_de_postgresql" class="md-nav__link">
+    4.3 PsycoPG2: Driver de PostgreSQL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44_requests_cliente_http" class="md-nav__link">
+    4.4 Requests: Cliente HTTP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5_detalles_de_implementacion" class="md-nav__link">
+    5. Detalles de Implementación
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tecnologias_utilizadas" class="md-nav__link">
+    Tecnologías Utilizadas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../db/" title="Base de Datos Especializada" class="md-nav__link">
+      Base de Datos Especializada
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1_general" class="md-nav__link">
+    1. General
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_fuentes_originales_de_datos" class="md-nav__link">
+    2. Fuentes Originales de Datos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_funciones" class="md-nav__link">
+    3. Funciones
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31_propiedades_de_las_funciones" class="md-nav__link">
+    3.1 Propiedades de las Funciones
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4_tecnologias_utilizadas" class="md-nav__link">
+    4. Tecnologías Utilizadas
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41_celery_sistema_de_tareas_asincronicas" class="md-nav__link">
+    4.1 Celery: Sistema de Tareas Asincrónicas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42_rabbitmq_agente_de_mensajeria_fila_de_tareas" class="md-nav__link">
+    4.2 RabbitMQ: Agente de Mensajería (Fila de Tareas)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43_celery-beat_herramienta_de_tareas_periodicas" class="md-nav__link">
+    4.3 Celery-Beat: Herramienta de Tareas Periódicas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44_flower_interfaz_de_monitoreo" class="md-nav__link">
+    4.4 Flower: Interfaz de Monitoreo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45_pgbouncer_gestor_de_conexiones_a_la_base_de_datos_postgresql" class="md-nav__link">
+    4.5 PgBouncer: Gestor de Conexiones a la Base de Datos PostgreSQL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43_psycopg2_driver_de_postgresql" class="md-nav__link">
+    4.3 PsycoPG2: Driver de PostgreSQL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44_requests_cliente_http" class="md-nav__link">
+    4.4 Requests: Cliente HTTP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5_detalles_de_implementacion" class="md-nav__link">
+    5. Detalles de Implementación
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tecnologias_utilizadas" class="md-nav__link">
+    Tecnologías Utilizadas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sergio-chumacero/fastaaps/edit/master/docs/AAPS-DATA/sync.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="aaps-data_servicio_de_sincronizacion_de_datos">AAPS-DATA: Servicio de Sincronización de Datos<a class="headerlink" href="#aaps-data_servicio_de_sincronizacion_de_datos" title="Permanent link">&para;</a></h1>
+<h2 id="1_general">1. General<a class="headerlink" href="#1_general" title="Permanent link">&para;</a></h2>
+<p>El <strong>Servicio de Sincronización de Datos</strong> del componente AAPS-DATA, se encarga de sincronizar los datos del componente con los datos de diversas fuentes externas, principalmente con los datos del sistema SIIRAyS.</p>
+<p><img alt="sync" src="../../img/sync.png" /></p>
+<p>El <a href="/AAPS-DATA/sync">Servicio de Sincronización</a>, tanto de manera automática periódica como de manera manual a través de la aplicación de control de tareas, se encarga de:</p>
+<ol>
+<li>
+<p>Acceder a estos datos, a través de un driver para la base de datos Postgres.</p>
+</li>
+<li>
+<p>Transformar los datos al formato del sistema.</p>
+</li>
+<li>
+<p>Ingresar los datos al sistema FASTAAPS a través del servicio de acceso.</p>
+</li>
+</ol>
+<p>Una vez ingresados al sistema estos datos pueden ser utilizados por las aplicaciones.</p>
+<p><img alt="arquitectura_data" src="../../img/sync_data_flow.svg" /></p>
+<h2 id="2_fuentes_originales_de_datos">2. Fuentes Originales de Datos<a class="headerlink" href="#2_fuentes_originales_de_datos" title="Permanent link">&para;</a></h2>
+<p>Las fuentes originales de los datos de la AAPS son aquellas administradas por sus direcciones, a través de sus planillas excel, sistema SIIRAyS, los archivos georeferenciados o cualquier otro método considerado necesario para el manejo apropiado de sus datos. El sistema FASTAAPS simplemente almacena, distribuye y utiliza estos datos con el fin de facilitar las tareas de los funcionarios de la AAPS.</p>
+<h2 id="3_funciones">3. Funciones<a class="headerlink" href="#3_funciones" title="Permanent link">&para;</a></h2>
+<p>El servicio de sicronización se encarga de las siguientes funciones:</p>
+<ol>
+<li>
+<p><strong>Sincronización Periódica con el SIIRAyS</strong>: Para asegurar que los datos utilizados por las aplicaciones se encuentren actualizados y repliquen fielmente el estado del SIIRAyS, el servicio de sincronización tiene una función que accesa de manera periódica y automática a la base de datos del sistema SIIRAyS y releva los datos más actuales.</p>
+</li>
+<li>
+<p><strong>Sincronización a Pedido</strong>: En caso de que sea necesario relizar una actualización a pedido, el servicio de sincronización ofrece esta función a través de su interfaz de monitoreo.</p>
+</li>
+</ol>
+<h3 id="31_propiedades_de_las_funciones">3.1 Propiedades de las Funciones<a class="headerlink" href="#31_propiedades_de_las_funciones" title="Permanent link">&para;</a></h3>
+<p>Para asegurar la consistencia del sistema, requerimos que todas las funciones del servicio de sincronización cumplan dos características fundamentales: Atomicidad e Idempotencia. Estas propiedades garantizan la consistencia del servicio, evitando entrar en estados inconsistentes y de esta manera reducir errores imprevistos.</p>
+<ol>
+<li><strong>Atomicidad</strong>: Una función atómica es aquella que es aplicada en su totalidad o no es aplicada en lo absoluto. 
+ Es decir, al aplicar una función atomica todos sus subprocesos persistentes son aplicados en el orden correcto en el caso exitoso mientras que, en caso de fallar algún subproceso, ninguno de los subprocesos persistentes es aplicado.</li>
+</ol>
+<p>En lenguaje simple se puede entender a una función atómica, como una que no deja rastros "a medias". </p>
+<ol>
+<li><strong>Idempotencia</strong>: Con una función idempotente se obtiene el mismo resultado, independientemente de las veces que la función sea repetida. 
+ Es decir, aplicar una función idempotente una vez es equivalente a aplicarla dos o más veces. </li>
+</ol>
+<p>En caso de extender el serivicio de sincronización añadiendo nuevas tareas, recomendamos que las nuevas funciones cumplan con estas dos características.</p>
+<h2 id="4_tecnologias_utilizadas">4. Tecnologías Utilizadas<a class="headerlink" href="#4_tecnologias_utilizadas" title="Permanent link">&para;</a></h2>
+<p>A continuación describimos las tecnologías utilizadas para el servicio de sincronización. Todas las librerías de código utilizado por las siguientes herramientas son del tipo "open source" o "código abierto".</p>
+<h3 id="41_celery_sistema_de_tareas_asincronicas">4.1 Celery: Sistema de Tareas Asincrónicas<a class="headerlink" href="#41_celery_sistema_de_tareas_asincronicas" title="Permanent link">&para;</a></h3>
+<p>Celery es un conjunto de herramientas (framework) utilizado para correr tareas específicas de manera asincrónica, es decir, en otro proceso o inclusive en otro servidor dedicado. Normalmente es usado para correr tareas pesadas y de mantenimiento, que resultarían inconvenientes de ser incluídas en una aplicación web. </p>
+<p><img alt="celery" src="../../img/celery.png" /></p>
+<p>El modelo de trabajo de celery gira entorno a una <strong>fila de tareas</strong>, en dónde las aplicaciones ingresan las tareas que deben ser realizadas. Esta fila de tareas es observada por <strong>procesos trabajadores</strong> que reciben las tareas y las procesan por su cuenta. </p>
+<p>Las tareas de sincronización con la base de datos del SIIRAyS califican a ser implementadas usando el modelo de trabajo de Celery porque las siguientes características:</p>
+<ul>
+<li>Las tareas de sincronización son pesadas. Pueden tardar varios segundos en ser procesadas.</li>
+<li>Las tareas de sincronización pueden ser ejecutadas de manera asincrónica.</li>
+<li>Los objetos involucrados en estas tareas son ajenos al resto de componentes del sistema.</li>
+</ul>
+<p><img alt="celery_diagram" src="../../img/celery_diagram.svg" /></p>
+<p>Para el servicio de sincronización periódico utilizamos una herramienta automatizada para añadir tareas a la fila en intervalos regulares. Esta herramienta es implementada en un proceso aparte y la describimos en mayor detalle más adelante. </p>
+<p>Celery utiliza procesos del tipo <em>trabajador</em> (worker) que corren de manera paralela y están pendientes de las tareas que tengan que ser ejecutadas. Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de <a href="/FASTAAPS/quality">cálidad de código</a>, los procesos trabajadores de Celery son contenerizados con Docker. </p>
+<p>Celery no implementa la fila de tareas, en cambio, depende de los servicios de un <strong>agente de mensajería</strong> (message broker) externo para transmitir mensajes a los procesos trabajadores. El uso de un agente de mensajería externo tiene la ventaja de usar una tecnología especializada. Más adelante explicamos el agente de mensajería en mayor detalle.</p>
+<h3 id="42_rabbitmq_agente_de_mensajeria_fila_de_tareas">4.2 RabbitMQ: Agente de Mensajería (Fila de Tareas)<a class="headerlink" href="#42_rabbitmq_agente_de_mensajeria_fila_de_tareas" title="Permanent link">&para;</a></h3>
+<p>El sistema de Celery depende de un agente de mensajería (message broker) externo para implementar la fila de tareas.  </p>
+<p>Existen distintos serivicios de mensajería como por ejemplo <a href="https://redis.io/">Redis</a> o una base de datos convencional, pero el sistema FASTAAPS utiliza el servicio de mensajería <a href="https://www.rabbitmq.com/">RabbitMQ</a>, el cual es el más completo en cuanto a funcionalidades de Celery.</p>
+<p><img alt="rabbitmq" src="../../img/rabbitmq.png" /></p>
+<p>Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de <a href="/FASTAAPS/quality">cálidad de código</a>, el agente de mensajería es contenerizado con Docker. De acuerdo con estos principios de diseño el agente de mensajería es accesible desde los contenedores que lo requieran (trabajadores Celery) en un puerto específico.</p>
+<p>Para monitorear el trabajo realizado por el agente de mensajería y facilitar su mantenimiento, incluímos un panel de control web desde el cual un usuario de apoyo técnico puede monitorear la fila de tareas en tiempo real. Este servicio es parte del contenedor de RabbitMQ.</p>
+<h3 id="43_celery-beat_herramienta_de_tareas_periodicas">4.3 Celery-Beat: Herramienta de Tareas Periódicas<a class="headerlink" href="#43_celery-beat_herramienta_de_tareas_periodicas" title="Permanent link">&para;</a></h3>
+<p>Teniendo procesos trabajadores de Celery a la espera de nuevas tareas a realizar en la fila, sólo nos hace falta una herramienta encargada de poner tareas en la fila en intervalos regulares. Precisamente esta es la función de <strong>Celery-Beat</strong>, una herramienta de Celery que inicia un nuevo proceso con el fin de añadir tareas a la fila de manera periódica.</p>
+<p>Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de <a href="/FASTAAPS/quality">cálidad de código</a>, la herramienta de tareas periódicas es contenerizada con Docker.</p>
+<h3 id="44_flower_interfaz_de_monitoreo">4.4 Flower: Interfaz de Monitoreo<a class="headerlink" href="#44_flower_interfaz_de_monitoreo" title="Permanent link">&para;</a></h3>
+<p>Para monitorear el trabajo realizado por el servicio de sincronización y facilitar su mantenimiento, el servicio de sincronización cuenta con una interfaz de usuario web desde la cual un usuario de apoyo técnico puede monitorear las tareas realizadas en tiempo real.</p>
+<p>La interfaz de monitoreo fue implementada haciendo uso de la librería <a href="https://flower.readthedocs.io/">Flower</a>.</p>
+<p>Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de <a href="/FASTAAPS/quality">cálidad de código</a>, la herramienta de monitoreo de tareas es contenerizado con Docker y el panel de control es expuesto en un puerto específico.</p>
+<p>El acceso al panel de control es considerado del tipo administrativo/técnico y se encuentra protegido por un sistema de autenticación básico (nombre de usuario &amp; contraseña). </p>
+<h3 id="45_pgbouncer_gestor_de_conexiones_a_la_base_de_datos_postgresql">4.5 PgBouncer: Gestor de Conexiones a la Base de Datos PostgreSQL<a class="headerlink" href="#45_pgbouncer_gestor_de_conexiones_a_la_base_de_datos_postgresql" title="Permanent link">&para;</a></h3>
+<p>Establecer una conexión con un servidor PostgreSQL es notoriamente costoso:</p>
+<ul>
+<li><strong>Memoria</strong>: Cada conexión de PostgreSQL inicia un nuevo proceso que requiere una asignación de aproximadamente 10MB de memoria.</li>
+<li><strong>Procesamiento Computacional</strong>: Iniciar nuevas conexiones además implica un gasto adicional en tiempo de cómputo.</li>
+</ul>
+<p>Debido a estos costos, no sería eficiente establecer una conexión nueva con la base de datos cada vez que comienze una tarea de sincronización. En especial si estas conexiones son de vida corta y son destruidas una vez completada la tarea.</p>
+<p>La solución a este problema es crear y mantener un grupo conexiones de larga duración (connection pool) que sean reutilizadas por los procesos trabajadores. Precisamente esta es la función de un <strong>gestor de conexiones (connection pooler)</strong> como <a href="http://www.pgbouncer.org/">PgBouncer</a>.</p>
+<p><img alt="pgbouncer" src="../../img/pgbouncer.svg" /></p>
+<p>El flujo de trabajo es el siguiente:</p>
+<ol>
+<li>El gestor de conexiones establece y mantiene conexiones directas hacia la base de datos del SIIRAyS y proporciona estas conexiones como servicio. </li>
+<li>Las tareas de Celery se conectan con el gestor como si este fuera la base de datos y realizan sus consultas.</li>
+<li>El gestor utiliza una de las conexiones que mantiene para realizar el pedido a la base de datos real y retorna el resultado de la consulta a la tarea.</li>
+<li>La conexión es retornada al grupo de conexiones para que esta pueda ser utilizada nuevamente.</li>
+</ol>
+<p>Como la mayoría de los servicios del sistema FASTAAPS y de acuerdo a los factores mencionados en la sección de <a href="/FASTAAPS/quality">cálidad de código</a>, el servicio de gestión de conexiones es contenerizado con Docker.</p>
+<h3 id="43_psycopg2_driver_de_postgresql">4.3 PsycoPG2: Driver de PostgreSQL<a class="headerlink" href="#43_psycopg2_driver_de_postgresql" title="Permanent link">&para;</a></h3>
+<h3 id="44_requests_cliente_http">4.4 Requests: Cliente HTTP<a class="headerlink" href="#44_requests_cliente_http" title="Permanent link">&para;</a></h3>
+<h2 id="5_detalles_de_implementacion">5. Detalles de Implementación<a class="headerlink" href="#5_detalles_de_implementacion" title="Permanent link">&para;</a></h2>
+<p>El servicio de sincronización está implementado a través de los siguientes servicios Docker:</p>
+<table>
+<thead>
+<tr>
+<th>Nombre del Servicio</th>
+<th>Descripción</th>
+<th>Tecnología Utilizada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rabbitmq</td>
+<td>Agente de mensajería (message broker)</td>
+<td><a href="https://www.rabbitmq.com/">RabbitMQ</a></td>
+</tr>
+<tr>
+<td>celery</td>
+<td>Proceso trabajador de Celery</td>
+<td><a href="http://www.celeryproject.org/">Celery Worker</a></td>
+</tr>
+<tr>
+<td>flower</td>
+<td>Herramienta de monitorero de Celery</td>
+<td><a href="https://flower.readthedocs.io/">Flower</a></td>
+</tr>
+<tr>
+<td>beat</td>
+<td>Herramienta de tareas periódicas de Celery</td>
+<td><a href="http://www.celeryproject.org/">Celery Beat</a></td>
+</tr>
+<tr>
+<td>pgbouncer</td>
+<td>Gestor de conexiones (connection pooler)</td>
+<td><a href="http://www.pgbouncer.org/">PgBouncer</a></td>
+</tr>
+</tbody>
+</table>
+<p>Cada servicio corre en un proceso aislado, pero exponen los siguientes puertos dentro del servidor:</p>
+<table>
+<thead>
+<tr>
+<th>Puerto</th>
+<th>Protocolo</th>
+<th>Servicio Docker</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5672</td>
+<td>AMQP</td>
+<td>rabbitmq</td>
+<td>Puerto de Mensajería</td>
+</tr>
+<tr>
+<td>15678</td>
+<td>HTTP</td>
+<td>rabbitmq</td>
+<td>Panel de Control de RabbitMQ</td>
+</tr>
+<tr>
+<td>5555</td>
+<td>HTTP</td>
+<td>celery_flower</td>
+<td>Panel de Control de Celery</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tecnologias_utilizadas">Tecnologías Utilizadas<a class="headerlink" href="#tecnologias_utilizadas" title="Permanent link">&para;</a></h3>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../dataset/" title="Conjuntos de Datos" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                Conjuntos de Datos
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../db/" title="Base de Datos Especializada" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Base de Datos Especializada
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/sergio-chumacero" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://twitter.com/SergioChumacer1" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+            
+          
+          
+            <script src="../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

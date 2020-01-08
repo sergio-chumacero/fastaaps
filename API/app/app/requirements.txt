@@ -1,0 +1,26 @@
+###################################################################
+# Título:      Requerimientos Python de Imágen 'fastapi'
+# Ubicación:   FASTAAPS/AAPS-API/RESTAPI/requirements.txt
+# Descripción: 
+#   Dependencias de Python de la imágen base 'fastapi' de Docker.
+###################################################################
+
+# FastApi: Framework Web
+fastapi
+uvicorn
+
+# Motor: Driver para MongoDB 
+motor
+
+# AIOFiles, Python Multipart: Manejo asincrónico de archivos
+aiofiles
+python-multipart
+
+# Requests: Cliente HTTP
+requests
+
+# Manejo de Tokens JWT
+pyjwt[crypto]
+
+# Validación de mails
+email-validator

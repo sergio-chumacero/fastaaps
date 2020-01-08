@@ -1,0 +1,24 @@
+###################################################################
+# Título:      Requerimientos Python de Imágen 'voila'
+# Ubicación:   FASTAAPS/LAB/requirements.txt
+# Descripción: 
+#   Dependencias de Python de la imágen base 'voila' de Docker.
+###################################################################
+
+# Voila: Apps basadas en Notebooks Jupyter
+voila==0.1.20
+
+# Pandas: Manejo de datos tabulares
+pandas==0.25.3
+
+# Pandas Schema: Validación de datos tabulares
+pandas-schema==0.3.4
+
+# Ipywidgets: Widgets interactivos para Notebooks Jupyter
+ipywidgets==7.5.1
+
+# QGrid: Widget para tablas
+qgrid==1.2.0
+
+# Mardown: Manejo para archivos Markdown
+markdown==3.1.1

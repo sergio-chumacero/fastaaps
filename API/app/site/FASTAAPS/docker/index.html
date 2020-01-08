@@ -1,0 +1,925 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Descripción general de tecnologías de contenerización y contenedores en producción del sistema FASTAAPS.">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es, en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/blur_circular.svg">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Docker - Contenerización de Servicios</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#00bcd4">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="cyan" data-md-color-accent="cyan">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#docker_tecnologias_de_contenerizacion" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Fast AAPS - Documentación" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">blur_circular</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Fast AAPS - Documentación
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Docker - Contenerización de Servicios
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/sergio-chumacero/fastaaps/" title="Ir al repositorio" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    sergio-chumacero/fastaaps
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+          
+
+
+  
+
+<div class="md-hero md-hero--expand" data-md-component="hero">
+  <div class="md-hero__inner md-grid">
+    FASTAAPS - Docker & Contenerización
+  </div>
+</div>
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Fast AAPS - Documentación" class="md-nav__button md-logo">
+      
+        <i class="md-icon">blur_circular</i>
+      
+    </a>
+    Fast AAPS - Documentación
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/sergio-chumacero/fastaaps/" title="Ir al repositorio" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    sergio-chumacero/fastaaps
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      FASTAAPS: Información General
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        FASTAAPS: Información General
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../upgrades/" title="Mejoras del Sistema" class="md-nav__link">
+      Mejoras del Sistema
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        (Docker) Contenerización de Servicios
+      </label>
+    
+    <a href="./" title="(Docker) Contenerización de Servicios" class="md-nav__link md-nav__link--active">
+      (Docker) Contenerización de Servicios
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1_informacion_general_que_es_y_para_que_sirve_docker" class="md-nav__link">
+    1. Información General: ¿Qué es y para qué sirve Docker?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_imagenes_base_servicios_y_contenedores_docker_del_sistema_fastaaps" class="md-nav__link">
+    2. Imágenes Base, Servicios y Contenedores Docker del Sistema FASTAAPS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_variables_de_configuracion" class="md-nav__link">
+    3. Variables de Configuración
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#archivos_docker_de_los_servicios" class="md-nav__link">
+    Archivos Docker de los Servicios
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../quality/" title="Estándares de Calidad de Código" class="md-nav__link">
+      Estándares de Calidad de Código
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deployment/" title="Instalación del Sistema en Servidores" class="md-nav__link">
+      Instalación del Sistema en Servidores
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      AAPS-LAB: Aplicaciones Interactivas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        AAPS-LAB: Aplicaciones Interactivas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-LAB/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      AAPS-API: Servicio de Datos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        AAPS-API: Servicio de Datos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-API/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-API/general/" title="Servicios de Datos - Conceptos y Tecnologías" class="md-nav__link">
+      Servicios de Datos - Conceptos y Tecnologías
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-API/specifications/" title="Especificación del Servicio de Datos" class="md-nav__link">
+      Especificación del Servicio de Datos
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      AAPS-AUTH: Seguridad
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        AAPS-AUTH: Seguridad
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-AUTH/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-AUTH/specifications/" title="Especificaciones de Seguridad" class="md-nav__link">
+      Especificaciones de Seguridad
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      AAPS-DATA: Sincronización y Almacenamiento de Datos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        AAPS-DATA: Sincronización y Almacenamiento de Datos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/specifications/" title="Estándares y Especificaciones" class="md-nav__link">
+      Estándares y Especificaciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/dataset/" title="Conjuntos de Datos" class="md-nav__link">
+      Conjuntos de Datos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/sync/" title="Servicio de Sincronización" class="md-nav__link">
+      Servicio de Sincronización
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/db/" title="Base de Datos Especializada" class="md-nav__link">
+      Base de Datos Especializada
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1_informacion_general_que_es_y_para_que_sirve_docker" class="md-nav__link">
+    1. Información General: ¿Qué es y para qué sirve Docker?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_imagenes_base_servicios_y_contenedores_docker_del_sistema_fastaaps" class="md-nav__link">
+    2. Imágenes Base, Servicios y Contenedores Docker del Sistema FASTAAPS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3_variables_de_configuracion" class="md-nav__link">
+    3. Variables de Configuración
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#archivos_docker_de_los_servicios" class="md-nav__link">
+    Archivos Docker de los Servicios
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sergio-chumacero/fastaaps/edit/master/docs/FASTAAPS/docker.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="docker_tecnologias_de_contenerizacion">Docker: Tecnologías de Contenerización<a class="headerlink" href="#docker_tecnologias_de_contenerizacion" title="Permanent link">&para;</a></h1>
+<p><img alt="docker" src="../../img/docker.png" /></p>
+<h2 id="1_informacion_general_que_es_y_para_que_sirve_docker">1. Información General: ¿Qué es y para qué sirve Docker?<a class="headerlink" href="#1_informacion_general_que_es_y_para_que_sirve_docker" title="Permanent link">&para;</a></h2>
+<p>Docker es una plataforma que permite a los desarrolladores empaquetar y correr aplicaciones vía interfaces estandarizadas. </p>
+<p>Docker está basado en tecnologías de virtualización a nivel de sistema operativo que empaqueta software en sus propios entornos virtuales denominados <em>contenedores</em>. A diferencia de una <em>máquina virtual</em>, un contenedor es más eficiente y ligero porque no replica una máquina física abstracta, sino que simplemente replica un sistema operativo abstracto. De esta manera se puede correr muchos más contenedores en un mismo servidor que maquinas virtuales gozando de las ventajas de aislar cada aplicación en su entorno individual.</p>
+<p>El uso de contenedores Docker para la puesta en producción reduce el trabajo de instalación y el uso de scripts de instalación.</p>
+<p>Un contenedor Docker es un proceso aislado que corre en el entorno del usuario del sistema operativo y comparte el núcleo (kernel) del sistema con otros procesos. Múltiples contenedores pueden correr en la misma máquina, cada uno corriendo su aplicación en un proceso aislado.</p>
+<p>La ventaja de utilizar tecnologías de contenerización para los servicios en producción son:</p>
+<ol>
+<li>
+<p><strong>Bajo índice de acoplamiento (loose coupling)</strong>: Al aislar cada aplicación en su propio entorno virtual, estas son independientes las unas de las otras. Las dependencias de una no interfieren con las dependencias de las otras. Por ejemplo, múltiples servicios del sistema FASTAAPS requieren de una instalación de Python y al aislarlos en sus propios contenedores es posible que cada servicio tenga su propia instalación de Python, posiblemente con distintas versiones, librerías de código instaladas y variables de entorno. </p>
+</li>
+<li>
+<p><strong>Consistencia y Replicabilidad (replicablity)</strong>: Al definir explícitamente las dependencias de una aplicación, podemos garantizar que las aplicaciones funcionarán de igual manera en cualquier entorno, sea este de desarrollo, de prueba o de producción.</p>
+</li>
+<li>
+<p><strong>Facilidad de escalabilidad (scalability)</strong>: Al tener la posibilidad de crear y replicar aplicaciones contenerizadas facilmente, es posible incrementar o reducir el número de copias de un servicio y sus recursos de cómputo de acuerdo a los requerimientos de uso.  </p>
+</li>
+</ol>
+<p>Una desventaja del uso de contenedores es la complejidad de interconexión y monitoreo de servicios. Por suerte, existen tecnologías maduras de manejo y orquestración de servicios contenerizados como <a href="https://kubernetes.io/">Kubernetes</a>.</p>
+<h2 id="2_imagenes_base_servicios_y_contenedores_docker_del_sistema_fastaaps">2. Imágenes Base, Servicios y Contenedores Docker del Sistema FASTAAPS<a class="headerlink" href="#2_imagenes_base_servicios_y_contenedores_docker_del_sistema_fastaaps" title="Permanent link">&para;</a></h2>
+<p>Un contenedor es un proceso aislado creado a partir de una <em>imágen base</em> que describe todas sus dependencias y su proceso de instalación. Estas imágenes nos dan la capacidad de crear servicios de manera reproducible y predecible, independientemente de las características particulares de la máquina. Las imágenes base de los contenedores además sirven de documentación técnica.</p>
+<p>A continuación listamos las imágenes base usadas para los distintos servicios del sistema FASTAAPS. Algunas imágenes descargadas del repositorio oficial de imágenes Docker, mientras otras son construidas en base a modificaciones de estas imágenes base.</p>
+<table>
+<thead>
+<tr>
+<th>Código de Imágen</th>
+<th>Componente</th>
+<th>Servicio</th>
+<th>Imágen Base</th>
+<th>Tecnología Utilizada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>celery</td>
+<td>AAPS-DATA</td>
+<td>Servicio de Sincronización</td>
+<td><a href="https://hub.docker.com/_/python/">python:3.8.0</a></td>
+<td>Celery/Flower</td>
+</tr>
+<tr>
+<td><a href="https://hub.docker.com/_/rabbitmq">rabbitmq:3.8.1-management</a></td>
+<td>AAPS-DATA</td>
+<td>Servicio de Sincronización</td>
+<td>-</td>
+<td><a href="https://www.rabbitmq.com/">RabbitMQ</a></td>
+</tr>
+<tr>
+<td><a href="https://hub.docker.com/r/edoburu/pgbouncer/dockerfile/">edoburu/pgbouncer</a></td>
+<td>AAPS-DATA</td>
+<td>Servicio de Sincronización</td>
+<td>-</td>
+<td><a href="http://www.pgbouncer.org/">PgBouncer</a></td>
+</tr>
+</tbody>
+</table>
+<p>Sobre estas imágenes base se implementan distintos servicios Docker. Cada servicio corre en un proceso aislado.</p>
+<table>
+<thead>
+<tr>
+<th>Nombre del Servicio</th>
+<th>Imágen Base</th>
+<th>Descripción</th>
+<th>Tecnología Utilizada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rabbitmq</td>
+<td><a href="https://hub.docker.com/_/rabbitmq">rabbitmq:3.8.1-management</a></td>
+<td>Agente de mensajería (message broker)</td>
+<td><a href="https://www.rabbitmq.com/">RabbitMQ</a></td>
+</tr>
+<tr>
+<td>celery</td>
+<td>celery</td>
+<td>Proceso trabajador de Celery</td>
+<td><a href="http://www.celeryproject.org/">Celery</a></td>
+</tr>
+<tr>
+<td>flower</td>
+<td>celery</td>
+<td>Herramienta de monitorero de Celery</td>
+<td><a href="https://flower.readthedocs.io/">Flower</a></td>
+</tr>
+<tr>
+<td>beat</td>
+<td>celery</td>
+<td>Herramienta de tareas periódicas</td>
+<td><a href="http://www.celeryproject.org/">Celery</a></td>
+</tr>
+<tr>
+<td>pgbouncer</td>
+<td><a href="https://hub.docker.com/r/edoburu/pgbouncer/dockerfile/">edoburu/pgbouncer</a></td>
+<td>Gestor de Conexiones para PostgreSQL</td>
+<td><a href="http://www.pgbouncer.org/">PgBouncer</a></td>
+</tr>
+</tbody>
+</table>
+<p>Los contenedores Docker se comunican entre ellos y con sistemas externos exponiendo los siguientes puertos específicos en el servidor.</p>
+<table>
+<thead>
+<tr>
+<th>Puerto</th>
+<th>Protocolo</th>
+<th>Servicio Docker</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5672</td>
+<td>AMQP</td>
+<td>rabbitmq</td>
+<td>Puerto de Mensajería</td>
+</tr>
+<tr>
+<td>15672</td>
+<td>HTTP</td>
+<td>rabbitmq</td>
+<td>Panel de Control de RabbitMQ</td>
+</tr>
+<tr>
+<td>5555</td>
+<td>HTTP</td>
+<td>celery_flower</td>
+<td>Panel de Control de Celery</td>
+</tr>
+<tr>
+<td>6432</td>
+<td>postgresql</td>
+<td>pgbouncer</td>
+<td>Gestor de Conexiones hacia PostgreSQL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3_variables_de_configuracion">3. Variables de Configuración<a class="headerlink" href="#3_variables_de_configuracion" title="Permanent link">&para;</a></h2>
+<p>Las variables de configuración de una aplicación de software son aquellos datos que son independientes del funcionamiento de la aplicación, como las URLs de las bases de datos o las llaves de acceso. Estos datos deben ser accesibles para los administradores y por lo general son del tipo dinámico. Además, por seguridad, estos datos no pueden ser incluídos en los repositorios públicos de código. </p>
+<p>De acuerdo a los <a href="https://12factor.net/">12 factores de aplicaciones como servicio</a>, es deseable separar los datos de configuración del código fuente. La manera recomendada de administrar las variables de configuración es a través de <em>variables de ambiente</em> (environment variables). Esto garantiza la portabilidad y escalabilidad de la aplicación. Las variables de ambiente tienen la ventaja de poder ser intercambiadas fácilmente entre distintos ambientes de trabajo, son independientes del lenguaje de programación y se integran muy bien con Docker.</p>
+<div class="admonition info">
+<p class="admonition-title">Los 12 factores de aplicaciones como servicio</p>
+<p>Los <a href="https://12factor.net/">12 factores de aplicaciones como servicio</a> son reglas generales para el desarrollo de software basado en una arquitectura de servicios que garantiza la portabilidad y la escalabilidad de los servicios.</p>
+<p>El sistema FastAAPS se adhiere a varios de estos factores de calidad de código. Para más información, véase la sección <a href="FASTAAPS/quality">calidad de código</a>. </p>
+</div>
+<h2 id="archivos_docker_de_los_servicios">Archivos Docker de los Servicios<a class="headerlink" href="#archivos_docker_de_los_servicios" title="Permanent link">&para;</a></h2>
+<p>El <em>archivo de Docker</em> (en inglés <em>Dockerfile</em>) contiene todas las instrucciones necesarias para construir la imágen del contenedor y a su vez sirve de documentación técnica. Estos archivos describen la aplicación y sus dependencias. </p>
+<p>Docker ejecuta las instrucciones de un archivo Docker para contruir la imágen base.</p>
+<p>A continuación incluímos los archivos docker que construyen las imágenes base usadas por los servicios del sistema.</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../upgrades/" title="Mejoras del Sistema" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                Mejoras del Sistema
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../quality/" title="Estándares de Calidad de Código" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Estándares de Calidad de Código
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/sergio-chumacero" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://twitter.com/SergioChumacer1" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+            
+          
+          
+            <script src="../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1176 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Instrucciones para el levantamiento del sistema.">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es, en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/blur_circular.svg">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Puesta en Producción (Instalación en Servidor)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#00bcd4">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="cyan" data-md-color-accent="cyan">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#puesta_en_produccion_instalacion_del_sistema_en_servidores" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Fast AAPS - Documentación" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">blur_circular</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Fast AAPS - Documentación
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Puesta en Producción (Instalación en Servidor)
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/sergio-chumacero/fastaaps/" title="Ir al repositorio" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    sergio-chumacero/fastaaps
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+          
+
+
+  
+
+<div class="md-hero md-hero--expand" data-md-component="hero">
+  <div class="md-hero__inner md-grid">
+    FASTAAPS - Puesta en Producción
+  </div>
+</div>
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Fast AAPS - Documentación" class="md-nav__button md-logo">
+      
+        <i class="md-icon">blur_circular</i>
+      
+    </a>
+    Fast AAPS - Documentación
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/sergio-chumacero/fastaaps/" title="Ir al repositorio" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    sergio-chumacero/fastaaps
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      FASTAAPS: Información General
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        FASTAAPS: Información General
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../upgrades/" title="Mejoras del Sistema" class="md-nav__link">
+      Mejoras del Sistema
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../docker/" title="(Docker) Contenerización de Servicios" class="md-nav__link">
+      (Docker) Contenerización de Servicios
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../quality/" title="Estándares de Calidad de Código" class="md-nav__link">
+      Estándares de Calidad de Código
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Instalación del Sistema en Servidores
+      </label>
+    
+    <a href="./" title="Instalación del Sistema en Servidores" class="md-nav__link md-nav__link--active">
+      Instalación del Sistema en Servidores
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos" class="md-nav__link">
+    Requisitos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso_1_instalar_docker_y_docker-compose" class="md-nav__link">
+    Paso 1: Instalar Docker y Docker-Compose
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso_2_descargar_el_repositorio" class="md-nav__link">
+    Paso 2: Descargar el Repositorio
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso_3_configuracion_del_sistema" class="md-nav__link">
+    Paso 3: Configuración del Sistema
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#descripcion_de_las_variables_de_configuracion_del_archivo_configenv" class="md-nav__link">
+    Descripción de las Variables de Configuración del Archivo config.env
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion_de_conexion_a_django" class="md-nav__link">
+    Configuración de Conexión a Django
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion_de_conexion_a_la_base_de_datos" class="md-nav__link">
+    Configuración de Conexión a la Base de Datos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion_de_usuario_inicial_postgresql" class="md-nav__link">
+    Configuración de usuario inicial PostgreSQL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion_de_usuario_inicial_pgadmin" class="md-nav__link">
+    Configuración de usuario inicial PGAdmin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datos_de_acceso_para_los_usuarios" class="md-nav__link">
+    Datos de Acceso para los Usuarios
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion_del_archivo_docker-composeyml" class="md-nav__link">
+    Configuración del archivo docker-compose.yml
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso_4_iniciar_servicios_y_correr_scripts" class="md-nav__link">
+    Paso 4: Iniciar Servicios y Correr Scripts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso_5_reiniciar_los_contenedores" class="md-nav__link">
+    Paso 5: Reiniciar los Contenedores
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      AAPS-LAB: Aplicaciones Interactivas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        AAPS-LAB: Aplicaciones Interactivas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-LAB/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      AAPS-API: Servicio de Datos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        AAPS-API: Servicio de Datos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-API/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-API/general/" title="Servicios de Datos - Conceptos y Tecnologías" class="md-nav__link">
+      Servicios de Datos - Conceptos y Tecnologías
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-API/specifications/" title="Especificación del Servicio de Datos" class="md-nav__link">
+      Especificación del Servicio de Datos
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      AAPS-AUTH: Seguridad
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        AAPS-AUTH: Seguridad
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-AUTH/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-AUTH/specifications/" title="Especificaciones de Seguridad" class="md-nav__link">
+      Especificaciones de Seguridad
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      AAPS-DATA: Sincronización y Almacenamiento de Datos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        AAPS-DATA: Sincronización y Almacenamiento de Datos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/specifications/" title="Estándares y Especificaciones" class="md-nav__link">
+      Estándares y Especificaciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/dataset/" title="Conjuntos de Datos" class="md-nav__link">
+      Conjuntos de Datos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/sync/" title="Servicio de Sincronización" class="md-nav__link">
+      Servicio de Sincronización
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/db/" title="Base de Datos Especializada" class="md-nav__link">
+      Base de Datos Especializada
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos" class="md-nav__link">
+    Requisitos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso_1_instalar_docker_y_docker-compose" class="md-nav__link">
+    Paso 1: Instalar Docker y Docker-Compose
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso_2_descargar_el_repositorio" class="md-nav__link">
+    Paso 2: Descargar el Repositorio
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso_3_configuracion_del_sistema" class="md-nav__link">
+    Paso 3: Configuración del Sistema
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#descripcion_de_las_variables_de_configuracion_del_archivo_configenv" class="md-nav__link">
+    Descripción de las Variables de Configuración del Archivo config.env
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion_de_conexion_a_django" class="md-nav__link">
+    Configuración de Conexión a Django
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion_de_conexion_a_la_base_de_datos" class="md-nav__link">
+    Configuración de Conexión a la Base de Datos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion_de_usuario_inicial_postgresql" class="md-nav__link">
+    Configuración de usuario inicial PostgreSQL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion_de_usuario_inicial_pgadmin" class="md-nav__link">
+    Configuración de usuario inicial PGAdmin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datos_de_acceso_para_los_usuarios" class="md-nav__link">
+    Datos de Acceso para los Usuarios
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion_del_archivo_docker-composeyml" class="md-nav__link">
+    Configuración del archivo docker-compose.yml
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso_4_iniciar_servicios_y_correr_scripts" class="md-nav__link">
+    Paso 4: Iniciar Servicios y Correr Scripts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso_5_reiniciar_los_contenedores" class="md-nav__link">
+    Paso 5: Reiniciar los Contenedores
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sergio-chumacero/fastaaps/edit/master/docs/FASTAAPS/deployment.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="puesta_en_produccion_instalacion_del_sistema_en_servidores">Puesta en Producción (Instalación del Sistema en Servidores)<a class="headerlink" href="#puesta_en_produccion_instalacion_del_sistema_en_servidores" title="Permanent link">&para;</a></h1>
+<p>En esta sección se dan las instrucciones para que el personal de apoyo técnico (sector TIC) pueda levantar el sistema en servidores.</p>
+<p>Esta acción puede resultar necesaria en caso de caida de los servidores, cambio de servidores o simplemente si por algún motivo se desea instalar el sistema nuevamente o en otro servidor.</p>
+<h2 id="requisitos">Requisitos<a class="headerlink" href="#requisitos" title="Permanent link">&para;</a></h2>
+<p>En teoría, el único requerimiento para levantar el sistema es un sistema operativo linux con acceso a internet, suficiente espacio y capacidad de cómputo y  que tenga Docker instalado. </p>
+<ol>
+<li>
+<p>(<strong>Requisitos del Servidor</strong>) El sistema fue probado en producción una máquina virtual con las siguientes características, por lo que se recomienda usar un servidor con las siguientes características o de mayor capacidad:</p>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sistema Operativo</td>
+<td><code>Ubuntu 18.04.3 LTS (bionic)</code></td>
+</tr>
+<tr>
+<td>Arquitectura:</td>
+<td><code>x86_64</code></td>
+</tr>
+<tr>
+<td>Memoria (total):</td>
+<td><code>3.84 GB</code></td>
+</tr>
+<tr>
+<td>Memoria (disponible):</td>
+<td><code>3.46 GB</code></td>
+</tr>
+<tr>
+<td>Número de Núcleos:</td>
+<td><code>2</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>(<strong>Interfaz</strong>) Para realizar la instalación se deberá poder ejecutar comandos en una línea de comandos, ya sea de manera directa o a través de una conexión remota (SSH). Es necesario contar con acceso del tipo <em>root</em> (superusuario) en el sistema para poder correr comandos <code>sudo</code>. </p>
+</li>
+<li>
+<p>(<strong>IP pública</strong>) Para que los usuarios del sistema puedan acceder a él a través de Internet, necesitaremos una IP pública que redirija a nuestro servidor.</p>
+</li>
+</ol>
+<h2 id="paso_1_instalar_docker_y_docker-compose">Paso 1: Instalar Docker y Docker-Compose<a class="headerlink" href="#paso_1_instalar_docker_y_docker-compose" title="Permanent link">&para;</a></h2>
+<p>Docker y Docker-Compose simplifican bastante la instalación y el mantenimiento del sistema. </p>
+<p>Existen <em>scripts</em> de instalación convenientes que reducirían esta sección a un par de comandos, pero oficialmente estos métodos <strong>no son recomendados en producción</strong> por lo que se sugiere realizar la instalación convencional descrita a continuación.</p>
+<p>Para instalar estas herramienas corremos los siguientes comandos:</p>
+<ol>
+<li>Actualizamos el gestor de paquetes del sistema:
+    <div class="codehilite"><pre><span></span>sudo apt-get update
+</pre></div>
+    <div class="codehilite"><pre><span></span>sudo apt-get upgrade
+</pre></div></li>
+<li>
+<p>Instalación de <a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/">Docker Engine</a>. </p>
+<p>En caso que se hayan instalado versiones antigüas de docker, las removemos. Es normal que diga que no existen los paquetes.</p>
+<div class="codehilite"><pre><span></span>sudo apt-get remove docker docker-engine docker.io containerd run
+</pre></div>
+
+<p>Instalamos algunos paquetes que nos permitirán usar los repositorios vía HTTPS.</p>
+<div class="codehilite"><pre><span></span>sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent  software-properties-common
+</pre></div>
+
+<p>Añadimos la llave GPG oficial de Docker.</p>
+<div class="codehilite"><pre><span></span>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+</pre></div>
+
+<p>Verificamos la integridad de la llave buscando su <em>huella digital</em>. El valor de la llave pública (<code>pub</code>) mostrada en el output debe igualar a <code>9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88</code>.</p>
+<div class="codehilite"><pre><span></span>sudo apt-key fingerprint 0EBFCD88
+</pre></div>
+
+<p>Añadimos el repositorio de Docker para Ubuntu.</p>
+<div class="codehilite"><pre><span></span>sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&quot;
+</pre></div>
+
+<p>Actualizamos los repositorios del gestor de paquetes <code>apt</code>.</p>
+<div class="codehilite"><pre><span></span>sudo apt-get update
+</pre></div>
+
+<p>Finalmente instalamos Docker.</p>
+<div class="codehilite"><pre><span></span>sudo apt-get install docker-ce docker-ce-cli containerd.io
+</pre></div>
+
+<p>Y verificamos que haya sido instalado correctamente.</p>
+<div class="codehilite"><pre><span></span>sudo docker run hello-world
+</pre></div>
+
+</li>
+<li>
+<p>Instalación de <a href="https://docs.docker.com/compose/install/">Docker Compose</a>.</p>
+<p>Descargamos la última versión estable de Docker Compose.</p>
+<div class="codehilite"><pre><span></span>sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+</pre></div>
+
+<p>Le damos permisos de  ejecutable al archivo descargado.</p>
+<div class="codehilite"><pre><span></span>sudo chmod +x /usr/local/bin/docker-compose
+</pre></div>
+
+<p>Finalmente verificamos que Docker Compose sea accesible y esté instalado.</p>
+<div class="codehilite"><pre><span></span>docker-compose --help
+</pre></div>
+
+</li>
+</ol>
+<h2 id="paso_2_descargar_el_repositorio">Paso 2: Descargar el Repositorio<a class="headerlink" href="#paso_2_descargar_el_repositorio" title="Permanent link">&para;</a></h2>
+<p>El código fuente se encuentra en un <a href="https://github.com/sergio-chumacero/aapsapi-docker">repositorio de Github</a>, el cual contiene todo lo necesario para levantar el sistema. En este paso lo descargamos en el servidor.</p>
+<p>Primero, instalamos Git en caso de que no se encuentre instalado en el servidor.</p>
+<div class="codehilite"><pre><span></span>sudo apt install git
+</pre></div>
+
+<p>Ahora clonamos el repositorio desde Github.</p>
+<div class="codehilite"><pre><span></span>git clone https://github.com/sergio-chumacero/aapsapi-docker.git
+</pre></div>
+
+<p>Esto creará una carpeta en el directorio actual de nombre <code>aapsapi-docker</code>. </p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>La dirección dentro del sistema de la carpeta con el código no es relevante para la instalación.</p>
+</div>
+<p>Ingresamos a la carpeta del código clonada.</p>
+<div class="codehilite"><pre><span></span>cd aapsapi-docker
+</pre></div>
+
+<h2 id="paso_3_configuracion_del_sistema">Paso 3: Configuración del Sistema<a class="headerlink" href="#paso_3_configuracion_del_sistema" title="Permanent link">&para;</a></h2>
+<p>Antes de correr el sistema, debemos decidir algunas variables de configuración que, por seguridad, no son incluídas en el código y por lo tanto deben ser editadas "manualmente". Para editar texto a través de la consola de comandos necesitaremos un editor de texto (Vim, Emacs, Nano, Micro, etc.). Dejamos la elección de un editor de texto a elección del funcionario, pero incluímos la instalación de <a href="">micro</a> como recomendación personal.</p>
+<details class="note"><summary>Instalar <code>micro</code> (click para abrir)</summary><p>Micro es un editor de texto en la consola de comandos. Podemos usarlo para editar los archivos de configuración del sistema. Para instalarlo, podemos usar un script que crea un ejecutable en la carpeta donde estemos.
+<div class="codehilite"><pre><span></span>curl https://getmic.ro | bash
+</pre></div>
+Para usarlo para abrir y editar un archivo (por ejemplo el archivo <code>ejemplo.txt</code> en la carpeta actual) basta con usar el ejecutable.
+<div class="codehilite"><pre><span></span>./micro ejemplo.txt
+</pre></div>
+Esto abrirá el archivo en modo edición. Para guardar cambios se puede usar <code>CTRL + S</code> y para salir del editor <code>CTRL + Q</code>.</p>
+</details>
+<p>Los archivos que modificaremos son <code>config.env</code> y  <code>docker-compose.yml</code>. </p>
+<ul>
+<li>
+<p><code>config.env</code>: Siguiendo las normas de diseño de la sección de <a href="/FASTAAPS/quality">calidad de código</a>, utilizamos variables de ambiente para configurar los servicios del sistema y las agrupamos en un solo archivo para facilitar su manejo. Este archivo define variables de ambiente que serán incluidas dentro de los contenedores docker y modificarán su comportamiento. Es importante que, con excepción de las líneas de comentario (las que inician con el símbolo <code>#</code>), las líneas en este archivo <strong>no pueden contener espacios</strong>.</p>
+</li>
+<li>
+<p><code>docker-compose.yml</code>: Este archivo define y configura los servicios docker, sus propiedades y los aspectos relacionados a la interconectividad de los contenedores Docker entre ellos y con los usuarios. Su uso es extenso y en caso de dudas, recomendamos recurrir a la <a href="https://docs.docker.com/compose/compose-file/">documentación oficial</a> de referencia. En este archivo también se incluye la configuración del router web <a href="https://containo.us/traefik/">Traefik</a> que dirije los pedidos de los clientes a los servicios adecuados del sistema.</p>
+</li>
+</ul>
+<h3 id="descripcion_de_las_variables_de_configuracion_del_archivo_configenv">Descripción de las Variables de Configuración del Archivo <code>config.env</code><a class="headerlink" href="#descripcion_de_las_variables_de_configuracion_del_archivo_configenv" title="Permanent link">&para;</a></h3>
+<p>El archivo <code>config.env</code> incluye comentarios indicando la funcionalidad de las variables de configuración, que deberían ser suficientemente intuitivas. Pero en caso de dudas, describimos las variables a continuación también. </p>
+<h4 id="configuracion_de_conexion_a_django">Configuración de Conexión a Django<a class="headerlink" href="#configuracion_de_conexion_a_django" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><code>DJANGO_SECRET_KEY</code> (<strong>LLave secreta de Django</strong>): Django utiliza métodos de encriptación que requieren de una cadena de caracteres aleatorios. Por motivos de seguridad no podemos incluir esta cadena en el repositorio, por lo que debe ser generada en el momento de la instalación. Esta llave <strong>no puede ser publicada</strong>, porque esto vulneraría las contraseñas encriptadas en la base de datos. Hay <a href="https://djecrety.ir/">páginas web</a> que generan cadenas válidas de manera automática.</p>
+<p>Ejemplo de cadena válida (<strong>no usar en producción</strong>): <code>gcynb!y-^2+40794mfyien8_fl*bkue6!^&amp;-v39959-w-&amp;v&amp;-x</code></p>
+</li>
+<li>
+<p><code>DJANGO_ALLOWED_HOSTS</code> (<strong>URLs permitidas</strong>): Por seguridad, es conveniente limitar las URLs desde las cuales se puede servir la aplicación. El valor de esta variable puede ser una lista sin espacios delimitada por comas. Por ejemplo: <code>200.185.45.65,aaps-lab.ml</code>. En última instancia o para hacer la prueba es posible permitir todas las URLs asignandole a esta variable el valor <code>*</code> (no recomendado en producción).</p>
+</li>
+</ul>
+<h4 id="configuracion_de_conexion_a_la_base_de_datos">Configuración de Conexión a la Base de Datos<a class="headerlink" href="#configuracion_de_conexion_a_la_base_de_datos" title="Permanent link">&para;</a></h4>
+<p>Estas variables son utilizadas por la aplicación Django para establecer una conexión con la base de datos Postgres que será usada en producción.</p>
+<ul>
+<li>
+<p><code>DJANGO_DB_HOST</code> (<strong>URL del servicio Postgres</strong>): URL que usará Django para conectarse con el servicio Postgres. Sólo modificar en caso de usar una base de datos externa. Valor por default: <code>django_postgres</code>. Con docker conectamos los contenedores en una red común y les asignamos dominios internos (hostnames) a cada servicio docker.</p>
+</li>
+<li>
+<p><code>DJANGO_DB_PORT</code> (<strong>Puerto del servicio Postgres (para Django)</strong>): Puerto que usará Django para conectarse con el servicio Postgres. Solo modificar en caso de no usar la base de datos estándar. Valor por default: <code>5432</code>. El servicio Docker de base de datos postgres está configurado para usar este puerto por default.</p>
+</li>
+<li>
+<p><code>DJANGO_DB_USER</code> (<strong>Nombre de usuario de Postgres (para Django)</strong>): El nombre de usuario que usará la aplicación Django para conectarse a la base de datos.</p>
+</li>
+<li>
+<p><code>DJANGO_DB_USER</code> (<strong>Contraseña de usuario de Postgres (para Django)</strong>): La contraseña que usará  la aplicación Django para conectarse a la base de datos.</p>
+</li>
+<li>
+<p><code>DJANGO_DB_NAME</code> (<strong>Nombre de la base de datos Postgres (para Django)</strong>): El nombre de la base de datos que usará Django para almacenar sus datos.</p>
+</li>
+<li>
+<p><code>DJANGO_CONN_MAX_AGE</code> (<strong>Tiempo de Conexión a la base de datos</strong>): Al establecer una conexión con la base de datos, esta será persistida por este tiempo con el fin de poder ser reutilizada. Valor en segundos. Admite decimales con punto. Valor por default: <code>60.0</code>.</p>
+</li>
+</ul>
+<h4 id="configuracion_de_usuario_inicial_postgresql">Configuración de usuario inicial PostgreSQL<a class="headerlink" href="#configuracion_de_usuario_inicial_postgresql" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><code>POSTGRES_USER</code> (<strong>Nombre del usuario inicial de Postgres.</strong>)</p>
+</li>
+<li>
+<p><code>POSTGRES_PASSWORD</code> (<strong>Contraseña del usuario inicial de Postgres.</strong>)</p>
+</li>
+</ul>
+<h4 id="configuracion_de_usuario_inicial_pgadmin">Configuración de usuario inicial PGAdmin<a class="headerlink" href="#configuracion_de_usuario_inicial_pgadmin" title="Permanent link">&para;</a></h4>
+<p>Para facilitar el manejo de la base de datos, se incluye el servicio de PGAdmin4. </p>
+<ul>
+<li>
+<p><code>PGADMIN_DEFAULT_EMAIL</code> (<strong>Mail de ingreso a PGAdmin</strong>)</p>
+</li>
+<li>
+<p><code>PGADMIN_DEFAULT_PASSWORD</code> (<strong>Contraseña de ingreso a PGAdmin</strong>)</p>
+</li>
+</ul>
+<h4 id="datos_de_acceso_para_los_usuarios">Datos de Acceso para los Usuarios<a class="headerlink" href="#datos_de_acceso_para_los_usuarios" title="Permanent link">&para;</a></h4>
+<p>Para facilitar el trabajo de instalación, se automatizó la creación de usuarios y permisos en el sistema. Los usuarios y permisos también pueden ser creados, modificados y eliminados desde la aplicación administrativa, cuando esta esté en funcionamiento. De manera automática se crean los siguientes usuarios:</p>
+<ol>
+<li><strong>Administrador</strong>: Tiene todos los permisos. Es usado para administrar a los otros usuarios. Puede acceder a la aplicación adminsitrativa.</li>
+<li><strong>Administrador DRA</strong>: Tiene todos los permisos sobre los datos de la dirección DRA-RH (SARH). Puede acceder a la aplicación adminsitrativa.</li>
+<li><strong>Administrador DER</strong>: Tiene todos los permisos sobre los datos de la dirección DER (Variables, Indicadores y POA). Puede acceder a la aplicación adminsitrativa.</li>
+<li><strong>Usuario DRA</strong>: Tiene permisos de sólo-lectura a los de la dirección DRA-RH. No puede acceder a la aplicación administrativa.</li>
+<li>
+<p><strong>Usuario DER</strong>: Tiene permisos de sólo-lectura a los de la dirección DER. No puede acceder a la aplicación administrativa.</p>
+</li>
+<li>
+<p><code>DJANGO_ADMIN_USER</code>, <code>DJANGO_ADMIN_DRA_USER</code>, <code>DJANGO_USUARIO_DRA_USER</code>, <code>DJANGO_ADMIN_DER_USER</code>, <code>DJANGO_USUARIO_DER_USER</code> (<strong>Nombres de los usuarios</strong>): Los nombres de los usuarios usados para el log-in.</p>
+</li>
+<li>
+<p><code>DJANGO_ADMIN_PASSWORD</code>, <code>DJANGO_ADMIN_DRA_PASSWORD</code>, <code>DJANGO_USUARIO_DRA_PASSWORD</code>, <code>DJANGO_ADMIN_DER_PASSWORD</code>, <code>DJANGO_USUARIO_DER_PASSWORD</code> (<strong>Contraseñas de los usuarios</strong>): Las contraseñas de los usuario para el log-in. Los usuarios pueden cambiar sus contraseñas desde la página administrativa.</p>
+</li>
+<li>
+<p><code>DJANGO_ADMIN_MAIL</code>, <code>DJANGO_ADMIN_DRA_MAIL</code>, <code>DJANGO_USUARIO_DRA_MAIL</code>, <code>DJANGO_ADMIN_DER_MAIL</code>, <code>DJANGO_USUARIO_DER_MAIL</code> (<strong>Mail de los usuarios</strong>): Emails de referencia. Los usuarios pueden cambiar sus direcciones de correo elecrónico desde la página administrativa.</p>
+</li>
+</ol>
+<h3 id="configuracion_del_archivo_docker-composeyml">Configuración del archivo <code>docker-compose.yml</code><a class="headerlink" href="#configuracion_del_archivo_docker-composeyml" title="Permanent link">&para;</a></h3>
+<p>La única configuración necesaria en este archivo es la de la URL y dominios del servidor. Estas se encuentran en el servicio <code>django</code> en la sección <code>labels</code>. En específico <code>Host(...)</code>. Las distintas URLs y dominiso pueden ser separados por comas.</p>
+<div class="codehilite"><pre><span></span><span class="n">services</span><span class="p">:</span>
+    <span class="o">...</span>
+    <span class="n">labels</span><span class="p">:</span>
+        <span class="o">-</span> <span class="s2">&quot;traefik.enable=true&quot;</span>
+<span class="hll">        <span class="o">-</span> <span class="s2">&quot;traefik.http.routers.django_router.rule=Host(`192.168.99.101`,`aasp-lab.ml`) &amp;&amp; PathPrefix(`/`)&quot;</span>
+</span>        <span class="o">-</span> <span class="s2">&quot;traefik.http.services.django_service.loadbalancer.server.port=8000&quot;</span>
+        <span class="o">-</span> <span class="s2">&quot;traefik.http.routers.django_router.entrypoints=web&quot;</span> 
+</pre></div>
+
+<h2 id="paso_4_iniciar_servicios_y_correr_scripts">Paso 4: Iniciar Servicios y Correr Scripts<a class="headerlink" href="#paso_4_iniciar_servicios_y_correr_scripts" title="Permanent link">&para;</a></h2>
+<p>Con la configuración lista, sólo hace falta levantar los servicios. Recordamos que todos los comandos del tipo <code>docker-compose</code> deben ser realizados en la carpeta base del código (la que contiene el archivo <code>docker-compose.yml</code>).</p>
+<div class="codehilite"><pre><span></span>sudo docker-compose up -d
+</pre></div>
+
+<p>La primera vez puede tardar un poco en levantar los servicios porque debe descargar y crear las imágenes de los contenedores.</p>
+<p>Una vez listo, corremos dos scripts que fueron incluídos en los contenedores de la base de datos y de Django respectivamente.</p>
+<p>El primero (<code>init_db.sh</code>) crea la tabla de la aplicación en la base de datos y le otorga los accesos necesarios al usuario.</p>
+<div class="codehilite"><pre><span></span>sudo docker exec -it django_postgres bash init_db.sh
+</pre></div>
+
+<p>El segundo (<code>init_django.sh</code>) crea y corre las migraciones de la base de datos, crea los usuarios  y alista los archivos estáticos.</p>
+<div class="codehilite"><pre><span></span>sudo docker exec -it django bash init_django.sh
+</pre></div>
+
+<h2 id="paso_5_reiniciar_los_contenedores">Paso 5: Reiniciar los Contenedores<a class="headerlink" href="#paso_5_reiniciar_los_contenedores" title="Permanent link">&para;</a></h2>
+<p>Finalmente sólo hace falta reiniciar los contenedores (también en el directorio base). </p>
+<div class="codehilite"><pre><span></span>sudo docker-compose restart 
+</pre></div>
+
+<p>Esto concluye la instalación. Ahora la aplicación administrativa y el servicio REST-API son accesibles desde la IP pública del servidor o dominios que redireccionen a esta IP. El panel de control de Postgres escucha en el puerto 5050.</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../quality/" title="Estándares de Calidad de Código" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                Estándares de Calidad de Código
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../AAPS-LAB/summary/" title="Resúmen" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Resúmen
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/sergio-chumacero" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://twitter.com/SergioChumacer1" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+            
+          
+          
+            <script src="../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

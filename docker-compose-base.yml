@@ -1,0 +1,195 @@
+###########################################################################
+# Título:      Servicios base (Bases de datos, routing y autenticación)
+# Ubicación:   FASTAAPS/docker-compose-base.yml
+# Descripción:
+#   Describe los servicios relacionados con bases de datos, routing y
+#   autenticación al igual que sus dependencias.
+# Orden de ejecución: 1 
+###########################################################################
+
+version: "3.7" # Requiere Docker Engine versión 18.06.0+
+
+networks: # Red base para la conexión interna entre servicios
+  default:
+    external:
+      name: aapsnetwork
+
+services: # Servicios de Base de Datos y Routing
+  traefik: # Traefik: Router periférico
+    container_name: traefik  # Nombre del contenedor
+    image: traefik:2.1.1     # Imágen base: Traefik V2, última oficial, versión fija, ligera (alpine por default)
+
+    environment: # Configuración estática para Traefik, copiadas de archivo .env 
+      TRAEFIK_LOG_LEVEL: ${TRAEFIK_LOG_LEVEL}
+      TRAEFIK_API: ${TRAEFIK_API}
+      TRAEFIK_API_DASHBOARD: ${TRAEFIK_API_DASHBOARD}
+      TRAEFIK_API_INSECURE: ${TRAEFIK_API_INSECURE}
+      TRAEFIK_ENTRYPOINTS_INSECURE: ${TRAEFIK_ENTRYPOINTS_INSECURE}
+      TRAEFIK_ENTRYPOINTS_INSECURE_ADDRESS: ${TRAEFIK_ENTRYPOINTS_INSECURE_ADDRESS}
+      TRAEFIK_ENTRYPOINTS_SECURE: ${TRAEFIK_ENTRYPOINTS_SECURE}
+      TRAEFIK_ENTRYPOINTS_SECURE_ADDRESS: ${TRAEFIK_ENTRYPOINTS_SECURE_ADDRESS}
+      TRAEFIK_PROVIDERS_DOCKER: ${TRAEFIK_PROVIDERS_DOCKER} 
+      TRAEFIK_PROVIDERS_DOCKER_ENDPOINT: ${TRAEFIK_PROVIDERS_DOCKER_ENDPOINT} 
+      TRAEFIK_PROVIDERS_DOCKER_EXPOSEDBYDEFAULT: ${TRAEFIK_PROVIDERS_DOCKER_EXPOSEDBYDEFAULT} 
+      TRAEFIK_PROVIDERS_DOCKER_NETWORK: ${TRAEFIK_PROVIDERS_DOCKER_NETWORK} 
+      TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT: ${TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT} 
+      TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_EMAIL: ${TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_EMAIL} 
+      TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_STORAGE: ${TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_STORAGE} 
+      TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_CASERVER: ${TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_CASERVER} 
+      TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_TLSCHALLENGE: ${TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_TLSCHALLENGE} 
+    
+    ports:      # Puertos expuestos al servidor (externos) 
+      - 80:80   # Default para HTTP
+      - 443:443 # Default para HTTPS
+    
+    expose:     # Puertos exuestos a otros contenedores (internos)
+      - 8080    # Default para el panel de control de Traefik
+    
+    labels:     # Configuración dinámica para Traefik (Servicio de panel de control para Traefik) 
+      - "traefik.enable=true"
+      - "traefik.http.services.traefik_dashboard.loadbalancer.server.port=8080"
+      # Redirección HTTP -> HTTPS
+      - "traefik.http.middlewares.https_redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.traefik_dashboard_insecure.entrypoints=insecure"
+      - "traefik.http.routers.traefik_dashboard_insecure.rule=Host(`traefik.${FASTAAPS_DOMAIN}`)"
+      - "traefik.http.routers.traefik_dashboard_insecure.middlewares=https_redirect@docker"
+      # Routing HTTPS -> Servicio (Panel de control de Traefik)
+      - "traefik.http.routers.traefik_dashboard_secure.entrypoints=secure"
+      - "traefik.http.routers.traefik_dashboard_secure.rule=Host(`traefik.${FASTAAPS_DOMAIN}`)"
+      - "traefik.http.routers.traefik_dashboard_secure.service=traefik_dashboard"
+      # Certificados TLS (permite HTTPS)
+      - "traefik.http.routers.traefik_dashboard_secure.tls=true"
+      - "traefik.http.routers.traefik_dashboard_secure.tls.certresolver=letsencrypt"
+      # Autenticación básica
+      - "traefik.http.middlewares.admin_auth.basicauth.users=test:$$apr1$$ByKqrowX$$/qXsDKD4fsy7gvojaxbrU." # codificado htpasswd 
+      - "traefik.http.routers.traefik_dashboard_secure.middlewares=admin_auth@docker"
+    
+    volumes: # Archivos y directorios compartidos (montados) entre huésped y contenedor
+      - /var/run/docker.sock:/var/run/docker.sock:ro # Socket Docker (permite a Traefik reconocer servicios)
+      - /var/acme.json:/acme.json                    # Certificados TLS
+      - /etc/localtime:/etc/localtime:ro             # Archivo de tiempo local
+
+  postgres: # PostgreSQL: Base de datos relacional
+    container_name: postgres
+    image: postgres:12.1-alpine # Imágen base: PG12, última oficial, versión fija, ligera
+    environment: # Configuración inicial para Postgres, copiadas de archivo .env
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_ROOT_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+      POSTGRES_DATABASES: ${POSTGRES_DATABASES}
+    expose:  # Puertos exuestos a otros contenedores (internos)
+      - 5432 # Default para PostgreSQL
+    volumes:
+      - /var/lib/postgresql/data:/var/lib/postgresql/data   # Datos persistentes
+      - /etc/localtime:/etc/localtime:ro                    # Archivo de tiempo local
+      - ./postgres-init-scripts:/docker-entrypoint-initdb.d # Scripts de inicialización
+    labels:
+      - "traefik.enable=false"
+  
+  pgadmin: # PgAdmin4: Panel de control de PostgreSQL
+    container_name: pgadmin
+    image: dpage/pgadmin4:4.16 # Imágen base: PGAdmin4.16, última oficial, versión fija
+    environment: # Configuración inicial para PGAdmin, copiadas de archivo .env
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    depends_on:
+        - postgres
+        - traefik
+    expose:  # Puertos exuestos a otros contenedores (internos)
+        - 80 # Default para PGAdmin
+    labels: # Configuración dinámica para Traefik (Servicio de panel de control PGAdmin)
+      - "traefik.enable=true"
+      - "traefik.http.services.pgadmin.loadbalancer.server.port=80"
+      # Redirección HTTP -> HTTPS
+      - "traefik.http.routers.pgadmin_insecure.entrypoints=insecure"
+      - "traefik.http.routers.pgadmin_insecure.rule=Host(`pgadmin.${FASTAAPS_DOMAIN}`)"
+      - "traefik.http.routers.pgadmin_insecure.middlewares=https_redirect@docker"
+      # Routing HTTPS -> Servicio (Panel de control de Traefik)
+      - "traefik.http.routers.pgadmin_secure.entrypoints=secure"
+      - "traefik.http.routers.pgadmin_secure.rule=Host(`pgadmin.${FASTAAPS_DOMAIN}`)"
+      - "traefik.http.routers.pgadmin_secure.service=pgadmin"
+      # Certificados TLS (permite HTTPS)
+      - "traefik.http.routers.pgadmin_dashboard_secure.tls=true"
+      - "traefik.http.routers.pgadmin_secure.tls.certresolver=letsencrypt"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro  # Archivo de tiempo local
+
+  pgbouncer: # PgBouncer:Gestor de conexiones de PostgreSQL
+    container_name: pgbouncer
+    image: edoburu/pgbouncer:1.11.0 # Imágen base: PGBouncer 1.11, última oficial, versión fija
+    environment: # Configuración inicial para PGBouncer, copiadas de archivo .env
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_HOST: postgres
+      DB_NAME: ${PGBOUNCER_DB_NAME}
+      LISTEN_PORT: ${PGBOUNCER_LISTEN_PORT}
+      DEFAULT_POOL_SIZE: ${PGBOUNCER_DEFAULT_POOL_SIZE}
+      MAX_DB_CONNECTIONS: ${PGBOUNCER_MAX_DB_CONNECTIONS}
+    depends_on:
+      - postgres
+    expose:    # Puertos exuestos a otros contenedores (internos)
+      - 6432 # Default para PGBouncer
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # Archivo de tiempo local
+
+  
+  redis: # Redis: Agente de mensajería
+    container_name: redis
+    image: redis:5.0.7 # Imágen base: Redis 5, última oficial, versión fija
+    command: redis-server --requirepass guest
+    expose:    # Puertos exuestos a otros contenedores (internos)
+      - 6379 # Default para Redis
+
+  mongo: # MongoDB: Base de datos orientada a documentos
+    container_name: mongo
+    image: mongo:4.0.13 # Imágen base: MongoDB 4, última oficial, versión fija
+    environment: # Configuración inicial para MongoDB, copiadas de archivo .env
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    expose:     # Puertos exuestos a otros contenedores (internos)
+      - 27017 # Default para MongoDB
+    ports:
+      - 27017:27017
+    volumes:
+      - /data/db:/data/db                # Datos persistentes
+      - /etc/localtime:/etc/localtime:ro # Archivo de tiempo local
+  
+  keycloak: # Keycloak: Proveedor de identidad y control de acceso
+    container_name: keycloak
+    image: jboss/keycloak:8.0.1 # Imágen base: Keycloak 8, última oficial, versión fija
+    depends_on: 
+      - traefik
+      - postgres
+    environment: # Configuración inicial para Keycloak, copiadas de archivo .env
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: ${KEYCLOAK_DB_DATABASE}
+      DB_PORT: "5432"
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_SCHEMA: public
+      PROXY_ADDRESS_FORWARDING: "true"
+      KEYCLOAK_LOGLEVEL: INFO
+      KEYCLOAK_USER: ${KEYCLOAK_USER}
+      KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+      KEYCLOAK_IMPORT: /tmp/AAPS-realm.json
+    expose:    # Puertos exuestos a otros contenedores (internos)
+      - 8080 # Default para el panel de control de Keycloak
+    labels:    # Configuración dinámica para Traefik (Servicio de panel de control para Keycloak) 
+      - "traefik.enable=true"
+      - "traefik.http.services.keycloak_dashboard.loadbalancer.server.port=8080"
+      # Redirección HTTP -> HTTPS
+      - "traefik.http.routers.keycloak_dashboard_insecure.entrypoints=insecure"
+      - "traefik.http.routers.keycloak_dashboard_insecure.rule=Host(`keycloak.${FASTAAPS_DOMAIN}`)"
+      - "traefik.http.routers.keycloak_dashboard_insecure.middlewares=https_redirect@docker"
+      # Routing HTTPS -> Servicio (Panel de control de Traefik)
+      - "traefik.http.routers.keycloak_dashboard_secure.entrypoints=secure"
+      - "traefik.http.routers.keycloak_dashboard_secure.rule=Host(`keycloak.${FASTAAPS_DOMAIN}`)"
+      - "traefik.http.routers.keycloak_dashboard_secure.service=keycloak_dashboard"
+      # Certificados TLS (permite HTTPS)
+      - "traefik.http.routers.keycloak_dashboard_secure.tls=true"
+      - "traefik.http.routers.keycloak_dashboard_secure.tls.certresolver=letsencrypt"
+    command: ["-b", "0.0.0.0", "-Dkeycloak.profile.feature.docker=enabled"]
+    volumes:
+      - ./AAPS-realm.json:/tmp/AAPS-realm.json:ro # Definición de roles y clientes
+      - /etc/localtime:/etc/localtime:ro          # Archivo de tiempo local

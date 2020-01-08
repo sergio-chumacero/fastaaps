@@ -1,0 +1,150 @@
+###########################################################################
+# Título:      Servicios de sincronización y acceso a los datos del sistema
+# Ubicación:   FASTAAPS/docker-compose-api.yml
+# Descripción:
+#   Describe los servicios relacionados con la sincronización 
+#   y acceso de datos, al igual que sus dependencias.
+# Dependencias: docker-compose-base.yml
+###########################################################################
+
+version: "3.7" # Requiere Docker Engine versión 18.06.0+
+
+networks: # Red base para la conexión interna entre servicios
+  default:
+    external:
+      name: aapsnetwork
+
+volumes: # Directorio de planillas compartido
+  sheets:
+    external: true
+
+services: # Servicios de sincronización de bases de datos y REST-API
+  celery: # Celery: Servicio de tareas asincrónicas
+    container_name: celery
+    image: &img celery # Imágen base a medida
+    build: &build
+      context: ./DATA
+      dockerfile: Dockerfile 
+    environment: &env # Configuración inicial para los procesos trabajadores de Celery, copiada del archivo .env   
+      CELERY_BROKER_URL: redis://:guest@redis:6379 
+      CELERY_WORKER_CONCURRENCY: "7"
+      CELERY_CELERYD_CONCURRENCY: "7"
+      # CELERY_RESULT_BACKEND: mongodb://guest:guest@mongo:27017
+      CELERY_PERIOD_LENGTH: "80.0"
+      CELERY_TASK_ARG: sync
+      REST_HOST: fastapi
+      REST_PORT: "80"
+      BROKER_CONNECTION_TIMEOUT: "20.0"
+      PGDB_HOST: pgbouncer
+      PGDB_PORT: ${PGBOUNCER_LISTEN_PORT}
+      PGDB_USER: ${POSTGRES_USER}
+      PGDB_PASS: ${POSTGRES_PASSWORD}
+      PGDB_NAME: ${PGBOUNCER_DB_NAME}
+    command: celery worker --app=app.main --pool=solo --concurrency=8 --loglevel=INFO 
+    depends_on:
+      - fastapi
+    volumes:
+      - ./DATA/app:/app:ro     # Código fuente de las tareas
+      - sheets:/sheets         # Planillas de datos compartidas
+      - /etc/localtime:/etc/localtime:ro # Archivo de tiempo local
+
+  beat: # Celery-Beat: Servicio de tareas periódicas
+    container_name: beat
+    image: *img
+    build: *build
+    environment: *env
+    command: celery beat --app=app.main --loglevel INFO --pidfile=
+    depends_on:
+        - celery
+    volumes:
+      - ./DATA/app:/app:ro     # Código fuente de las tareas
+      - /etc/localtime:/etc/localtime:ro # Archivo de tiempo local
+
+  flower: # Flower: Panel de control para Celery
+    container_name: flower
+    image: *img
+    build: *build
+    environment: *env
+    command: celery flower --app app.main
+    depends_on:
+      - celery
+      - beat
+    expose:  # Puertos exuestos a otros contenedores (internos)
+      - 5555 # Default para FastApi
+    labels:  # Configuración dinámica para Traefik (Panel de control para Celery) 
+      - "traefik.enable=true"
+      - "traefik.http.services.flower.loadbalancer.server.port=5555"
+      # Redirección HTTP -> HTTPS
+      - "traefik.http.routers.flower_insecure.entrypoints=insecure"
+      - "traefik.http.routers.flower_insecure.rule=Host(`flower.${FASTAAPS_DOMAIN}`)"
+      - "traefik.http.routers.flower_insecure.middlewares=https_redirect@docker"
+      # Routing HTTPS -> Servicio (REST-API)
+      - "traefik.http.routers.flower_secure.entrypoints=secure"
+      - "traefik.http.routers.flower_secure.rule=Host(`flower.${FASTAAPS_DOMAIN}`)"
+      - "traefik.http.routers.flower_secure.service=flower"
+      # Certificados TLS (permite HTTPS)
+      - "traefik.http.routers.flower_secure.tls=true"
+      - "traefik.http.routers.flower_secure.tls.certresolver=letsencrypt"
+    volumes:
+      - ./DATA/app:/app:ro     # Código fuente de las tareas
+      - /etc/localtime:/etc/localtime:ro # Archivo de tiempo local
+  
+  fastapi_gatekeeper: # Keycloak Gatekeer: Proxy de autenticación/autorización al servicio FastAPI
+    container_name: fastapi_gatekeeper
+    image: keycloak/keycloak-gatekeeper:7.0.0 # Imágen base: KC-Gatekeerper 7, última oficial, versión fija
+    external_links:   
+      - traefik:keycloak.${FASTAAPS_DOMAIN}
+    expose:  # Puertos exuestos a otros contenedores (internos)
+      - 3000 # Configurado en parámetros
+    labels: # Configuración dinámica para Traefik (Servicio REST-API)
+      - "traefik.enable=true"
+      - "traefik.http.services.fastapi.loadbalancer.server.port=3000"
+      # Redirect HTTP -> HTTPS
+      - "traefik.http.routers.fastapi_insecure.entrypoints=insecure"
+      - "traefik.http.routers.fastapi_insecure.rule=Host(`${FASTAAPS_DOMAIN}`)"
+      - "traefik.http.routers.fastapi_insecure.middlewares=https_redirect@docker"
+      # Routing HTTPS -> Service
+      - "traefik.http.routers.fastapi_secure.entrypoints=secure"
+      - "traefik.http.routers.fastapi_secure.rule=Host(`${FASTAAPS_DOMAIN}`)"
+      - "traefik.http.routers.fastapi_secure.service=fastapi"
+      # TLS Certificates (enable HTTPS)
+      - "traefik.http.routers.fastapi_secure.tls=true"
+      - "traefik.http.routers.fastapi_secure.tls.certresolver=letsencrypt"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    entrypoint: # Configuración para Keycloak Gatekeeper
+      - /opt/keycloak-gatekeeper
+      - --discovery-url=https://keycloak.${FASTAAPS_DOMAIN}/auth/realms/AAPS
+      - --skip-openid-provider-tls-verify=true
+      - --client-id=fastapi
+      - --client-secret=${FASTAAPS_FASTAPI_CLIENT_SECRET}
+      - --listen=:3000
+      - --redirection-url=https://${FASTAAPS_DOMAIN}
+      - --encryption-key=${FASTAAPS_ENCRYPTION_KEY}
+      - --upstream-url=http://${FASTAAPS_DOMAIN}/
+      - --resources=uri=/*|methods=GET
+      # - --resources=uri=/voila/render/restore_geo.ipynb|methods=GET|roles=registro:restore_geo
+
+  fastapi: # FastAPI: Serivicio REST-API
+    container_name: fastapi
+    networks: 
+      default:
+        aliases: 
+          - ${FASTAAPS_DOMAIN} 
+    image: fastapi # Imágen base a medida
+    build:
+      context: ./API
+      dockerfile: Dockerfile
+    environment: # Configuración inicial para el servicio REST-API, copiada del archivo .env
+      MONGO_DB_HOST: ${MONGO_DB_HOST}
+      MONGO_DB_PORT: ${MONGO_DB_PORT}
+      MONGO_DB_USER: ${MONGO_DB_USER}
+      MONGO_DB_PASS: ${MONGO_DB_PASS}
+      FASTAAPS_DOMAIN: ${FASTAAPS_DOMAIN}
+    expose: # Puertos exuestos a otros contenedores (internos)
+      - 80  # Default para FastApi
+    labels: # Configuración dinámica para Traefik (Servicio REST-API) 
+      - "traefik.enable=false"
+    volumes:
+      - ./API/app:/app:ro       # Código fuente del servicio
+      - sheets:/app/sheets:ro   # Planillas de datos compartidas

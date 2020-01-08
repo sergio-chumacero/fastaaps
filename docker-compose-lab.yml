@@ -1,0 +1,77 @@
+###########################################################################
+# Título:      Servicios de aplicaciones web
+# Ubicación:   FASTAAPS/docker-compose-lab.yml
+# Descripción:
+#   Describe los servicios relacionados con las aplicaciones interactivas web.
+# Dependencias:
+#   - docker-compose-data.yml 
+#   - docker-compose-auth.yml
+###########################################################################
+
+version: "3.7" # Requiere Docker Engine versión 18.06.0+
+
+networks: # Red base para la conexión interna entre servicios
+  default:
+    external:
+      name: aapsnetwork
+
+volumes: # Directorio de planillas compartido
+  sheets:
+    external: true
+
+services: # Servicios de aplicaciones web
+  voila_gatekeeper: # Keycloak Gatekeeper: KC Adapter/Proxy
+    container_name: voila_gatekeeper
+    image: keycloak/keycloak-gatekeeper:7.0.0 # Imágen base: KC-Gatekeerper 7, última oficial, versión fija
+    external_links:
+      - traefik:keycloak.${FASTAAPS_DOMAIN}
+    expose:  # Puertos exuestos a otros contenedores (internos)
+      - 3000 # Configurado en parámetros
+    labels:  # Configuración dinámica para Traefik (Servicio REST-API)
+      - "traefik.enable=true"
+      - "traefik.http.services.voila.loadbalancer.server.port=3000"
+      # Redirect HTTP -> HTTPS
+      - "traefik.http.routers.voila_insecure.entrypoints=insecure"
+      - "traefik.http.routers.voila_insecure.rule=Host(`lab.${FASTAAPS_DOMAIN}`)"
+      - "traefik.http.routers.voila_insecure.middlewares=https_redirect@docker"
+      # Routing HTTPS -> Service
+      - "traefik.http.routers.voila_secure.entrypoints=secure"
+      - "traefik.http.routers.voila_secure.rule=Host(`lab.${FASTAAPS_DOMAIN}`)"
+      - "traefik.http.routers.voila_secure.service=voila"
+      # TLS Certificates (enable HTTPS)
+      - "traefik.http.routers.voila_secure.tls=true"
+      - "traefik.http.routers.voila_secure.tls.certresolver=letsencrypt"
+    entrypoint:
+      - /opt/keycloak-gatekeeper
+      - --discovery-url=https://keycloak.${FASTAAPS_DOMAIN}/auth/realms/AAPS
+      - --skip-openid-provider-tls-verify=true
+      - --client-id=voila
+      - --client-secret=${FASTAAPS_VOILA_CLIENT_SECRET}
+      - --listen=:3000
+      - --redirection-url=https://lab.${FASTAAPS_DOMAIN}
+      - --encryption-key=${FASTAAPS_ENCRYPTION_KEY}
+      - --upstream-url=http://lab.${FASTAAPS_DOMAIN}/
+      - --resources=uri=/*|methods=GET
+      - --resources=uri=/voila/render/restore_geo.ipynb|methods=GET|roles=registro:restore_geo
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+  
+  voila: # Voila: Aplicación interactiva
+    container_name: voila
+    networks: 
+      default:
+        aliases: 
+          - lab.${FASTAAPS_DOMAIN} 
+    image: voila # Imágen base a medida
+    build:
+      context: ./LAB
+      dockerfile: Dockerfile
+    command: voila --no-browser --port=80 apps
+    expose:  # Puertos exuestos a otros contenedores (internos)
+      - 80 
+    labels:
+      - "traefik.enable=false"
+    volumes:
+      - ./LAB//apps:/apps                # Aplicaciones Jupyter
+      - sheets:/apps/datasets            # Planillas de datos compartidas
+      - /etc/localtime:/etc/localtime:ro # Archivo de tiempo local

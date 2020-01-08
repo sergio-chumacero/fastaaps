@@ -1,0 +1,1090 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Descripción de lso estándares de calidad de código utilizados para el código fuente del sistema FASTAAPS.">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es, en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/blur_circular.svg">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Estándares de Calidad de Código</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#00bcd4">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="cyan" data-md-color-accent="cyan">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#estandares_de_calidad_de_codigo" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Fast AAPS - Documentación" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">blur_circular</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Fast AAPS - Documentación
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Estándares de Calidad de Código
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/sergio-chumacero/fastaaps/" title="Ir al repositorio" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    sergio-chumacero/fastaaps
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+          
+
+
+  
+
+<div class="md-hero md-hero--expand" data-md-component="hero">
+  <div class="md-hero__inner md-grid">
+    FASTAAPS - Cálidad de Código
+  </div>
+</div>
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Fast AAPS - Documentación" class="md-nav__button md-logo">
+      
+        <i class="md-icon">blur_circular</i>
+      
+    </a>
+    Fast AAPS - Documentación
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/sergio-chumacero/fastaaps/" title="Ir al repositorio" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    sergio-chumacero/fastaaps
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      FASTAAPS: Información General
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        FASTAAPS: Información General
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../upgrades/" title="Mejoras del Sistema" class="md-nav__link">
+      Mejoras del Sistema
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../docker/" title="(Docker) Contenerización de Servicios" class="md-nav__link">
+      (Docker) Contenerización de Servicios
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Estándares de Calidad de Código
+      </label>
+    
+    <a href="./" title="Estándares de Calidad de Código" class="md-nav__link md-nav__link--active">
+      Estándares de Calidad de Código
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#factor_1_un_solo_repositorio_de_codigo_fuente_versionado" class="md-nav__link">
+    Factor 1: Un solo Repositorio de Código Fuente Versionado
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_2_aislamiento_y_declaracion_explicita_de_dependencias" class="md-nav__link">
+    Factor 2: Aislamiento y Declaración Explícita de Dependencias
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_3_configuracion_guardada_en_variables_de_ambiente" class="md-nav__link">
+    Factor 3: Configuración Guardada en Variables de Ambiente
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_4_servicios_de_apoyo_como_recursos_adjuntos" class="md-nav__link">
+    Factor 4: Servicios de Apoyo como Recursos Adjuntos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_5_separacion_entre_construccion_y_ejecucion" class="md-nav__link">
+    Factor 5: Separación entre Construcción y Ejecución
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_6_procesos_independientes_y_libres_de_estado" class="md-nav__link">
+    Factor 6: Procesos Independientes y Libres de Estado
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_7_exportacion_de_servicios_via_enlaces_de_puertos" class="md-nav__link">
+    Factor 7: Exportación de Servicios vía Enlaces de Puertos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_8_procesos_como_modelo_de_concurrencia" class="md-nav__link">
+    Factor 8: Procesos como Modelo de Concurrencia
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_9_facilidad_y_rapidez_de_puesta_en_marcha_y_cierre" class="md-nav__link">
+    Factor 9: Facilidad y Rapidez de Puesta en Marcha y Cierre
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_10_entornos_de_trabajo_similares" class="md-nav__link">
+    Factor 10: Entornos de Trabajo Similares
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_11_archivos_de_registro_como_un_flujo_de_eventos" class="md-nav__link">
+    Factor 11: Archivos de Registro como un Flujo de Eventos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_12_tareas_administrativas_como_procesos_de_vida_corta_incluidos_en_la_distribucion_de_codigo" class="md-nav__link">
+    Factor 12: Tareas Administrativas como Procesos de Vida Corta Incluídos en la Distribución de Código
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deployment/" title="Instalación del Sistema en Servidores" class="md-nav__link">
+      Instalación del Sistema en Servidores
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      AAPS-LAB: Aplicaciones Interactivas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        AAPS-LAB: Aplicaciones Interactivas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-LAB/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      AAPS-API: Servicio de Datos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        AAPS-API: Servicio de Datos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-API/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-API/general/" title="Servicios de Datos - Conceptos y Tecnologías" class="md-nav__link">
+      Servicios de Datos - Conceptos y Tecnologías
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-API/specifications/" title="Especificación del Servicio de Datos" class="md-nav__link">
+      Especificación del Servicio de Datos
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      AAPS-AUTH: Seguridad
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        AAPS-AUTH: Seguridad
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-AUTH/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-AUTH/specifications/" title="Especificaciones de Seguridad" class="md-nav__link">
+      Especificaciones de Seguridad
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      AAPS-DATA: Sincronización y Almacenamiento de Datos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        AAPS-DATA: Sincronización y Almacenamiento de Datos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/summary/" title="Resúmen" class="md-nav__link">
+      Resúmen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/specifications/" title="Estándares y Especificaciones" class="md-nav__link">
+      Estándares y Especificaciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/dataset/" title="Conjuntos de Datos" class="md-nav__link">
+      Conjuntos de Datos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/sync/" title="Servicio de Sincronización" class="md-nav__link">
+      Servicio de Sincronización
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../AAPS-DATA/db/" title="Base de Datos Especializada" class="md-nav__link">
+      Base de Datos Especializada
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#factor_1_un_solo_repositorio_de_codigo_fuente_versionado" class="md-nav__link">
+    Factor 1: Un solo Repositorio de Código Fuente Versionado
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_2_aislamiento_y_declaracion_explicita_de_dependencias" class="md-nav__link">
+    Factor 2: Aislamiento y Declaración Explícita de Dependencias
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_3_configuracion_guardada_en_variables_de_ambiente" class="md-nav__link">
+    Factor 3: Configuración Guardada en Variables de Ambiente
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_4_servicios_de_apoyo_como_recursos_adjuntos" class="md-nav__link">
+    Factor 4: Servicios de Apoyo como Recursos Adjuntos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_5_separacion_entre_construccion_y_ejecucion" class="md-nav__link">
+    Factor 5: Separación entre Construcción y Ejecución
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_6_procesos_independientes_y_libres_de_estado" class="md-nav__link">
+    Factor 6: Procesos Independientes y Libres de Estado
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_7_exportacion_de_servicios_via_enlaces_de_puertos" class="md-nav__link">
+    Factor 7: Exportación de Servicios vía Enlaces de Puertos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_8_procesos_como_modelo_de_concurrencia" class="md-nav__link">
+    Factor 8: Procesos como Modelo de Concurrencia
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_9_facilidad_y_rapidez_de_puesta_en_marcha_y_cierre" class="md-nav__link">
+    Factor 9: Facilidad y Rapidez de Puesta en Marcha y Cierre
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_10_entornos_de_trabajo_similares" class="md-nav__link">
+    Factor 10: Entornos de Trabajo Similares
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_11_archivos_de_registro_como_un_flujo_de_eventos" class="md-nav__link">
+    Factor 11: Archivos de Registro como un Flujo de Eventos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factor_12_tareas_administrativas_como_procesos_de_vida_corta_incluidos_en_la_distribucion_de_codigo" class="md-nav__link">
+    Factor 12: Tareas Administrativas como Procesos de Vida Corta Incluídos en la Distribución de Código
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sergio-chumacero/fastaaps/edit/master/docs/FASTAAPS/quality.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="estandares_de_calidad_de_codigo">Estándares de Calidad de Código<a class="headerlink" href="#estandares_de_calidad_de_codigo" title="Permanent link">&para;</a></h1>
+<div class="admonition quote">
+<p class="admonition-title">Calidad</p>
+<p>"Calidad significa hacer las cosas bien, aún cuando nadie esté mirando." </p>
+<p>.- Henry Ford </p>
+</div>
+<p>El sistema FASTAAPS tiene una arquitectura orientada a servicios y se adhiere a los <a href="https://12factor.net/">12 factores de aplicaciones como servicio</a>. Estos factores son principios de diseño que buscan las siguientes propiedades deseables para un sistema:</p>
+<ul>
+<li>Minimización de costos y esfuerzos para administradores y nuevos desarrolladores.</li>
+<li>Máxima <strong>portabilidad</strong> entre ambientes de trabajo.</li>
+<li>Adecuado para el uso de tecnologías cloud.</li>
+<li>Adecuado para los paradigmas de <strong>integración contínua</strong> y <strong>desarrollo ágil</strong>.</li>
+<li>Es fácilmente <strong>escalable</strong> sin necesitar cambios drásticos de estructura. </li>
+</ul>
+<p>A continuación describimos brevemente los factores, las ventajas de seguir estas guías de diseño y cómo se tomaron en consideración los factores durante el desarrollo e implementación del sistema FASTAAPS.</p>
+<h2 id="factor_1_un_solo_repositorio_de_codigo_fuente_versionado">Factor 1: Un solo Repositorio de Código Fuente Versionado<a class="headerlink" href="#factor_1_un_solo_repositorio_de_codigo_fuente_versionado" title="Permanent link">&para;</a></h2>
+<p>La aplicación utiliza un sistema de control de versión como Git o Mercurial y todo el código fuente de la aplicación es almacenado en un solo repositorio.</p>
+<p>Ventajas de usar un sistema de control de verión:</p>
+<ul>
+<li><strong>Colaboración</strong>: Permite añadir contribuciones de múltiples desarrolladores.</li>
+<li><strong>Versatilidad</strong>: Permite mantener distintas versiones del código para distintas entornos de trabajo (desarrollo, prueba, producción). </li>
+<li><strong>Accesibilidad</strong>: Hace al código fuente más accesible al equipo. La accesibilidad del código es fundamental para ser considerado <em>código abierto</em>.</li>
+<li><strong>Automatización</strong>: Las plataformas de maenjo de código modernas como Github además se integran bien con herramientas de integración contínua.</li>
+</ul>
+<p>Ventajas de usar un repositorio único:</p>
+<ul>
+<li><strong>Facilidad de Uso</strong> y Reuso del código fuente. </li>
+<li><strong>Simplicidad</strong> de la estructura del proyecto. </li>
+</ul>
+<p>Todo el código del sistema FASTAAPS es almacenado en un respositorio de Github:</p>
+<p><a href="https://github.com/sergio-chumacero/fastaaps/">https://github.com/sergio-chumacero/fastaaps/</a></p>
+<p>La estructura del código es detallada en la sección <a href="FASTAAPS/codebase">estructura del código fuente</a>.</p>
+<h2 id="factor_2_aislamiento_y_declaracion_explicita_de_dependencias">Factor 2: Aislamiento y Declaración Explícita de Dependencias<a class="headerlink" href="#factor_2_aislamiento_y_declaracion_explicita_de_dependencias" title="Permanent link">&para;</a></h2>
+<p>La aplicación declara las dependencias de sus componentes de manera explícita y aislada.</p>
+<p>Ventajas del aislamiento de dependencias:</p>
+<ul>
+<li>
+<p><strong>Bajo índice de acoplamiento</strong> entre componentes: Al tener sus dependencias aisladas, los componentes no interfieren de manera negativa unos con otros.</p>
+</li>
+<li>
+<p><strong>Especialización</strong> de los componentes: Como consecuencia del bajo índice de acoplamiento, cada componente puede usar tecnologías especializadas para sus funciones, a diferencia de usar una herramienta general no optimizada para todas sus funciones. </p>
+</li>
+</ul>
+<p>Ventajas de la declaración explícita de dependencias:</p>
+<ul>
+<li>
+<p><strong>Consistencia</strong>: Al no depender de dependencias implícitas, los servicios garantizan sus funcionamientos en diversos entornos de trabajo sin correr el riesgo de que una de sus dependencias no sea cumplida. </p>
+</li>
+<li>
+<p><strong>Documentación</strong>: Además de ser usados para la construcción de los componentes, los archivos de declaración de dependencias sirven de documentación confiable.</p>
+</li>
+<li>
+<p><strong>Replicabilidad</strong>: Con las dependencias explícitamente declaradas, un desarrollador puede replicar fácilmente el ambiente de desarrollo de la aplicación. </p>
+</li>
+</ul>
+<p>El uso de contenedores Docker en la implementación de los servicios del sistema garantiza el aislamiento de dependencias en el sistema FASTAAPS.</p>
+<p>Los documentos que definen de manera explícita las dependencias de cada servicio son los archivos Docker utilizados para la construcción de las imágenes base. Otros documentos usados con este fin son los documentos de dependencias de Python <code>requirements.txt</code> usados por el gestor de paquetes <code>pip</code>.</p>
+<p>Los métodos de contenerización son descritos en detalle en la sección de <a href="FASTAAPS/docker">contenerización</a>. </p>
+<h2 id="factor_3_configuracion_guardada_en_variables_de_ambiente">Factor 3: Configuración Guardada en Variables de Ambiente<a class="headerlink" href="#factor_3_configuracion_guardada_en_variables_de_ambiente" title="Permanent link">&para;</a></h2>
+<p>La configuración de la aplicación es guardada en variables de ambiente y no en el código fuente.</p>
+<p>La configuración de una aplicación es todo aquello que vaya a cambiar entre distintos entornos de trabajo. Ejemplos de configuración son credenciales, detalles de acceso a servicios externos (como bases de datos), direcciones IP y URLs entre otras.</p>
+<p>Ventajas:</p>
+<ul>
+<li>
+<p><strong>Consistencia</strong> del código fuente: Al separar estríctamente la configuración del código fuente, el código fuente requiere de menos modificaciones para funcionar en distintos entornos de trabajo.</p>
+</li>
+<li>
+<p><strong>Colaboración</strong>: Al no guardar credenciales en el código este puede ser publicado sin comprometer la seguridad del sistema. Esta propiedad es fundamental para poder publicar el código fuente como <em>código abierto</em>.</p>
+</li>
+<li>
+<p><strong>Facilidad de uso</strong>: Las variables de ambiente pueden ser modificadas con facilidad. Un administrador o desarrollador externo que deba cambiar la configuración de la aplciación no debería tener que modificar el código fuente.</p>
+</li>
+</ul>
+<p>En el sistema FASTAAPS la configuración usada por los componentes es guardada en variables de ambiente en los contenedores Docker. Para facilitar la modificación de estas variables de configuración, las variables son agrupadas en archivos del tipo <code>.env</code>.</p>
+<h2 id="factor_4_servicios_de_apoyo_como_recursos_adjuntos">Factor 4: Servicios de Apoyo como Recursos Adjuntos<a class="headerlink" href="#factor_4_servicios_de_apoyo_como_recursos_adjuntos" title="Permanent link">&para;</a></h2>
+<p>La aplicación no hace distinción entre servicios de apoyo externos e internos</p>
+<p>Un servicio de apoyo es cualquier servicio que la aplicación requira para su funcionamiento normal, por ejemplo bases de datos, agentes de mensajería o servicios de mail. Los servicios de apoyo pueden ser externos (por ejemplo servicios cloud)  o internos, es decir manejados por el mismo sistema (por ejemplo la base de datos del sistema).</p>
+<p>Ventajas:</p>
+<ul>
+<li>
+<p><strong>Facilidad de uso</strong>: Al no diferenciar entre servicios externos e internos, se elimina la complejidad de identificar ambos grupos y verificar su funcionamiento.</p>
+</li>
+<li>
+<p><strong>Flexibilidad</strong>: Al no especificar los detalles de los servicios en el código de la aplicación es posible intercambiar y extender los servicios de apoyo con mayor flexibilidad.</p>
+</li>
+</ul>
+<p>Los recursos de apoyo del sistema FASTAAPS son por ejemplo el agente de mesarjería RabbitMQ utilizado por el <a href="/AAPS-DATA/sync">servicio de sincronización</a> o la base de datos MongoDB de la <a href="/AAPS-DATA/db">base de datos especializada</a>. El código de los componentes que hacen uso de estos servicios sólo requieren de credenciales y detalles de conexíon.</p>
+<h2 id="factor_5_separacion_entre_construccion_y_ejecucion">Factor 5: Separación entre Construcción y Ejecución<a class="headerlink" href="#factor_5_separacion_entre_construccion_y_ejecucion" title="Permanent link">&para;</a></h2>
+<p>Los procesos de construcción y ejecución de la aplición están fuertemente separados.</p>
+<p>El proceso de construcción de la aplicación consiste en transformar el código fuente y la configuración de la aplicación en un archivo ejecutable, mientras que el proceso de ejecución consiste en correr este archivo en el ambiente de producción.</p>
+<p>Ventajas:</p>
+<ul>
+<li>
+<p><strong>Consistencia</strong>: Al separar estos dos procesos, la modificación del código fuente no afecta la ejecución de la aplicación y la aplicación no es capaz de modificar el código fuente.</p>
+</li>
+<li>
+<p><strong>Seguridad</strong>: Si el código se encuentra con control de veriones, es posible volver, en caso de emergencia a una versión previa de la aplicación recreando el archivo ejecutable de una versión anterior.</p>
+</li>
+<li>
+<p><strong>Colaboración</strong>: La seguridad del punto anterior facilita la colaboración de múltiples desarrolladores.</p>
+</li>
+</ul>
+<p>Los contenedores Docker usados por el sistema FASTAAPS son versiones ejecutables creadas en base a imágenes base que incluye el código fuente de la aplicación.</p>
+<p>Los métodos de contenerización son descritos en detalle en la sección de <a href="FASTAAPS/docker">contenerización</a>.</p>
+<h2 id="factor_6_procesos_independientes_y_libres_de_estado">Factor 6: Procesos Independientes y Libres de Estado<a class="headerlink" href="#factor_6_procesos_independientes_y_libres_de_estado" title="Permanent link">&para;</a></h2>
+<p>La aplicación es ejecutada como uno o más procesos libres de estado (stateless) que no comparten recursos entre ellos.</p>
+<p>Un proceso libre de estado es aquel cuya funcionalidad no depende del estado interno en el que se encuentre en un momento específico. Esto garantiza que el proceso funcionará de igual manera en cualquier momento.</p>
+<p>Ventajas:</p>
+<ul>
+<li>
+<p><strong>Consistencia</strong>: Al garantizar que la lógica de la aplicación no dependa de lo que esta hizo previamente, podemos garantizar la consistencia de la aplicación en el tiempo.</p>
+</li>
+<li>
+<p><strong>Bajo índice de acoplamiento</strong>: Ya que los procesos de la aplicación no comparten recursos entre ellos, se eliminan dependencias innecesarias.</p>
+</li>
+<li>
+<p><strong>Escalabilidad</strong> horizontal: Con múltiples instancias de la aplicación corriendo en paralelo, si estos mantuvieran estado de manera interna, sería muy complicado orquestrar la interacción entre ellos.</p>
+</li>
+</ul>
+<p>Los procesos del sistema FASTAAPS no guardan datos de sesiones o memoria de transacciones, todo el estado persistente es relegado a servicios de apoyo como bases de datos o agentes de mensajería.</p>
+<p>La interacción entre los procesos del sistema es realizada a través de protocolos de comunicación definidos de manera explícita y ofrecidos como servicio, por ejemplo el servicio de sincronización utiliza el servicio REST-API para ingresar datos al sistema. </p>
+<h2 id="factor_7_exportacion_de_servicios_via_enlaces_de_puertos">Factor 7: Exportación de Servicios vía Enlaces de Puertos<a class="headerlink" href="#factor_7_exportacion_de_servicios_via_enlaces_de_puertos" title="Permanent link">&para;</a></h2>
+<p>La aplicación expone sus servicios a través de puertos de acceso específicos.</p>
+<p>Entre otras cosas, esto significa que la aplicación no depende de un servidor web adicional para ofrecer sus servicios. </p>
+<p>Ventajas:</p>
+<ul>
+<li>
+<p><strong>Portabilidad</strong>: Al eliminar dependencias de conectividad, la aplicación puede ser considerada como un paquete "completo" que puede ser instalado fácilmente en cualquier ambiente.</p>
+</li>
+<li>
+<p><strong>Interconexión</strong>: Al contar con protocolos de conexión bien definidos, resulta más factible hacer uso de estos canales para conectar distintos servicios, en especial si existen múltiples instancias de la aplicación.</p>
+</li>
+</ul>
+<p>Los contenedores Docker utilizados por el sistema FASTAAPS exponen puertos específicos, definidos de manera explícita en los archivos de creación de imágenes base. La interacción entre componentes utiliza estos canales de comunicación. Por ejemplo, el servicio de sincronización de datos utiliza el puerto expuesto por el servicio REST-API para alimentar datos al sistema y por lo tanto se adhiere a los protocolos de acceso definidos por este servicio.</p>
+<p>Los puertos expuestos por los distintos contenedores es detallado en la sección <a href="/FASTAAPS/docker">Tecnologías de Contenerización</a>.</p>
+<h2 id="factor_8_procesos_como_modelo_de_concurrencia">Factor 8: Procesos como Modelo de Concurrencia<a class="headerlink" href="#factor_8_procesos_como_modelo_de_concurrencia" title="Permanent link">&para;</a></h2>
+<p>La aplicación utiliza procesos computacionales como mecanismo fundamental para la extensión de sus servicios.</p>
+<p>Durante su ciclo de vida, es común que la aplicación reciba cargas de trabajo diversas, por ejemplo un fin de semana, se espera que el número de pedidos a la aplicación sea menor que en horas de trabajo. Este factor instruye que la manera de afrontar esta situación es a través de procesos computacionales concurrentes.</p>
+<p>De acuerdo al factor número seis, los procesos computacionales son aislados y libres de estado. Este punto es importante para evitar problemas de consistencia y complejidad al tener que manejar múltiples procesos paralelos de manera simultánea. </p>
+<p>Ventajas:</p>
+<ul>
+<li>
+<p><strong>Escalabilidad</strong>: La arquitectura basada en procesos computacionales permite a la aplicación manejar cargas de trabajo diversas de manera eficiente, iniciando y terminando procesos de acuerdo al uso de sus componentes.</p>
+</li>
+<li>
+<p><strong>Eficiencia</strong>: Responder a altas cargas de trabajo incrementando el número de procesos de cierto tipo (escalabilidad horizontal), tiende ser más económico en términos de recursos computacionales que incrementar la capacidad de los servidores (escalabilidad vertical), ademas de adaptarse más facilmente a sistemas distribuidos.</p>
+</li>
+</ul>
+<p>El uso de contenedores Docker encapsula los servicios del sistema FASTAAPS en procesos aislados. Además, el uso de tecnologías de orquestación de contenedores permite que el sistema se adapte a distintas cargas de trabajo.</p>
+<h2 id="factor_9_facilidad_y_rapidez_de_puesta_en_marcha_y_cierre">Factor 9: Facilidad y Rapidez de Puesta en Marcha y Cierre<a class="headerlink" href="#factor_9_facilidad_y_rapidez_de_puesta_en_marcha_y_cierre" title="Permanent link">&para;</a></h2>
+<p>La aplicación puede ser iniciada y apagada con facilidad y de manera rápida.</p>
+<p>Ventajas:</p>
+<ul>
+<li>
+<p><strong>Robustez</strong>: La facilidad de manejo incentiva las mejoras constantes y cambios de configuración en producción.</p>
+</li>
+<li>
+<p><strong>Escalabilidad</strong>: La rapidez de inicio y cierre de la aplicación es importante para la adaptación dinámica de la aplicación.</p>
+</li>
+</ul>
+<p>El sistema FASTAAPS utiliza herramientas de orquestración de contenedores como <code>docker-compose</code> para facilitar y agilizar los procesos de inicio y cierre de aplicaciones. Estos procesos no tardan más de unos segundos desde que el comando inicial es ejecutado.</p>
+<h2 id="factor_10_entornos_de_trabajo_similares">Factor 10: Entornos de Trabajo Similares<a class="headerlink" href="#factor_10_entornos_de_trabajo_similares" title="Permanent link">&para;</a></h2>
+<p>Los entornos de trabajo (desarrollo, prueba y producción) de la aplicación deben ser lo más similares posibles.</p>
+<p>Ventajas:</p>
+<ul>
+<li>
+<p><strong>Robustez/Consistencia</strong>: Si los entornos de trabajo son similares, se reducen las probabilidades de fallas inesperadas que tengan como causa factores externos a la aplicación.</p>
+</li>
+<li>
+<p><strong>Integración Contínua</strong>: Al mantener la brecha entre desarrollo y producción pequeña, se posibilita la automatización de la puesta en producción.</p>
+</li>
+</ul>
+<p>Al abstraer el entorno de trabajo a nivel sistema operativo usando contenedores, garantizamos que los ambientes de trabajo sean lo más similares posibles. De igual manera, las herramientas y servicios de apoyo utilizados durante el desarrollo del sistema FASTAAPS son los mismos que los que son utilizados en producción.</p>
+<h2 id="factor_11_archivos_de_registro_como_un_flujo_de_eventos">Factor 11: Archivos de Registro como un Flujo de Eventos<a class="headerlink" href="#factor_11_archivos_de_registro_como_un_flujo_de_eventos" title="Permanent link">&para;</a></h2>
+<p>La aplicación permite monitorear sus servicios a través de un flujo de eventos en tiempo real (event stream).</p>
+<p>Este flujo de eventos será redirigido posteriormente a archivos para ser archivado.</p>
+<p>Ventajas:</p>
+<ul>
+<li>
+<p><strong>Portabilidad</strong>: Como la aplicación no administra los archivos de registro de sus servicios individualmente, la aplicación y sus registros pueden ser manejados con mayor faicilidad.</p>
+</li>
+<li>
+<p><strong>Facilidad de Uso</strong>: Tener todos los eventos de la aplicación en un sólo lugar, facilita el trabajo de monitoreo de la aplicación.</p>
+</li>
+</ul>
+<p>Todos los eventos de los servicios del sistema FASTAAPS son unificados en un flujo de eventos que son almacenados periódicamente en archivos persistentes.</p>
+<h2 id="factor_12_tareas_administrativas_como_procesos_de_vida_corta_incluidos_en_la_distribucion_de_codigo">Factor 12: Tareas Administrativas como Procesos de Vida Corta Incluídos en la Distribución de Código<a class="headerlink" href="#factor_12_tareas_administrativas_como_procesos_de_vida_corta_incluidos_en_la_distribucion_de_codigo" title="Permanent link">&para;</a></h2>
+<p>La aplicación permite realizar tareas administrativas creando procesos de vida corta en un entorno similar/idéntico al entorno de la aplicación. Estas tareas administrativas deben ser incluídas en la distribución de código de la aplicación.</p>
+<p>Ejemplos de tareas administrativas son: Migraciones de bases de datos, limpieza/actualización de datos, administración de usuarios y credenciales. </p>
+<p>Ventajas:</p>
+<ul>
+<li>
+<p><strong>Consistencia</strong>: Al utilizar un ambiente similar/idéntico al de la aplicación para ejecutar tareas administrativas, se minimiza el riesgo de errores con causa ajena a la implementación de estas tareas.  </p>
+</li>
+<li>
+<p><strong>Seguridad</strong>: Las tareas administrativas pueden ser riesgosas para la aplicación por lo que es mejor usar herramientas que los desarrolladores hayan puesto a prueba. </p>
+</li>
+<li>
+<p><strong>Facilidad de Uso</strong>: Al incluír las tareas en la distribución de código, no es necesario importarlas desde un entorno distinto y el equipo de desarrollo garantiza que estas tareas se encuentren actualizadas y que funcionen apropiadamente.</p>
+</li>
+</ul>
+<p>Las tareas admnistrativas del sistema FASTAAPS son incluídas en el repositorio de código fuente y son ejecutadas dentro del contenedor correspondiente a la tarea en cuestión.</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../docker/" title="(Docker) Contenerización de Servicios" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                (Docker) Contenerización de Servicios
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../deployment/" title="Instalación del Sistema en Servidores" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Instalación del Sistema en Servidores
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/sergio-chumacero" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://twitter.com/SergioChumacer1" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+            
+          
+          
+            <script src="../../assets/javascripts/lunr/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
