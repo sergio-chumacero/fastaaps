@@ -2,7 +2,7 @@
 
 {% raw -%}
 <div id="app" style="display: none">
-    <v-app :dark="isDark">
+    <v-app>
         <v-slide-y-transition>
             <v-layout v-show="loading" align-center justify-center>
                 <v-card style="min-width: 600px">
@@ -45,6 +45,12 @@
                             </v-list-item>
                         </v-list>
                     </jupyter-widget-mount-point>
+                    <v-container pa-2>
+                        <v-switch label="Modo oscuro" v-model="dark_switch"></v-switch>
+                    </v-container>
+                    <!-- <v-container pa-1>
+                        <v-switch label="Modo oscuro" v-model="switch"></v-switch>
+                    </v-container> -->
                 </v-navigation-drawer>
                 <v-app-bar app color="cyan">
                     <v-app-bar-nav-icon v-if="!showNavBar" @click.stop="showNavBar = !showNavBar">
@@ -93,18 +99,25 @@
                 iconfont: 'md'
             }
         }),
+        watch: {
+            dark_switch(newValue) {
+                this.$vuetify.theme.dark = newValue;
+                // alert("Switch toggled to " + newValue);
+            }
+        },
+
         el: '#app',
         mounted() {
             document.querySelector('#app').removeAttribute("style");
         },
         data() {
             return {
-                isDark: true,
                 loading_text: "Cargando Aplicación",
                 loadingPercentage: -1,
                 showNavBar: true,
                 loading: true,
                 right: null,
+                dark_switch: true,
                 url: 'https://www.w3schools.com/',
                 items: [
                     { icon: "dashboard", title: "voila", url: "https://github.com/voila-dashboards/voila" },
@@ -116,7 +129,7 @@
                 ],
                 // title: 'Voila vuetify',
             }
-        }
+        },
     });
 
 </script>

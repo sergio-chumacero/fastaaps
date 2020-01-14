@@ -75,4 +75,5 @@ services: # Servicios de aplicaciones web
       - ./LAB/apps:/apps                # Aplicaciones Jupyter
       - ./LAB/app.html:/usr/local/share/jupyter/voila/templates/vuetify-default/nbconvert_templates/app.html
       - sheets:/apps/datasets            # Planillas de datos compartidas
+      - ./LAB/img:/apps/img              # Imágenes de instrucciones
       - /etc/localtime:/etc/localtime:ro # Archivo de tiempo local
