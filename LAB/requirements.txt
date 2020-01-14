@@ -8,6 +8,10 @@
 # Voila: Apps basadas en Notebooks Jupyter
 voila==0.1.20
 
+# Ipyvuetify, Voila-Vuetify: Plantillas y Widgets Vuetify para las aplicaciones
+ipyvuetify==1.1.1
+voila-vuetify==0.2.2
+
 # Pandas: Manejo de datos tabulares
 pandas==0.25.3
 

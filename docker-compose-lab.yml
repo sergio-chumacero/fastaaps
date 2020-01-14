@@ -58,7 +58,7 @@ services: # Servicios de aplicaciones web
   
   voila: # Voila: Aplicación interactiva
     container_name: voila
-    networks: 
+    networks:
       default:
         aliases: 
           - lab.${FASTAAPS_DOMAIN} 
@@ -66,12 +66,13 @@ services: # Servicios de aplicaciones web
     build:
       context: ./LAB
       dockerfile: Dockerfile
-    command: voila --no-browser --port=80 apps
+    command: voila --no-browser --port=80 --template=vuetify-default apps
     expose:  # Puertos exuestos a otros contenedores (internos)
       - 80 
     labels:
       - "traefik.enable=false"
     volumes:
-      - ./LAB//apps:/apps                # Aplicaciones Jupyter
+      - ./LAB/apps:/apps                # Aplicaciones Jupyter
+      - ./LAB/app.html:/usr/local/share/jupyter/voila/templates/vuetify-default/nbconvert_templates/app.html
       - sheets:/apps/datasets            # Planillas de datos compartidas
       - /etc/localtime:/etc/localtime:ro # Archivo de tiempo local
